@@ -1,0 +1,3 @@
+Partie Front (ANGULAR):
+Avant d'execution du projet veuillez executer la commande "npm install"
+pour que tous les dependeces seront installé.
