@@ -1,3 +1,5 @@
 Partie Front (ANGULAR):
+FrameWork Design: Sementic UI (https://semantic-ui.com)
+
 Avant d'execution du projet veuillez executer la commande "npm install"
 pour que tous les dependeces seront installé.
