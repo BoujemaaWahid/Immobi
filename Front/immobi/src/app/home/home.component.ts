@@ -1,38 +1,30 @@
 //tslint:disable
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { AOS } from 'aos';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { ContactForm } from './ContactezNous';
 declare var $: any;
 declare var AOS: any;
 declare var HomeAnime: any;
+declare var navBarActions: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
   categoryContent = []
-  basicSearchInput = ''
-  constructor() {
-
+  basicSearchInputValue = ''
+  angContactForm: FormGroup;
+  contactFormButtonIsClicked = false;
+  constructor(private formBuilder: FormBuilder) {
+    this.createContactForm();
     this.categoryContent = [
-    { category: 'Paris', description:"Maison qui contient des trucs",
-    image:'assets/logo.png', price:'4475.123$', title: 'Maison 1' },
-    { category: 'Paris', title: '' },
-    { category: 'North America', title: 'Canada' },
-    { category: 'Asia', title: 'South Korea' },
-    { category: 'Asia', title: 'Japan' },
-    { category: 'Asia', title: 'China' },
-    { category: 'Europe', title: 'Denmark' },
-    { category: 'Europe', title: 'England' },
-    { category: 'Europe', title: 'France' },
-    { category: 'Europe', title: 'Germany' },
-    { category: 'Africa', title: 'Ethiopia' },
-    { category: 'Africa', title: 'Nigeria' },
-    { category: 'Africa', title: 'Zimbabwe' },
+    { category: 'Paris', description:"Description",image:'assets/logo.png', price:'4475.123$', title: 'Maison 1' },
   ];
   }
 
-  ngAfterViewInit(): void {
+  sendContactFormMsg(){
+
   }
   HideConnectMsgInfo(){
     HomeAnime().hideConnectMsgInfo()
@@ -40,9 +32,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
   basicSearchClick(){
     HomeAnime().showConnectMsgInfo()
   }
+  basicSearchButton($e){
+    if( this.basicSearchInputValue == ''){
+      HomeAnime().shake('#paramet')
+      $e.preventDefault()
+    }
+  }
+  createContactForm(){
+    this.angContactForm = this.formBuilder.group({
+      email:['', [Validators.required, Validators.email]],
+      message:['', Validators.required]
+    })
+  }
+  IDT(e){
+    console.log( this.angContactForm.controls[e].errors );
+    return {'error':this.angContactForm.controls[e].invalid &&
+      ( this.angContactForm.controls[e].dirty || this.angContactForm.controls[e].touched )?true:false,
+      'state':this.angContactForm.controls[e].errors}
+  }
   ngOnInit(): void {
     HomeAnime().init()
-
+    navBarActions().InitScrollInside()
     $('.ui.search')
     .search({
       type: 'category',

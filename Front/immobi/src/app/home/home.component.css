@@ -8926,7 +8926,7 @@ h1, h2, h3, h4, h5,
       letter-spacing: 1px;
       font-size: 18px; }
   .services-wrap:hover .icon {
-    background: #e86ed0; }
+    background: cornflowerblue; }
     .services-wrap:hover .icon span {
       color: #fff; }
 
@@ -9028,9 +9028,9 @@ textarea.form-control {
     font-size: 20px;
     font-weight: 400; }
   .ftco-footer .ftco-footer-widget ul li a {
-    color: rgba(0, 0, 0, 0.8); }
+    color: cornflowerblue; }
     .ftco-footer .ftco-footer-widget ul li a span {
-      color: #e86ed0; }
+      color: cornflowerblue; }
   .ftco-footer .ftco-footer-widget .btn-primary {
     background: #fff !important;
     border: 2px solid #fff !important; }
@@ -9582,7 +9582,7 @@ textarea.form-control {
       width: 40px;
       font-size: 18px;
       padding-top: 2px;
-      color: #e86ed0; }
+      color: cornflowerblue; }
 
 .block-6 .media-body p {
   font-size: 16px; }

@@ -24,7 +24,8 @@ function navBarActions(){
             scrollTop: $("#informations").offset().top
         }, 500);
       });
-      $("#forSearchPart").click(function() {
+      $(".forSearchPart").click(function() {
+
         $([document.documentElement, document.body]).animate({
             scrollTop: $("#SearchPart").offset().top
         }, 500);
