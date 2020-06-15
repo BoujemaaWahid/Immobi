@@ -38,7 +38,10 @@
               "node_modules/semantic-ui-css/semantic.min.js",
               "node_modules/aos/dist/aos.js",
               "node_modules/scrollax/scrollax.min.js",
-              "src/Global/js/main.js"
+              "src/Global/js/main.js",
+              "src/Global/js/forHome.js",
+              "src/Global/js/forNavBar.js",
+              "src/Global/js/placeholderTypewriter.js"
             ]
           },
           "configurations": {

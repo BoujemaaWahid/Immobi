@@ -1,0 +1,11 @@
+
+@media (min-width: 601px) {
+  #leftMenu {display: flex;}
+  #humbergurLeftMenu{display:none}
+  #SideMenuRes{display: none;}
+}
+@media screen and (max-width: 600px) {
+  #leftMenu {display: none;}
+  #humbergurLeftMenu{display:'block'}
+  #SideMenuRes{display: none;}
+}

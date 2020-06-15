@@ -1,5 +1,9 @@
-<div class="ui inverted menu">
-  <div class="left menu">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="ui">
+<div style="width:auto" class="ui inverted menu animate__animated to_pulse_anim" data-aos-duration="700" data-aos="slide-left">
+
+  <div class="left menu" id="leftMenu">
   <a class="active item animate__animated to_pulse_anim" in="true">
   <i class="home icon"></i>
   Acceuil
@@ -12,10 +16,46 @@
     <i class="user plus icon"></i>
     Inscrivez vous
   </a>
-  <a class="item animate__animated to_pulse_anim">
+  <a class="forServicesLink item animate__animated to_pulse_anim">
   <i class="boxes icon"></i>
     Nos services
   </a>
+  <a class="forInformationsLink item animate__animated to_pulse_anim">
+  <i class="info circle icon"></i>
+    informations
+  </a>
+  </div>
+  <div class="left menu" id="humbergurLeftMenu">
+    <a class="item" clicked="false" (click)="showSideMenu()"><i class="align justify icon"></i>
+</a>
+  </div>
+  <div class="right menu">
+  <a class="item">
+  <img src="assets/logo2.png" />
+  </a>
   </div>
 </div>
+<div id="SideMenuRes" activated="false" class="ui inverted vertical menu animate__animated" style="margin-left:1%;z-index:1;position:absolute">
+  <a class="active item animate__animated to_pulse_anim" style="background-color:#292b2c" in="true">
+  <i class="home icon"></i>
+  Acceuil
+  </a>
+  <a class="item animate__animated to_pulse_anim" style="background-color:cornflowerblue;" in="false">
+    <i class="user circle icon"></i>
+    Connectez vous
+  </a>
+  <a class="item animate__animated to_pulse_anim" style="background-color:cornflowerblue" in="false">
+    <i class="user plus icon"></i>
+    Inscrivez vous
+  </a>
+  <a class="forServicesLink item animate__animated to_pulse_anim" style="background-color:cornflowerblue">
+  <i class="boxes icon"></i>
+    Nos services
+  </a>
+  <a class="forInformationsLink item animate__animated to_pulse_anim" style="background-color:cornflowerblue">
+  <i class="info circle icon"></i>
+    informations
+  </a>
+</div>
 <router-outlet #outlet="outlet"></router-outlet>
+</div>

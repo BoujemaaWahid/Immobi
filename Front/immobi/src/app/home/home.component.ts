@@ -3,6 +3,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AOS } from 'aos';
 declare var $: any;
 declare var AOS: any;
+declare var HomeAnime: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,6 +11,7 @@ declare var AOS: any;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   categoryContent = []
+  basicSearchInput = ''
   constructor() {
 
     this.categoryContent = [
@@ -32,8 +34,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
   }
-
+  HideConnectMsgInfo(){
+    HomeAnime().hideConnectMsgInfo()
+  }
+  basicSearchClick(){
+    HomeAnime().showConnectMsgInfo()
+  }
   ngOnInit(): void {
+    HomeAnime().init()
+
     $('.ui.search')
     .search({
       type: 'category',
@@ -44,16 +53,5 @@ export class HomeComponent implements OnInit, AfterViewInit {
       ],
       source: this.categoryContent
     });
-
-
-
-    $('#paramet')
-    .transition('shake')
-
-    AOS.init()
-    $(".to_pulse_anim")
-    .mouseenter(function(){$(this).addClass('animate__pulse')})
-    .mouseleave(function(){$(this).removeClass('animate__pulse')})
   }
-
 }

@@ -14,44 +14,38 @@
             				<div class="form-group">
                     <div class="ui category search">
               				<div class="form-field" id="paramet">
-				                <input type="text" class="prompt animate__animated to_pulse_anim form-control" placeholder="Search location">
+				                <input type="text" (click)="basicSearchClick()" id="basic_search_input" class="prompt animate__animated to_pulse_anim form-control" placeholder="Search location">
                         <button id="search_button" style="outline:none"><span class="to_pulse_anim animate__animated ion-ios-search"></span></button>
 				              </div>
                       <div class="results"></div>
                       </div>
 			              </div>
-
-
-
-
             			</div>
 		        		</div>
 		        	</form>
-
-<div class="ui info message" id="connect_msg_info">
-  <i class="close icon"></i>
-  <div class="header">
-    Vous avez besoin d'une recherche plus avancé ?
-  </div>
-  Créez un compte ou connectez vous si vous avez un
-</div>
+              <div class="ui info message animate__animated" (click)="HideConnectMsgInfo()" data="true" style="position:absolute;width:100%;cursor:pointer;display:none" id="connect_msg_info">
+                <div class="header animate__animated to_pulse_anim">
+                  Vous avez besoin d'une recherche plus avancé ?
+                </div>
+                Créez un compte ou connectez vous si vous avez un
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="mouse">
-				<a class="mouse-icon">
+				<a class="mouse-icon animate__animated to_pulse_anim">
 					<div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
 				</a>
 			</div>
     </div>
 
 
-    <section style="margin-top:4%">
+    <section id="services" style="margin-top:4%">
       <div class="container">
 
         <div class="row justify-content-center">
-            <div style="margin-top:2%" class="col-md-12 heading-section text-center mb-5">
+            <div id="services_span_res" class="col-md-12 heading-section text-center mb-5">
               <span class="subheading">Our Services</span>
               <h2 class="mb-2">The smartest way to buy a home</h2>
           </div>
@@ -109,17 +103,17 @@
 
 
 
-    <footer class="ftco-footer ftco-section">
+    <footer class="ftco-footer ftco-section" id="informations" data-aos="slide-left" data-aos-duration="700">
       <div class="container">
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">Uptown</h2>
               <p>Far far away, behind the word mountains, far from the countries.</p>
-              <ul class="ftco-footer-social list-unstyled mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              <ul data-aos="flip-up" data-aos-duration="1500" class="ftco-footer-social list-unstyled mt-5">
+                <li class=""><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class=""><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class=""><a href="#"><span class="icon-instagram"></span></a></li>
               </ul>
             </div>
           </div>
@@ -162,7 +156,7 @@
 	              <ul>
 	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
 	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope pr-4"></span><span class="text">info@yourdomain.com</span></a></li>
+	                <li data-aos="flip-left" data-aos-duration="1500"><a href="#"><span class="icon icon-envelope pr-4"></span><span class="text">info@yourdomain.com</span></a></li>
 	              </ul>
 	            </div>
             </div>
@@ -170,6 +164,5 @@
         </div>
       </div>
     </footer>
-
 
 
