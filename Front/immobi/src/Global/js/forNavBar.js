@@ -45,7 +45,8 @@ function navBarActions(){
         $('.forInformationsLink').addClass('animate__fadeOut')
       })
       $('.hlLink').click(function(){
-        if($("#forRoot").attr('in') == 'true')return
+        if($("#forRoot").attr('in') == 'true' && $("#hmForRoot").attr('in') == 'true')return
+
         $('.forServicesLink').removeClass('animate__fadeOut')
         $('.forInformationsLink').removeClass('animate__fadeOut')
         $('.forServicesLink').addClass('animate__fadeIn')

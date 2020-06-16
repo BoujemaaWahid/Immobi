@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     pulseAnimation();
-    navBarActions().InitScrollInside(this.router)
     $('#baseMenu').removeAttr('data-aos');
   }
 

@@ -15,6 +15,7 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     navBarActions().updateActiveLink()
     navBarActions().hmUpdateActiveLink()
+
   }
   showSideMenu(){
     navBarActions().navAnimation()
