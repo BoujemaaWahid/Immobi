@@ -1,11 +1,16 @@
+function pulseAnimation(){
+  $(".to_pulse_anim")
+  .mouseenter(function(){$(this).addClass('animate__pulse')})
+  .mouseleave(function(){$(this).removeClass('animate__pulse')})
+}
+function initAos(){
+  AOS.init()
+}
 function HomeAnime(){
   placeholderWRITER($)
     return {
         init: function(){
-            AOS.init()
-            $(".to_pulse_anim")
-            .mouseenter(function(){$(this).addClass('animate__pulse')})
-            .mouseleave(function(){$(this).removeClass('animate__pulse')})
+
             $('#basic_search_input').placeholderTypewriter({
               text: ["Lieu: Paris 75001","Lieu: Nanterre 92000", "Prix: 4450$","Maison S+2", "Location", "Achat", "250m²", "Description: Maison avec un petit jardin"]
             });
