@@ -18,7 +18,7 @@
                     <div class="ui category search">
               				<div class="form-field" id="paramet">
 				                <input type="text" [(ngModel)]="basicSearchInputValue" [ngModelOptions]="{standalone: true}" (click)="basicSearchClick()" id="basic_search_input" class="prompt animate__animated to_pulse_anim form-control" placeholder="Search location">
-                        <button id="search_button" (click)="basicSearchButton($event)" style="outline:none"><span class="to_pulse_anim animate__animated ion-ios-search"></span></button>
+                        <button id="search_button" (click)="basicSearchButton($event)" style="outline:none"><span class="to_pulse_anim animate__animated ion-ios-search" style="animation:pulse 1.5s infinite"></span></button>
 				              </div>
                       <div class="results"></div>
                       </div>

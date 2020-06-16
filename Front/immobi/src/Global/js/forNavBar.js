@@ -38,6 +38,19 @@ function navBarActions(){
       })
     },
     updateActiveLink: function(){
+      $('.hsLink').click(function(){
+        $('.forServicesLink').removeClass('animate__fadeIn')
+        $('.forInformationsLink').removeClass('animate__fadeIn')
+        $('.forServicesLink').addClass('animate__fadeOut')
+        $('.forInformationsLink').addClass('animate__fadeOut')
+      })
+      $('.hlLink').click(function(){
+        if($("#forRoot").attr('in') == 'true')return
+        $('.forServicesLink').removeClass('animate__fadeOut')
+        $('.forInformationsLink').removeClass('animate__fadeOut')
+        $('.forServicesLink').addClass('animate__fadeIn')
+        $('.forInformationsLink').addClass('animate__fadeIn')
+      })
       $("#leftMenu").children().each(function(index){
         $(this).removeClass('active')
         $(this).attr('in','false')
