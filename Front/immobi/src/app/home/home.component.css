@@ -6,9 +6,11 @@
  */
  @media (min-width: 601px) {
   #services_span_res{margin-top: 2%;}
+  .search_location_cl{margin-bottom:5%;}
 }
 @media screen and (max-width: 600px) {
   #services_span_res{margin-top: 4%;}
+  .search_location_cl{margin-bottom:50%;}
 }
  :root {
   --blue: #007bff;
@@ -69,7 +71,6 @@ body {
   outline: 0 !important; }
 .search_location_cl{
   margin-top: -60%;
-  margin-bottom: 10%;
 }
 hr {
   -webkit-box-sizing: content-box;
@@ -8859,8 +8860,8 @@ h1, h2, h3, h4, h5,
     margin: 0 auto;
     width: 100px; }
     .services .icon span {
-      font-size: 60px;
-      color: blue; }
+      font-size: 65px;
+      color: #1273EB; }
   .services .media-body {
     width: 100%;
     color: rgba(0, 0, 0, 0.8); }
