@@ -45,10 +45,11 @@ export const fader = trigger('routeAnimations', [
 
 export const slider = trigger('routeAnimations', [
   transition('isHome => isLogin', slideTo('right') ),
-  transition('isLogin => isHome', slideTo('left') )
-  /*,
-  transition('isRight => *', slideTo('left') ),
-  transition('isLeft => *', slideTo('right') )*/
+  transition('isLogin => isHome', slideTo('left') ),
+  transition('isLogin => isRegister', slideTo('right') ),
+  transition('isRegister => isLogin', slideTo('left') ),
+  transition('isRegister => isHome', slideTo('left') ),
+  transition('isHome => isRegister', slideTo('right') )
 ]);
 
 function slideTo(direction) {

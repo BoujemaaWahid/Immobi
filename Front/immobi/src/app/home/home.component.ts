@@ -12,7 +12,7 @@ declare var navBarActions: any;
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   categoryContent = []
   basicSearchInputValue = ''
   angContactForm: FormGroup;
@@ -22,6 +22,12 @@ export class HomeComponent implements OnInit {
     this.categoryContent = [
     { id:'1', category: 'Paris', description:"Description",image:'assets/logo.png', price:'4475.123$', title: 'Maison 1' },
   ];
+  }
+  ngAfterViewInit(): void {
+    $('.modal').modal({
+      centered: true
+    }).modal('setting', 'transition', 'fly right').modal('setting', 'closable', true)
+  .modal('show')
   }
 
   sendContactFormMsg(){

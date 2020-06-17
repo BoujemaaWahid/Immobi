@@ -26,9 +26,9 @@
             "styles": [
               "node_modules/semantic-ui-css/semantic.min.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css",
               "node_modules/animate.css/animate.min.css",
               "node_modules/aos/dist/aos.css",
+              "src/styles.css",
               "src/Global/css/ionicons.min.css",
               "src/Global/css/flaticon.css",
               "src/Global/css/icomoon.css"
@@ -39,7 +39,7 @@
               "node_modules/aos/dist/aos.js",
               "node_modules/scrollax/scrollax.min.js",
               "src/Global/js/main.js",
-              "src/Global/js/forHome.js",
+              "src/Global/js/globalAnimations.js",
               "src/Global/js/forNavBar.js",
               "src/Global/js/placeholderTypewriter.js"
             ]

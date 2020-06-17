@@ -38,6 +38,10 @@ function navBarActions(){
       })
     },
     updateActiveLink: function(){
+      $("#SearchPart").children().each(function(e){
+          console.log($(this))
+      })
+
       $('.hsLink').click(function(){
         $('.forServicesLink').removeClass('animate__fadeIn')
         $('.forInformationsLink').removeClass('animate__fadeIn')
@@ -58,18 +62,38 @@ function navBarActions(){
       })
       if( localStorage.getItem('active_link') == undefined ){ localStorage.setItem('active_link', '#forRoot')}
       $(localStorage.getItem('active_link')).attr('in', 'true')
-      $(localStorage.getItem('active_link')).addClass('active')
+      $(localStorage.getItem('active_link')).addClass(['active', 'basicActiveLinkref'])
+
       $(".hLink").click(function(){
         localStorage.setItem('active_link', '#'+$(this).attr('id'))
+        let t = $(this).attr('id')
         $("#leftMenu").children().each(function(index){
-          $(this).removeClass('active')
+          $(this).removeClass(['active','basicActiveLinkref'])
           $(this).attr('in','false')
         })
+        if ( t == 'forRoot' || t == 'hmForRoot' ){ $('.hlLink').click() }
         $(this).attr('in', 'true')
-        $(this).addClass('active')
+        $(this).addClass(['active','basicActiveLinkref'])
+
       })
     },
     InitScrollInside: function(){
+
+      $(".hero-wrap").mouseenter(function(e){
+        $(".basicActiveLinkref").each(function(e){$(this).removeClass(['basicActiveLinkref', 'active'])})
+        $("#forRoot").addClass(['basicActiveLinkref', 'active'])
+        console.log('search')
+      })
+      $("#services").mouseenter(function(e){
+        $(".basicActiveLinkref").each(function(e){$(this).removeClass(['basicActiveLinkref', 'active'])})
+        $("#forServices").addClass(['basicActiveLinkref', 'active'])
+        console.log('serv')
+      })
+      $("#informations").mouseenter(function(e){
+        $(".basicActiveLinkref").each(function(e){$(this).removeClass(['basicActiveLinkref', 'active'])})
+        $("#forInformations").addClass(['basicActiveLinkref', 'active'])
+        console.log('info')
+      })
       $(".forServicesLink").click(function() {
         try{
           $([document.documentElement, document.body]).animate({

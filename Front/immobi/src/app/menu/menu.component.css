@@ -10,3 +10,6 @@
   #humbergurLeftMenu{display:'block'}
   #SideMenuRes{display: none;}
 }
+.basicActiveLinkref{
+  animation: pulse 1.5s infinite;
+}

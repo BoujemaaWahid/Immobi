@@ -19,6 +19,7 @@ export class AppComponent implements OnInit, AfterViewInit{
   ngOnInit(): void {
     navBarHover();
     navBarActions().InitScrollInside();
+
   }
 
   prepareRoute(outlet: RouterOutlet) {
