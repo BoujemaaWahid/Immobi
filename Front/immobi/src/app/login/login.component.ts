@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     pulseAnimation();
-
     $('#baseMenu').removeAttr('data-aos');
   }
 

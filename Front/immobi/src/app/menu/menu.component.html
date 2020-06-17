@@ -1,3 +1,4 @@
+<div class="group">
 <div style="width:100%;;z-index:3" id="baseMenu" class="ui inverted menu animate__animated to_pulse_anim" data-aos-duration="700" data-aos="slide-left">
 
   <div class="left menu" id="leftMenu">
@@ -13,6 +14,10 @@
     <i class="user plus icon"></i>
     Inscrivez vous
   </a>
+   <a id="trouveBien" href="/recherche" class="basicLinkref hLink item animate__animated to_pulse_anim">
+  <i class="search icon"></i>
+    trouver un bien
+  </a>
   <a id="forServices" class="hLink forServicesLink item animate__animated to_pulse_anim">
   <i class="boxes icon"></i>
     Nos services
@@ -21,6 +26,7 @@
   <i class="info circle icon"></i>
     informations
   </a>
+
   </div>
   <div class="left menu" id="humbergurLeftMenu">
     <a class="item" clicked="false" (click)="showSideMenu()"><i class="align justify icon"></i>
@@ -32,6 +38,10 @@
   </a>
   </div>
 </div>
+</div>
+
+
+
 <div id="SideMenuRes" activated="false" class="ui inverted vertical menu animate__animated" style="margin-left:1%;margin-top:2%;z-index:4;position:absolute">
   <a routerLink="/" id="hmForRoot" class="hlLink hmLink active item animate__animated to_pulse_anim" style="background-color:#292b2c" in="true">
   <i class="home icon"></i>

@@ -41,7 +41,8 @@
               "src/Global/js/main.js",
               "src/Global/js/globalAnimations.js",
               "src/Global/js/forNavBar.js",
-              "src/Global/js/placeholderTypewriter.js"
+              "src/Global/js/placeholderTypewriter.js",
+              "src/Global/js/searchScript.js"
             ]
           },
           "configurations": {

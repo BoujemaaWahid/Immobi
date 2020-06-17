@@ -1,6 +1,7 @@
 //tslint:disable
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 declare var $: any;
 declare var AOS: any;
 declare var pulseAnimation: any;
@@ -13,15 +14,11 @@ declare var navBarActions: any;
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  categoryContent = []
-  basicSearchInputValue = ''
+
   angContactForm: FormGroup;
   contactFormButtonIsClicked = false;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private router: Router) {
     this.createContactForm();
-    this.categoryContent = [
-    { id:'1', category: 'Paris', description:"Description",image:'assets/logo.png', price:'4475.123$', title: 'Maison 1' },
-  ];
   }
   ngAfterViewInit(): void {
     $(".dropdown").dropdown()
@@ -36,11 +33,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   basicSearchClick(){
     HomeAnime().showConnectMsgInfo()
   }
-  basicSearchButton($e){
-    if( this.basicSearchInputValue == ''){
-      HomeAnime().shake('#paramet')
-      $e.preventDefault()
-    }
+  process(){
+    this.router.navigate(['recherche'])
   }
   createContactForm(){
     this.angContactForm = this.formBuilder.group({
@@ -58,19 +52,5 @@ export class HomeComponent implements OnInit, AfterViewInit {
     initAos();
     HomeAnime().init()
     navBarActions().InitScrollInside()
-
-    $('.ui.search')
-    .search({
-      onSelect: function(e, y){
-        console.log(e)
-      },
-      type: 'category',
-      searchFields   : [
-        'title',
-        'category',
-        'price'
-      ],
-      source: this.categoryContent
-    });
   }
 }
