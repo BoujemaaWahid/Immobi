@@ -14,7 +14,7 @@ function HomeAnime(){
             $('#basic_search_input').placeholderTypewriter({
               text: ["Lieu: Paris 75001","Lieu: Nanterre 92000", "Prix: 4450$","Maison S+2", "Location", "Achat", "250m²", "Description: Maison avec un petit jardin"]
             });
-            $("#basic_acceuil_modal").click(function(){
+            $("#content_basic_acceuil_modal").click(function(){
               $('.modal')
               .modal('setting', 'transition', 'fly left').modal('hide')
             })

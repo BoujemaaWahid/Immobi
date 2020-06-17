@@ -2,6 +2,11 @@
   #services_span_res{margin-top: 2%;}
   .search_location_cl{margin-bottom:5%;}
   #basic_acceuil_modal{width: 65%;}
+  .XXX:hover{
+    animation: pulse 1s;
+    transform: scale(1.5);
+    z-index: 1;
+  }
 }
 @media screen and (max-width: 600px) {
   #services_span_res{margin-top: 4%;}
