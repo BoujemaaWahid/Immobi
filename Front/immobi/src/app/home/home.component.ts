@@ -24,10 +24,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ];
   }
   ngAfterViewInit(): void {
-    $('.modal').modal({
-      centered: true
-    }).modal('setting', 'transition', 'fly right').modal('setting', 'closable', true)
-  .modal('show')
+    $(".dropdown").dropdown()
   }
 
   sendContactFormMsg(){

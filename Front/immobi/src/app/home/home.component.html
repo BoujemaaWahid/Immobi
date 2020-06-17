@@ -1,3 +1,4 @@
+<!--
 <div class="ui small modal" id="basic_acceuil_modal"
 style="left: auto;right: auto; top: auto; overflow-y: scroll; bottom: auto; height: 65%;"
 >
@@ -15,7 +16,7 @@ style="left: auto;right: auto; top: auto; overflow-y: scroll; bottom: auto; heig
   <div class="action"></div>
 
  <div class="group">
-    <!--<div class="ui small images" style="margin: 1%;">
+    <div class="ui small images" style="margin: 1%;">
 
     <div class="ui small images" *ngFor="let i of [1,2,3,4, 5 , 6 , 7 , 8 , 9]" style="display: flex">
     <img
@@ -26,34 +27,100 @@ style="left: auto;right: auto; top: auto; overflow-y: scroll; bottom: auto; heig
     </div>
 
 
-    </div>-->
+    </div>
 
   </div>
 </div>
+-->
 
 <div id="SearchPart" class="hero-wrap ftco-degree-bg" style="background-image: url('assets/bg_2.jpg');" >
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text justify-content-center align-items-center">
           <div class="col-lg-8 col-md-6  d-flex align-items-end">
-          	<div class="search_location_cl text text-center" data-aos="zoom-in">
+          	<div class="text text-center" id="xBloc" data-aos="zoom-in">
 
 	            <h2 class="mb-4"><b>Le plus simple<br>Façon de trouver une propriété</b></h2>
 	            <p style="font-size: 18px;">
              Que type de maison désirez-vous ? De quel budget disposez-vous pour financer cet achat ? vous allez trouvez ce qui vous vien et vous pouvez avoir tous les renseignements nécessaires lors des visites Source
              </p>
+
 	            <form action="" class="search-location mt-md-5 ui form">
 		        		<div class="row justify-content-center">
 		        			<div class="col-lg-10 align-items-end ">
 
-            				<div class="form-group">
-                    <div class="ui category search">
-              				<div class="form-field" id="paramet">
-				                <input type="text" [(ngModel)]="basicSearchInputValue" [ngModelOptions]="{standalone: true}" (click)="basicSearchClick()" id="basic_search_input" class="prompt animate__animated to_pulse_anim form-control" placeholder="Search location">
-                        <button id="search_button" (click)="basicSearchButton($event)" style="outline:none"><span class="to_pulse_anim animate__animated ion-ios-search" style="animation:pulse 1.5s infinite"></span></button>
-				              </div>
-                      <div class="results"></div>
+            				<div class="form form-group">
+                    <div class="cardss">
+                        <div class="login-box">
+                          <div class="login-snip">
+
+                            <form style="margin-top:-10%" class="ui form">
+
+                           <div class="row justify-content-center">
+                           <div class="col-md-3">
+                           <input id="tab-1" type="radio" name="tab" class="pulse sign-in" checked><label class="animate__animated pulse" for="tab-1" class="tab">Louer</label>
+                           </div>
+                           <div class="col-md-3">
+                           <input style="" id="tab-2" type="radio" name="tab" class="animate__animated to_pulse_anim sign-up" checked><label style=""for="tab-2" class="tab">Acheter</label>
+                           </div>
+                           <div class="col-md-3">
+                           <input id="tab-3" type="radio" name="tab" class="animate__animated to_pulse_anim sign-in"><label class="animate__animated to_pulse_anim" for="tab-3" class="tab">Estimer</label>
+                           </div>
+                          </div>
+
+
+                             <div class="two fields">
+                              <div class="field">
+                              <select class="pulse ui fluid search dropdown" multiple="">
+                                <option value="" disabled selected hidden>Dans quelle ville Quartier ?</option>
+                                <option value="AL">Paris</option>
+                                <option value="AL1">Ile de france</option>
+                                <option value="AL2">Nanterre</option>
+                                <option value="AL3">la Défense</option>
+                              </select>
+                              </div>
+                              <div class="field">
+                                <div class="ui icon input">
+                                  <input  type="number" class="pulse" placeholder="Votre budget max ?">
+                                  <i class="euro sign icon"></i>
+                                </div>
+                              </div>
+                              </div>
+                              <div class="field">
+
+                                <button class="ui fluid primary button">Chercher</button>
+
+                              </div>
+
+                            </form>
+
+
+                          </div>
+                        </div>
                       </div>
+
+                      <!--
+                        <form class="ui form">
+                          <div class="two fields">
+                            <div class="field">
+
+                              <select class="ui fluid search dropdown" multiple="">
+                          <option value="" disabled selected hidden>Dans quelle ville Quartier ?</option>
+                          <option value="AL">Alabama</option>
+                          <option value="AK">Alaska</option>
+                        </select>
+
+                            </div>
+                            <div class="field">
+                            <div class="ui icon input">
+                          <input type="text" placeholder="Votre budget max ?">
+                          <i class="euro sign icon"></i>
+                        </div>
+                            </div>
+                          </div>
+                        </form>
+                        -->
+
 			              </div>
             			</div>
 		        		</div>
