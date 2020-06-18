@@ -9,8 +9,9 @@ declare var navBarActions: any;
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-
-  constructor() { }
+  showFilter = !(localStorage.getItem('forSideBar') == null)
+  constructor() {
+  }
 
   ngOnInit(): void {
     navBarActions().updateActiveLink()

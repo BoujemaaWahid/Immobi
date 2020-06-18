@@ -1,4 +1,6 @@
-
+.forServicesLink,.forInformationsLink{
+  display:block;
+}
 @media (min-width: 601px) {
   #services_span_res{margin-top: 2%;}
   .search_location_cl{margin-bottom:5%;}

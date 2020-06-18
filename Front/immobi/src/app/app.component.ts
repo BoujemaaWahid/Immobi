@@ -1,7 +1,7 @@
 //tslint:disable
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { fader, slider } from '../route-animations';
+import { slider } from '../route-animations';
 
 declare var $: any;
 declare var navBarHover: any;

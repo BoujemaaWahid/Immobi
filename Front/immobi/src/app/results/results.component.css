@@ -1,11 +1,41 @@
+
+.hidden_checkbox{
+  display:none
+}
 .filters_items{
   margin:10%;
+}
+.label{
+  cursor: pointer;
+}
+.label:hover{
+  animation: pulse 1.5s;
 }
 .href_filter{
   background-color: white;
 }
+.card:hover{
+  animation: pulse 1.5s;
+  cursor: pointer;
+}
 @media screen and (max-width:600px){
-  .lieux_popup{width:300px;}
+  .lieux_popup{width:auto;}
+  #menu_filter{display: none;}
+  #resp_results_2{display: none;}
+  #resp_results_1{display: block;}
+}
+@media screen and (min-width:601px){
+  .lieux_popup{width:auto;}
+  #menu_filter{display: flex;}
+  #resp_results_2{display: block;}
+  #resp_results_1{display: none;}
+
+}
+@media screen and (max-width:999px){
+  #menu_filter{display: none;}
+}
+@media screen and (min-width:1000px){
+  #menu_filter{display: flex;}
 }
 
 

@@ -2,6 +2,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BasicFilter } from './BasicFilter';
 declare var $: any;
 declare var AOS: any;
 declare var pulseAnimation: any;
@@ -17,15 +18,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   angContactForm: FormGroup;
   contactFormButtonIsClicked = false;
+  basicFilter: BasicFilter;
+
   constructor(private formBuilder: FormBuilder, private router: Router) {
     this.createContactForm();
+    this.basicFilter = new BasicFilter();
+
   }
-  ngAfterViewInit(): void {
-    $(".dropdown").dropdown()
-  }
+  ngAfterViewInit(): void {}
 
   sendContactFormMsg(){
-
   }
   HideConnectMsgInfo(){
     HomeAnime().hideConnectMsgInfo()
@@ -34,6 +36,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     HomeAnime().showConnectMsgInfo()
   }
   process(){
+    localStorage.setItem('basicFilter', JSON.stringify(this.basicFilter))
+    navBarActions().forRecherche()
     this.router.navigate(['recherche'])
   }
   createContactForm(){

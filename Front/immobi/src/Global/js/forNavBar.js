@@ -19,7 +19,6 @@ function navBarActions(){
         $(this).attr('in','false')
       })
 
-      $('#hmForRoot').css({'background-color':'#292b2c'})
       $(localStorage.getItem('active_link_hm')).addClass('active')
       if( localStorage.getItem('active_link_hm') == undefined ){localStorage.setItem('active_link_hm', '#hmForRoot')}
       $(localStorage.getItem('active_link_hm')).attr('in', 'true')
@@ -37,33 +36,33 @@ function navBarActions(){
         $("#SideMenuRes").attr('clicked', 'false')
       })
     },
+    forRecherche: function(){
+      let id = "#trouveBien2"
+      if( $("#leftMenu").is(':visible') ){
+        id = "#trouveBien"
+          localStorage.setItem('active_link', id)
+          let t = $(this).attr('id')
+          $("#leftMenu").children().each(function(index){
+            $(this).removeClass(['active','basicActiveLinkref'])
+            $(this).attr('in','false')
+            $(this).attr('in', 'true')
+            $(this).addClass(['active','basicActiveLinkref'])
+          })
+        $(id).attr('in', 'true')
+        $(id).addClass(['active','basicActiveLinkref'])
+        return
+      }
+      localStorage.setItem('active_link_hm', id)
+        $("#SideMenuRes").children().each(function(index){
+          $(this).css({'background-color':'cornflowerblue'})
+          $(this).attr('in','false')
+        })
+        $(id).attr('in', 'true')
+        $(id).css({'background-color':'#292b2c'})
+        $("#SideMenuRes").css({display:'none'})
+        $("#SideMenuRes").attr('clicked', 'false')
+    },
     updateActiveLink: function(){
-      $("#SearchPart").children().each(function(e){
-          console.log($(this))
-      })
-
-      $('.hsLink').click(function(){
-        $('.forServicesLink').removeClass('animate__fadeIn')
-        $('.forInformationsLink').removeClass('animate__fadeIn')
-        $('.forServicesLink').addClass('animate__fadeOut')
-        $('.forInformationsLink').addClass('animate__fadeOut')
-      })
-      $('.hlLink').click(function(){
-        if($("#forRoot").attr('in') == 'true' && $("#hmForRoot").attr('in') == 'true')return
-
-        $('.forServicesLink').removeClass('animate__fadeOut')
-        $('.forInformationsLink').removeClass('animate__fadeOut')
-        $('.forServicesLink').addClass('animate__fadeIn')
-        $('.forInformationsLink').addClass('animate__fadeIn')
-      })
-      $("#leftMenu").children().each(function(index){
-        $(this).removeClass('active')
-        $(this).attr('in','false')
-      })
-      if( localStorage.getItem('active_link') == undefined ){ localStorage.setItem('active_link', '#forRoot')}
-      $(localStorage.getItem('active_link')).attr('in', 'true')
-      $(localStorage.getItem('active_link')).addClass(['active', 'basicActiveLinkref'])
-
       $(".hLink").click(function(){
         localStorage.setItem('active_link', '#'+$(this).attr('id'))
         let t = $(this).attr('id')
@@ -74,25 +73,42 @@ function navBarActions(){
         if ( t == 'forRoot' || t == 'hmForRoot' ){ $('.hlLink').click() }
         $(this).attr('in', 'true')
         $(this).addClass(['active','basicActiveLinkref'])
-
       })
+
+      $(".FC").click(function(){
+        $(".forServicesLink").css({display:'none'})
+        $(".forInformationsLink").css({display:'none'})
+      })
+      $(".forSearchPart").click(function(){
+        $(".forServicesLink").css({display:'block'})
+        $(".forInformationsLink").css({display:'block'})
+      })
+
+      $("#leftMenu").children().each(function(index){
+        $(this).removeClass('active')
+        $(this).attr('in','false')
+      })
+
+      if( localStorage.getItem('active_link') == undefined ){ localStorage.setItem('active_link', '#forRoot')}
+      $(localStorage.getItem('active_link')).attr('in', 'true')
+      $(localStorage.getItem('active_link')).addClass(['active', 'basicActiveLinkref'])
+
     },
     InitScrollInside: function(){
 
       $(".hero-wrap").mouseenter(function(e){
         $(".basicActiveLinkref").each(function(e){$(this).removeClass(['basicActiveLinkref', 'active'])})
         $("#forRoot").addClass(['basicActiveLinkref', 'active'])
-        console.log('search')
       })
       $("#services").mouseenter(function(e){
         $(".basicActiveLinkref").each(function(e){$(this).removeClass(['basicActiveLinkref', 'active'])})
         $("#forServices").addClass(['basicActiveLinkref', 'active'])
-        console.log('serv')
+
       })
       $("#informations").mouseenter(function(e){
         $(".basicActiveLinkref").each(function(e){$(this).removeClass(['basicActiveLinkref', 'active'])})
         $("#forInformations").addClass(['basicActiveLinkref', 'active'])
-        console.log('info')
+
       })
       $(".forServicesLink").click(function() {
         try{

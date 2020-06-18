@@ -1,3 +1,6 @@
+.forServicesLink,.forInformationsLink{
+  display:none;
+}
 .cardss{
   width: auto;
   height: auto;

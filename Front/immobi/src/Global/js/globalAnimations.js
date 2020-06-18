@@ -8,6 +8,9 @@ function initAos(){
 }
 function HomeAnime(){
   placeholderWRITER($)
+  $(".dropdown").dropdown()
+  $("#acheter_label").click()
+  $("#search_filter_menu").css({display:'none'})
     return {
         init: function(){
 

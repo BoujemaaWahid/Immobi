@@ -4,6 +4,9 @@
   #baseMenu {position:fixed}
   #humbergurLeftMenu{display:none}
   #SideMenuRes{display: none;}
+  #search_filter_menu{
+    display: none;
+  }
 }
 @media screen and (max-width: 600px) {
   #leftMenu {display: none;}
@@ -13,3 +16,4 @@
 .basicActiveLinkref{
   animation: pulse 1.5s infinite;
 }
+

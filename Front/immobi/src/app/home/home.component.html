@@ -44,34 +44,29 @@ style="left: auto;right: auto; top: auto; overflow-y: scroll; bottom: auto; heig
 	            <p style="font-size: 18px;">
              Que type de maison désirez-vous ? De quel budget disposez-vous pour financer cet achat ? vous allez trouvez ce qui vous vien et vous pouvez avoir tous les renseignements nécessaires lors des visites Source
              </p>
-
 	            <form action="" class="search-location mt-md-5 ui form">
 		        		<div class="row justify-content-center">
 		        			<div class="col-lg-10 align-items-end ">
-
             				<div class="form form-group">
                     <div class="cardss">
                         <div class="login-box">
                           <div class="login-snip">
-
                             <form style="margin-top:-10%" class="ui form">
-
                            <div class="row justify-content-center">
                            <div class="col-md-3">
-                           <input id="tab-1" type="radio" name="tab" class="pulse sign-in" checked><label class="animate__animated pulse" for="tab-1" class="tab">Louer</label>
+                           <input value="1" [(ngModel)]="basicFilter.projet" [ngModelOptions]="{standalone:true}"  id="tab-1" type="radio" name="tab" class="pulse sign-in"><label class="animate__animated pulse" for="tab-1" class="tab">Louer</label>
                            </div>
                            <div class="col-md-3">
-                           <input style="" id="tab-2" type="radio" name="tab" class="animate__animated to_pulse_anim sign-up" checked><label style=""for="tab-2" class="tab">Acheter</label>
+                           <input value="2" [checked]="true" [(ngModel)]="basicFilter.projet" id="tab-2" type="radio" name="tab" class="animate__animated to_pulse_anim sign-up"><label id="acheter_label" for="tab-2" class="tab">Acheter</label>
                            </div>
                            <div class="col-md-3">
-                           <input id="tab-3" type="radio" name="tab" class="animate__animated to_pulse_anim sign-in"><label class="animate__animated to_pulse_anim" for="tab-3" class="tab">Estimer</label>
+                           <input [value]="3" [(ngModel)]="basicFilter.projet" id="tab-3" type="radio" name="tab" class="animate__animated to_pulse_anim sign-in"><label class="animate__animated to_pulse_anim" for="tab-3" class="tab">Estimer</label>
                            </div>
                           </div>
 
-
                              <div class="two fields">
                               <div class="field">
-                              <select class="pulse ui fluid search dropdown" multiple="">
+                              <select [(ngModel)]="basicFilter.villes" [ngModelOptions]="{standalone:true}" class="pulse ui fluid search dropdown" multiple="">
                                 <option value="" disabled selected hidden>Dans quelle ville Quartier ?</option>
                                 <option value="AL">Paris</option>
                                 <option value="AL1">Ile de france</option>
@@ -81,7 +76,7 @@ style="left: auto;right: auto; top: auto; overflow-y: scroll; bottom: auto; heig
                               </div>
                               <div class="field">
                                 <div class="ui icon input">
-                                  <input  type="number" class="pulse" placeholder="Votre budget max ?">
+                                  <input [(ngModel)]="basicFilter.max_budget" [ngModelOptions]="{standalone:true}" type="number" class="pulse" placeholder="Votre budget max ?">
                                   <i class="euro sign icon"></i>
                                 </div>
                               </div>
