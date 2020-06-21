@@ -181,32 +181,31 @@
   <i class="filter icon"></i>
     <b>Surface</b>
   </div>
-  <div class="ui fluid popup top left transition hidden">
+  <div style="position:absolute;z-index:1;margin-left:-50%" class="ui popup top left transition hidden">
     <p style="float:left"><b>Quelle surface habitable ?</b></p>
     <div class="ui clearing divider"></div>
     <div class="ui column divided center aligned grid">
       <div class="column">
         <form class="ui form">
-            <div class="two fields">
             <div class="field">
+
                 <label for="amin_surface">Min</label>
                 <div class="ui icon input">
                   <input [ngModelOptions]="{standalone: true}" [(ngModel)]="filter.surface.min_surface_habitable" id="amin_surface" placeholder="250 m²" type="number">
 
                 </div>
               </div>
+
               <div class="field">
                 <label for="amax_surface">Max</label>
                 <div class="ui icon input">
                   <input [ngModelOptions]="{standalone: true}" [(ngModel)]="filter.surface.max_surface_habitable" id="amax_surface" placeholder="500 m²" type="number">
                 </div>
               </div>
-              </div>
               <div class="ui clearing divider"></div>
               <div class="field">
                 <p style="float:left"><b>Surface du terrain ?</b></p><br>
                 </div>
-              <div class="two fields">
             <div class="field">
                 <label for="amin_surface_terrain">Min</label>
                 <div class="ui icon input">
@@ -220,7 +219,7 @@
                   <input [ngModelOptions]="{standalone: true}" [(ngModel)]="filter.surface.max_surface_terrain" id="amax_surface_terrain" placeholder="500 m²" type="number">
                 </div>
               </div>
-              </div>
+
               <div class="ui clearing divider"></div>
               <div class="field">
                 <button
@@ -228,7 +227,7 @@
                   Appliquer
                 </button>
               </div>
-        </form>
+        </form>-->
       </div>
     </div>
   </div>
@@ -691,7 +690,7 @@
 
         <div class="four wide column" *ngFor="let cmp of [1,2,3,4,5,6,7,8,9]">
 
-          <div class="ui card" style="height:1%">
+          <div class="ui card" (click)="seeDetails(cmp)" style="height:1%">
             <div style="height:10%;width:100%" class="image">
               <img src="https://picsum.photos/200">
             </div>

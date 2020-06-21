@@ -51,7 +51,8 @@ export const slider = trigger('routeAnimations', [
   transition('isRegister => isHome', slideTo('left') ),
   transition('isHome => isRegister', slideTo('right') ),
   transition('* => isResults', slideTo('right') ),
-  transition('isResults => *', slideTo('left') )
+  transition('isResults => *', slideTo('left') ),
+  transition('isDetails => *', slideTo('left'))
 ]);
 
 function slideTo(direction) {

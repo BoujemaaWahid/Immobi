@@ -1,0 +1,109 @@
+
+<div style="position: absolute; margin-top:3%;margin-bottom:10%" class="centered ui stackable grid container">
+  <div class="sixteen wide column" id="containerInfo">
+    <div class="ui stackable column grid container">
+      <div class="column">
+        <div class="ui raised segment">
+          <div class="ui top attached black label"><h4>VILLA à Rosny sous bois</h4><p>Immobi</p></div>
+          <div class="ui grid stackable two column">
+            <div class="three wide column"><a class="ui green ribbon big left label"><b>Prix 4447 <i class="euro icon"></i></b></a></div>
+          </div>
+          <p></p><br>
+          <div class="column">
+            <div class="two wide column"><a class="ui blue ribbon label"><b>Description</b></a></div>
+            <div class="sixteen column">
+              <p>
+                I wanted a specific pin icon so I went and made one with inkscape, then opened the SVG file and copied the svg path into the path into the code, but this works with any SVG path that you put in the "path" attribute of the icon object.Here is the result:
+              </p>
+            </div>
+          </div>
+          <p></p><br>
+          <div class="column">
+            <div class="two wide column"><a class="ui blue ribbon label"><b>Figures</b></a></div>
+            <p></p>
+            <ul id="gallery" style="display:none">
+                  <li *ngFor="let cmp of [0,1,2,3,4,5,6,7,8,9]">
+                    <img class="ui small rounded image"  src="https://picsum.photos/200">
+                  </li>
+            </ul>
+            <div style="overflow-x:scroll; display:flex">
+                  <ng-container *ngFor="let cmp of [0,1,2,3,4,5,6,7,8,9]">
+                  <img id="{{cmp}}" class="ui small rounded image"  (click)="showGalleryAt(cmp)" src="https://picsum.photos/200">
+                  </ng-container>
+            </div>
+          </div>
+          <p></p><br>
+          <div class="column">
+            <div class="two wide column"><a class="ui blue ribbon label"><b>Emplacement</b></a></div>
+            <p></p>
+            <google-map width="100%" height="250px" [zoom]="10" [center]="center">
+              <map-marker
+                *ngFor="let marker of markers"
+                [position]="marker.position"
+                [label]="marker.label"
+                [title]="marker.title"
+                [options]="marker.options">
+              </map-marker>
+            </google-map>
+          </div>
+
+         <p></p><br>
+          <div class="column" style="background-color:#d6e2e29c;padding-bottom:5%">
+            <div class="two wide column"><a class="ui blue ribbon label"><b>Contactez nous</b></a></div>
+            <p></p><br>
+            <div class="grid container centered stackable ui column">
+              <form [formGroup]="angContactForm" novalidate class="ui form">
+                <div class="fields">
+                <div class="field">
+                  <div class="field ui left icon input">
+                    <input formControlName="email" type="email" placeholder="Votre email...">
+                    <i class="envelope icon"></i>
+                  </div>
+
+                    <div *ngIf="IDT('email').error">
+                      <div *ngIf ="angContactForm.controls['email'].errors.required" class="ui pointing red basic label">
+                        Nous avons besoins de votre email <br> pour qu'on puisse avoir votre message
+                      </div>
+                      <div *ngIf ="angContactForm.controls['email'].errors.email" class="ui pointing red basic label">
+                        Veuillez écrire votre email correctement, il semble qu'il ya une erreur.
+                      </div>
+                    </div>
+                </div>
+                  <div class="field">
+                  <div class="field ui left icon input">
+                    <input formControlName="phone" type="text" placeholder="Votre num de téléphone...">
+                    <i class="phone icon"></i>
+
+                  </div>
+
+                    <div *ngIf="IDT('phone').error">
+                      <div *ngIf ="angContactForm.controls['phone'].errors.required" class="ui pointing red basic label">
+                        Nous avons besoins de votre numéro <br> pour qu'on puisse vous contacter
+                      </div>
+                      <div *ngIf ="angContactForm.controls['phone'].errors.pattern" class="ui pointing red basic label">
+                        Veuillez écrire votre numéro de téléphone correctement, il semble qu'il ya une erreur.
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="field">
+                  <textarea formControlName="message" placeholder="Votre message..." rows="2"></textarea>
+                  <div *ngIf="IDT('message').error">
+                    <div *ngIf ="angContactForm.controls['message'].errors.required" class="ui pointing red basic label">
+                        Veuillez écrire votre message.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <button [disabled]="angContactForm.invalid" style="width:100%" class="ui button primary">Envoyer</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+</div>

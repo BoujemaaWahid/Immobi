@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
 import { RegisterComponent } from './register/register.component';
 import { ResultsComponent } from './results/results.component';
+import { DetailsComponent } from './details/details.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -17,14 +19,16 @@ import { ResultsComponent } from './results/results.component';
     LoginComponent,
     MenuComponent,
     RegisterComponent,
-    ResultsComponent
+    ResultsComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GoogleMapsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

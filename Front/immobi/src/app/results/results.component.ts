@@ -2,6 +2,7 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Filters } from './Filters';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 declare var $: any;
 declare var basicInit: any;
 @Component({
@@ -11,7 +12,7 @@ declare var basicInit: any;
 })
 export class ResultsComponent implements OnInit, AfterViewInit {
   filter: Filters;
-  constructor(private formBuilder: FormBuilder ) {
+  constructor(private formBuilder: FormBuilder, private router: Router ) {
     this.filter = new Filters()
     try{
     let bf = JSON.parse(localStorage.getItem('basicFilter'))
@@ -19,11 +20,10 @@ export class ResultsComponent implements OnInit, AfterViewInit {
     this.filter.lieux.villes.push("AL")
     this.filter.projets.acheter_bien = (bf['projet'] == '2')
     this.filter.projets.louer_bien = (bf['projet'] == '1')
+    localStorage.removeItem('basicFilter')
     }catch(exception){}
   }
-  ngAfterViewInit(): void {
-
-  }
+  ngAfterViewInit(): void {}
 
   setTempTransport(item, isTemp): void{
     if (isTemp)this.filter.lieux.temp = item
@@ -41,11 +41,11 @@ export class ResultsComponent implements OnInit, AfterViewInit {
   }
   ngOnInit(): void {
     basicInit();
-
   }
-  budgetProc(){
+  budgetProc(){}
 
-
+  seeDetails(item){
+    this.router.navigate(['details'], { queryParams: { id: 5 } });
   }
 
 }

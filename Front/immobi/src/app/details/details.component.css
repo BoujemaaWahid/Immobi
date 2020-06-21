@@ -1,0 +1,23 @@
+@media screen and (max-width: 700px){
+  #containerInfo{margin-left: 0%;}
+}
+@media screen and (min-width: 701px){
+  #containerInfo{margin-left: 10%;}
+}
+img:hover{
+  cursor: pointer;
+  animation: pulse 1.5s;
+}
+img{
+  margin:0.5%
+}
+.segment{
+  background-color: #f1f4f794;
+
+}
+p{
+  font-weight: 500;
+}
+.forServicesLink,.forInformationsLink{
+  display:block;
+}

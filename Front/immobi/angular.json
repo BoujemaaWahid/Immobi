@@ -28,10 +28,12 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/animate.css/animate.min.css",
               "node_modules/aos/dist/aos.css",
+              "node_modules/viewerjs/dist/viewer.min.css",
               "src/styles.css",
               "src/Global/css/ionicons.min.css",
               "src/Global/css/flaticon.css",
               "src/Global/css/icomoon.css"
+
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -42,7 +44,8 @@
               "src/Global/js/globalAnimations.js",
               "src/Global/js/forNavBar.js",
               "src/Global/js/placeholderTypewriter.js",
-              "src/Global/js/searchScript.js"
+              "src/Global/js/searchScript.js",
+              "node_modules/viewerjs/dist/viewer.min.js"
             ]
           },
           "configurations": {
