@@ -3,3 +3,7 @@ FrameWork Design: Semantic UI, Bootstrap4
 
 Avant d'execution du projet veuillez executer la commande "npm install"
 pour que tous les dependeces seront installé.
+-----------------------------------------------------------------------
+Spring Port: 4300
+DataBase name: immobi
+uname:root, pwd=0000
