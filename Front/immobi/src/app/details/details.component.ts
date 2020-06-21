@@ -1,8 +1,8 @@
 //tslint:disable
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { DataShare } from '../DataShare.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Viewer from 'viewerjs';
+import { DataShare } from '../dataShare.service';
 
 declare var $: any;
 @Component({
@@ -15,7 +15,10 @@ export class DetailsComponent implements OnInit, AfterViewInit {
   markers: Array<any>;
   angContactForm: FormGroup;
   gallery: Viewer;
-  constructor(private formBuilder: FormBuilder, private dataShare: DataShare) {
+  constructor(private dataShare: DataShare, private formBuilder: FormBuilder) {
+    this.dataShare.currentMessage.subscribe(message => {
+      console.log(message)
+    })
     this.markers = new Array<any>();
     this.createContactForm();
     navigator.geolocation.getCurrentPosition(position => {
