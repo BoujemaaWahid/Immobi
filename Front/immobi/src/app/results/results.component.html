@@ -181,6 +181,59 @@
   <i class="filter icon"></i>
     <b>Surface</b>
   </div>
+  <div class="ui fluid popup top left transition hidden">
+  <div class="ui two centered row divided aligned grid">
+    <form class="ui form">
+      <div class="row">
+        <div class="column">
+          <p style="float:left"><b>Quelle surface habitable ?</b></p>
+          <div class="field">
+
+                <label for="amin_surface">Min</label>
+                <div class="ui icon input">
+                  <input [ngModelOptions]="{standalone: true}" [(ngModel)]="filter.surface.min_surface_habitable" id="amin_surface" placeholder="250 m²" type="number">
+
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="amax_surface">Max</label>
+                <div class="ui icon input">
+                  <input [ngModelOptions]="{standalone: true}" [(ngModel)]="filter.surface.max_surface_habitable" id="amax_surface" placeholder="500 m²" type="number">
+                </div>
+              </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <p style="float:left"><b>Surface du terrain ?</b></p>
+
+            <div class="field">
+                <label for="amin_surface_terrain">Min</label>
+                <div class="ui icon input">
+                  <input [ngModelOptions]="{standalone: true}" [(ngModel)]="filter.surface.min_surface_terrain" id="amin_surface_terrain" placeholder="250 m²" type="number">
+
+                </div>
+              </div>
+              <div class="field">
+                <label for="amax_surface_terrain">Max</label>
+                <div class="ui icon input">
+                  <input [ngModelOptions]="{standalone: true}" [(ngModel)]="filter.surface.max_surface_terrain" id="amax_surface_terrain" placeholder="500 m²" type="number">
+                </div>
+              </div>
+              <div class="field">
+                <button
+                (click)="budgetProc()" style="outline:none;width:100%" class="btnClosepp ui primary button">
+                  Appliquer
+                </button>
+                </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+  <!--
   <div style="position:absolute;z-index:1;margin-left:-50%" class="ui popup top left transition hidden">
     <p style="float:left"><b>Quelle surface habitable ?</b></p>
     <div class="ui clearing divider"></div>
@@ -227,10 +280,10 @@
                   Appliquer
                 </button>
               </div>
-        </form>-->
+        </form>
       </div>
     </div>
-  </div>
+  </div>-->
   </a>
 
     <!--PROJET FILTER-->
