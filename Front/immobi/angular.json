@@ -33,7 +33,6 @@
               "src/Global/css/ionicons.min.css",
               "src/Global/css/flaticon.css",
               "src/Global/css/icomoon.css"
-
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -139,6 +138,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "immobi"
 }

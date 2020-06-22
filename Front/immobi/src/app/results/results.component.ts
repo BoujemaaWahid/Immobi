@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataShare } from '../dataShare.service';
 
+
 declare var $: any;
 declare var basicInit: any;
 @Component({
@@ -15,8 +16,10 @@ declare var basicInit: any;
 export class ResultsComponent implements OnInit, AfterViewInit, OnDestroy {
   filter: Filters;
   msg : any;
+
   constructor(private dataShare: DataShare, private formBuilder: FormBuilder, private router: Router ) {
     this.filter = new Filters()
+
     try{
       let bf = JSON.parse(localStorage.getItem('basicFilter'))
       this.filter.budget.max_budget = bf['max_budget']

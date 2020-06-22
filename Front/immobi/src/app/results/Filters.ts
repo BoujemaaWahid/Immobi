@@ -7,6 +7,10 @@ export class ProjetFilter {
   public terrain_bien = false
   public parking_bien = false
 }
+export class DatePublication {
+  public min = ""
+  public max = ""
+}
 export class LieuxFilter {
   public temp = ''
   public transport = ''
@@ -40,6 +44,7 @@ export class Filters {
   public budget: BudgetFilter;
   public surface: SurfaceFilter;
   public pieces: PiecesFilter;
+  public dates: DatePublication;
 
   constructor(){
     this.projets = new ProjetFilter()
@@ -47,5 +52,6 @@ export class Filters {
     this.budget = new BudgetFilter()
     this.surface = new SurfaceFilter()
     this.pieces = new PiecesFilter()
+    this.dates = new DatePublication()
   }
 }
