@@ -11,6 +11,8 @@ import { RegisterComponent } from './register/register.component';
 import { ResultsComponent } from './results/results.component';
 import { DetailsComponent } from './details/details.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

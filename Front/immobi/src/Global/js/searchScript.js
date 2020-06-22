@@ -1,4 +1,8 @@
 function basicInit(){
+  $(".basicActiveLinkref").each(function(){
+    $(this).removeClass(['basicActiveLinkref', 'active'])
+    $("#trouveBien").addClass(['basicActiveLinkref', 'active'])
+  })
   $('#baseMenu').removeAttr('data-aos');
   $(".forServicesLink").css({display:'none'})
   $(".forInformationsLink").css({display:'none'})

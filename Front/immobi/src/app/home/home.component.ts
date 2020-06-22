@@ -3,6 +3,8 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BasicFilter } from './BasicFilter';
+import { DataShare } from '../dataShare.service';
+import { DataService } from '../data-service.service';
 declare var $: any;
 declare var AOS: any;
 declare var pulseAnimation: any;
@@ -20,10 +22,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   contactFormButtonIsClicked = false;
   basicFilter: BasicFilter;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private dataService: DataService, private dataShare: DataShare, private formBuilder: FormBuilder, private router: Router) {
     this.createContactForm();
     this.basicFilter = new BasicFilter();
-
+    this.dataService.getBasicSearch().subscribe(data => {
+      console.log("data", data)
+    })
   }
   ngAfterViewInit(): void {}
 
@@ -37,6 +41,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
   process(){
     localStorage.setItem('basicFilter', JSON.stringify(this.basicFilter))
+
     navBarActions().forRecherche()
     this.router.navigate(['recherche'])
   }
