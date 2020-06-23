@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.AdresseDto;
-import com.example.demo.dto.LieuxDto;
 import com.example.demo.entitys.Adresse;
+import com.example.demo.entitys.Lieux;
 import com.example.demo.repositorys.AdressesRepository;
 
 @Service
@@ -56,9 +56,9 @@ public class AdressesService {
 	public String save(AdresseDto dto) {
 		try {
 			Adresse entity = new Adresse();
-			LieuxDto ldto = new LieuxDto();
-			modelMapper.map(dto.getLieu(), ldto);
-			lieuxService.save(ldto);
+			Lieux lieux = new Lieux();
+			modelMapper.map(lieuxService.findOne(dto.getLieu().getId()), lieux);
+			dto.setLieu(lieux);
 			modelMapper.map(dto, entity);
 			adressesRepository.save(entity);
 		}catch(Exception ex) { return ex.getMessage(); }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,6 +48,7 @@ public class AdresseController {
 	
 	@PostMapping("/save")
 	public String save(@RequestBody AdresseDto dto) {
+		System.out.println(dto);
 		return adresseServices.save(dto);
 	}
 	
@@ -57,8 +57,8 @@ public class AdresseController {
 		return adresseServices.save(dto);
 	}
 	
-	@DeleteMapping("/delete/{id}")
-	public String delete(@PathVariable( value = "id") Long id) {
+	@DeleteMapping("/delete")
+	public String delete(@RequestParam( value = "id") Long id) {
 		return adresseServices.delete(id);
 	}
 
