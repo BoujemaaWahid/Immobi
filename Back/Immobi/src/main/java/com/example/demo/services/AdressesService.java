@@ -6,12 +6,15 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.CacheComponent;
 import com.example.demo.dto.AdresseDto;
 import com.example.demo.entitys.Adresse;
 import com.example.demo.entitys.Lieux;
 import com.example.demo.repositorys.AdressesRepository;
+
 
 @Service
 public class AdressesService {
@@ -24,6 +27,11 @@ public class AdressesService {
 	@Autowired
 	ModelMapper modelMapper;
 	
+	@Autowired
+	CacheComponent componentServ;
+	
+	
+	@Cacheable("adresses_all")
 	public List<AdresseDto> findAll(){
 		List<AdresseDto> list = new ArrayList<>();
 		adressesRepository.findAll().forEach(item -> {
@@ -34,6 +42,7 @@ public class AdressesService {
 		return list;
 	}
 	
+	@Cacheable("adresse_one")
 	public AdresseDto findOne(Long id) {
 		try {
 			AdresseDto dto = new AdresseDto();
@@ -43,6 +52,7 @@ public class AdressesService {
 		}catch(Exception ex) { return new AdresseDto(); }
 	}
 	
+	@Cacheable("adreses_all_ids")
 	public List<AdresseDto> findAllById(List<Long> ids){
 		List<AdresseDto> list = new ArrayList<>();
 		adressesRepository.findAllById(ids).forEach(item -> {
@@ -62,6 +72,7 @@ public class AdressesService {
 			modelMapper.map(dto, entity);
 			adressesRepository.save(entity);
 		}catch(Exception ex) { return ex.getMessage(); }
+		componentServ.evictAllCaches();
 		return "200";
 	}
 	
@@ -69,9 +80,12 @@ public class AdressesService {
 		try {
 			adressesRepository.deleteById(id);
 		}catch(Exception ex) { return ex.getMessage(); }
+		componentServ.evictAllCaches();
+		
 		return "200";
 	}
 	
+	@Cacheable("adresses_lieux_id")
 	public List<AdresseDto> byLieuId(Long id) {
 		List<AdresseDto> dtos = new ArrayList<>();
 		try {

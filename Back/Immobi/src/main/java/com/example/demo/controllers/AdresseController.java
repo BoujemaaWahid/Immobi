@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.AdresseDto;
 import com.example.demo.services.AdressesService;
 
+
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("/adresses")
@@ -24,8 +25,6 @@ public class AdresseController {
 	@Autowired
 	AdressesService adresseServices;
 
-
-	
 	@GetMapping("/find")
 	public AdresseDto find(@RequestParam(value = "id")Long id) {
 		return adresseServices.findOne(id);
@@ -48,7 +47,6 @@ public class AdresseController {
 	
 	@PostMapping("/save")
 	public String save(@RequestBody AdresseDto dto) {
-		System.out.println(dto);
 		return adresseServices.save(dto);
 	}
 	

@@ -1,8 +1,10 @@
 package com.example.demo.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.example.demo.entitys.Lieux;
+import com.example.demo.entitys.Local;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AdresseDto implements Serializable{
@@ -17,6 +19,9 @@ public class AdresseDto implements Serializable{
 	
 	@JsonProperty("numero")
     private int numero;
+	
+	@JsonProperty("complement")
+	private String complement;
 
 	@JsonProperty("lat")
     private double latitude;
@@ -27,14 +32,19 @@ public class AdresseDto implements Serializable{
 	@JsonProperty("lieu")
 	private Lieux lieu;
 	
+	@JsonProperty("locales")
+	private List<Local> locales;
+	
 	public AdresseDto() {}
 	
-	public AdresseDto(String rue, int numero, double latitude, double longitude, Lieux lieu) {
+	public AdresseDto(String rue, int numero, String complement, double latitude, double longitude, Lieux lieu, List<Local>locales) {
 		this.rue = rue;
 		this.numero = numero;
+		this.complement = complement;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.lieu = lieu;
+		this.locales = locales;
 	}
 
 	public Long getId() {
@@ -85,10 +95,27 @@ public class AdresseDto implements Serializable{
 		this.lieu = lieu;
 	}
 
+	public List<Local> getLocales() {
+		return locales;
+	}
+
+	public void setLocales(List<Local> locales) {
+		this.locales = locales;
+	}
+
+	public String getComplement() {
+		return complement;
+	}
+
+	public void setComplement(String complement) {
+		this.complement = complement;
+	}
+
 	@Override
 	public String toString() {
-		return "AdresseDto [id=" + id + ", rue=" + rue + ", numero=" + numero + ", latitude=" + latitude
-				+ ", longitude=" + longitude + ", lieu=" + lieu + "]";
+		return "AdresseDto [id=" + id + ", rue=" + rue + ", numero=" + numero + ", complement=" + complement
+				+ ", latitude=" + latitude + ", longitude=" + longitude + ", lieu=" + lieu + ", locales=" + locales
+				+ "]";
 	}
 
 }

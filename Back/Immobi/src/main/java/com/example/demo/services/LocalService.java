@@ -10,15 +10,15 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.CacheComponent;
-import com.example.demo.dto.LieuxDto;
-import com.example.demo.entitys.Lieux;
-import com.example.demo.repositorys.LieuxRepository;
-
+import com.example.demo.dto.LocalDto;
+import com.example.demo.entitys.Local;
+import com.example.demo.repositorys.LocalRepository;
 
 @Service
-public class LieuxService {
+public class LocalService {
+	/*
 	@Autowired
-	private LieuxRepository lieuxRepository;
+	private LocalRepository localRepository;
 	
 	@Autowired
 	ModelMapper modelMapper;
@@ -26,43 +26,43 @@ public class LieuxService {
 	@Autowired
 	CacheComponent componentServ;
 	
-	@Cacheable("lieux_all")
-	public List<LieuxDto> findAll(){
-		List<LieuxDto> list = new ArrayList<>();
-		lieuxRepository.findAll().forEach(item -> {
-			LieuxDto ld = new LieuxDto();
+	@Cacheable("local_all")
+	public List<LocalDto> findAll(){
+		List<LocalDto> list = new ArrayList<>();
+		localRepository.findAll().forEach(item -> {
+			LocalDto ld = new LocalDto();
 			modelMapper.map(item, ld);
 			list.add(ld);
 		});
 		return list;
 	}
 	
-	@Cacheable("lieux_one")
-	public LieuxDto findOne(Long id) {
+	@Cacheable("local_one")
+	public LocalDto findOne(Long id) {
 		try {
-			LieuxDto dto = new LieuxDto();
-			Optional<Lieux> entity = lieuxRepository.findById(id);
+			LocalDto dto = new LocalDto();
+			Optional<Local> entity = localRepository.findById(id);
 			modelMapper.map(entity.get(), dto) ;
 			return dto;
-		}catch(Exception ex) { return new LieuxDto(); }
+		}catch(Exception ex) { return new LocalDto(); }
 	}
 	
-	@Cacheable("lieux_all_ids")
-	public List<LieuxDto> findAllById(List<Long> ids){
-		List<LieuxDto> list = new ArrayList<>();
-		lieuxRepository.findAllById(ids).forEach(item -> {
-			LieuxDto ld = new LieuxDto();
+	@Cacheable("local_all_ids")
+	public List<LocalDto> findAllById(List<Long> ids){
+		List<LocalDto> list = new ArrayList<>();
+		localRepository.findAllById(ids).forEach(item -> {
+			LocalDto ld = new LocalDto();
 			modelMapper.map(item, ld);
 			list.add(ld);
 		});
 		return list;
 	}
 	
-	public String save(LieuxDto dto) {
+	public String save(LocalDto dto) {
 		try {
-			Lieux entity = new Lieux();
+			Local entity = new Local();
 			modelMapper.map(dto, entity);
-			lieuxRepository.save(entity);
+			localRepository.save(entity);
 		}catch(Exception ex) { return ex.getMessage(); }
 		
 		componentServ.evictAllCaches();
@@ -71,10 +71,10 @@ public class LieuxService {
 	
 	public String delete(Long id) {
 		try {
-			lieuxRepository.deleteById(id);
+			localRepository.deleteById(id);
 		}catch(Exception ex) { return ex.getMessage(); }
 		
 		componentServ.evictAllCaches();
 		return "200";
-	}
+	}*/
 }

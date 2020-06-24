@@ -1,6 +1,9 @@
 package com.example.demo.entitys;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,8 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -25,6 +28,9 @@ public class Adresse {
 	@Column(name="NUMERO")
     private int numero;
 	
+	@Column(name="COMPLEMENT")
+	String complement;
+	
 	@Column(name="LATITUDE", nullable=false, precision = 10, scale = 0)
     private double latitude;
 	
@@ -37,14 +43,20 @@ public class Adresse {
 	@JsonIgnore
 	Lieux lieu;
 	
+	@OneToMany(mappedBy = "adresse")
+	@JsonIgnore
+	List<Local> locales = new ArrayList<>();
+	
 	public Adresse() {}
 	
-	public Adresse(String rue, int numero, double latitude, double longitude, Lieux lieu) {
+	public Adresse(String rue, int numero, String complement, double latitude, double longitude, Lieux lieu, List<Local>locales) {
 		this.rue = rue;
 		this.numero = numero;
+		this.complement = complement;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.lieu = lieu;
+		this.locales = locales;
 	}
 
 	public Long getId() {
@@ -95,10 +107,27 @@ public class Adresse {
 		this.lieu = lieu;
 	}
 
+	public List<Local> getLocales() {
+		return locales;
+	}
+
+	public void setLocales(List<Local> locales) {
+		this.locales = locales;
+	}
+
+	public String getComplement() {
+		return complement;
+	}
+
+	public void setComplement(String complement) {
+		this.complement = complement;
+	}
+
 	@Override
 	public String toString() {
-		return "Adresse [id=" + id + ", rue=" + rue + ", numero=" + numero + ", latitude=" + latitude + ", longitude="
-				+ longitude + ", lieu=" + lieu + "]";
+		return "Adresse [id=" + id + ", rue=" + rue + ", numero=" + numero + ", complement=" + complement
+				+ ", latitude=" + latitude + ", longitude=" + longitude + ", lieu=" + lieu + ", locales=" + locales
+				+ "]";
 	}
 	
 }

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.LieuxDto;
 import com.example.demo.services.LieuxService;
+
+
 import com.example.demo.services.AdressesService;
 
 @CrossOrigin(origins="http://localhost:4200")
@@ -38,7 +40,7 @@ public class LieuxController {
 	
 	@GetMapping("/findAll")
 	public List<LieuxDto> findAll() {
-		return lieuxService.findAll();
+		return lieuxService.findAll();	
 	}
 	
 	@GetMapping("/inRange")

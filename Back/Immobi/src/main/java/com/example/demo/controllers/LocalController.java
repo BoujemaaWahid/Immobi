@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
-public class Search {
-	@RequestMapping("/ok")
-	public String t() {
-		return "ok";
-	}
+@RequestMapping("/local")
+public class LocalController {
+
 }
