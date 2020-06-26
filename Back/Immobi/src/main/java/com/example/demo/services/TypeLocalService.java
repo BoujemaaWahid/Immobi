@@ -13,6 +13,9 @@ import com.example.demo.CacheComponent;
 import com.example.demo.dto.TypeLocalDto;
 import com.example.demo.entitys.TypeLocal;
 import com.example.demo.repositorys.TypeRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Service
 public class TypeLocalService {
@@ -24,6 +27,9 @@ public class TypeLocalService {
 	
 	@Autowired
 	ModelMapper modelMapper;
+	
+	@Autowired
+	ObjectMapper objectMapper;
 
 	@Cacheable("types_all")
 	public List<TypeLocalDto> findAll(){
@@ -64,6 +70,31 @@ public class TypeLocalService {
 			typeRepository.save(entity);
 		}catch(Exception ex) { return ex.getMessage(); }
 		
+		componentServ.evictAllCaches();
+		return "200";
+	}
+	
+	@SuppressWarnings("deprecation")
+	public String update(String json) {
+		try {
+			JsonNode data = objectMapper.readTree(json);
+			Long id = data.get("id").asLong();
+			if ( data.get("id").isNull() ) return "UPDATE: ID NOT FOUND EXEPTION";
+			TypeLocalDto dtoNew = new TypeLocalDto();
+			Optional<TypeLocal> entity = typeRepository.findById(id);
+			modelMapper.map(entity.get(), dtoNew);
+			JsonNode entityJson = objectMapper.readTree(objectMapper.writeValueAsString(dtoNew));
+			data.fieldNames().forEachRemaining(field->{
+				if( !data.get(field).isNull()  ) {
+					System.out.println(field);
+					((ObjectNode)entityJson).put(field, data.get(field));
+				}
+			});
+			TypeLocalDto toSave = objectMapper.convertValue(entityJson, TypeLocalDto.class);
+			TypeLocal finalEntity = new TypeLocal();
+			modelMapper.map(toSave, finalEntity);
+			typeRepository.save(finalEntity);
+		}catch(Exception ex) {return ex.getMessage();}
 		componentServ.evictAllCaches();
 		return "200";
 	}

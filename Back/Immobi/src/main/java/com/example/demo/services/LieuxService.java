@@ -13,6 +13,9 @@ import com.example.demo.CacheComponent;
 import com.example.demo.dto.LieuxDto;
 import com.example.demo.entitys.Lieux;
 import com.example.demo.repositorys.LieuxRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 
 @Service
@@ -25,6 +28,9 @@ public class LieuxService {
 	
 	@Autowired
 	CacheComponent componentServ;
+	
+	@Autowired
+	ObjectMapper objectMapper;
 	
 	@Cacheable("lieux_all")
 	public List<LieuxDto> findAll(){
@@ -65,6 +71,31 @@ public class LieuxService {
 			lieuxRepository.save(entity);
 		}catch(Exception ex) { return ex.getMessage(); }
 		
+		componentServ.evictAllCaches();
+		return "200";
+	}
+	
+	@SuppressWarnings("deprecation")
+	public String update(String json) {
+		try {
+			JsonNode data = objectMapper.readTree(json);
+			Long id = data.get("id").asLong();
+			if ( data.get("id").isNull() ) return "UPDATE: ID NOT FOUND EXEPTION";
+			LieuxDto dtoNew = new LieuxDto();
+			Optional<Lieux> entity = lieuxRepository.findById(id);
+			modelMapper.map(entity.get(), dtoNew);
+			JsonNode entityJson = objectMapper.readTree(objectMapper.writeValueAsString(dtoNew));
+			data.fieldNames().forEachRemaining(field->{
+				if( !data.get(field).isNull()  ) {
+					System.out.println(field);
+					((ObjectNode)entityJson).put(field, data.get(field));
+				}
+			});
+			LieuxDto toSave = objectMapper.convertValue(entityJson, LieuxDto.class);
+			Lieux finalEntity = new Lieux();
+			modelMapper.map(toSave, finalEntity);
+			lieuxRepository.save(finalEntity);
+		}catch(Exception ex) {return ex.getMessage();}
 		componentServ.evictAllCaches();
 		return "200";
 	}

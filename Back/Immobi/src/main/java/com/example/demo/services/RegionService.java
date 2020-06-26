@@ -13,6 +13,9 @@ import com.example.demo.CacheComponent;
 import com.example.demo.dto.RegionDto;
 import com.example.demo.entitys.Region;
 import com.example.demo.repositorys.RegionRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Service
 public class RegionService {
@@ -25,6 +28,9 @@ public class RegionService {
 	
 	@Autowired
 	CacheComponent componentServ;
+	
+	@Autowired
+	ObjectMapper objectMapper;
 	
 	@Cacheable("region_all")
 	public List<RegionDto> findAll(){
@@ -68,7 +74,30 @@ public class RegionService {
 		componentServ.evictAllCaches();
 		return "200";
 	}
-	
+	@SuppressWarnings("deprecation")
+	public String update(String json) {
+		try {
+			JsonNode data = objectMapper.readTree(json);
+			Long id = data.get("id").asLong();
+			if ( data.get("id").isNull() ) return "UPDATE: ID NOT FOUND EXEPTION";
+			RegionDto dtoNew = new RegionDto();
+			Optional<Region> entity = regionRepository.findById(id);
+			modelMapper.map(entity.get(), dtoNew);
+			JsonNode entityJson = objectMapper.readTree(objectMapper.writeValueAsString(dtoNew));
+			data.fieldNames().forEachRemaining(field->{
+				if( !data.get(field).isNull()  ) {
+					System.out.println(field);
+					((ObjectNode)entityJson).put(field, data.get(field));
+				}
+			});
+			RegionDto toSave = objectMapper.convertValue(entityJson, RegionDto.class);
+			Region finalEntity = new Region();
+			modelMapper.map(toSave, finalEntity);
+			regionRepository.save(finalEntity);
+		}catch(Exception ex) {return ex.getMessage();}
+		componentServ.evictAllCaches();
+		return "200";
+	}
 	public String delete(Long id) {
 		try {
 			regionRepository.deleteById(id);

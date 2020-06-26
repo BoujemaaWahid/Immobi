@@ -13,6 +13,9 @@ import com.example.demo.CacheComponent;
 import com.example.demo.dto.LocalDto;
 import com.example.demo.entitys.Local;
 import com.example.demo.repositorys.LocalRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Service
 public class LocalService {
@@ -25,6 +28,9 @@ public class LocalService {
 	
 	@Autowired
 	CacheComponent componentServ;
+	
+	@Autowired
+	ObjectMapper objectMapper;
 	
 	@Cacheable("local_all")
 	public List<LocalDto> findAll(){
@@ -65,6 +71,31 @@ public class LocalService {
 			localRepository.save(entity);
 		}catch(Exception ex) { return ex.getMessage(); }
 		
+		componentServ.evictAllCaches();
+		return "200";
+	}
+	
+	@SuppressWarnings("deprecation")
+	public String update(String json) {
+		try {
+			JsonNode data = objectMapper.readTree(json);
+			Long id = data.get("id").asLong();
+			if ( data.get("id").isNull() ) return "UPDATE: ID NOT FOUND EXEPTION";
+			LocalDto dtoNew = new LocalDto();
+			Optional<Local> entity = localRepository.findById(id);
+			modelMapper.map(entity.get(), dtoNew);
+			JsonNode entityJson = objectMapper.readTree(objectMapper.writeValueAsString(dtoNew));
+			data.fieldNames().forEachRemaining(field->{
+				if( !data.get(field).isNull()  ) {
+					System.out.println(field);
+					((ObjectNode)entityJson).put(field, data.get(field));
+				}
+			});
+			LocalDto toSave = objectMapper.convertValue(entityJson, LocalDto.class);
+			Local finalEntity = new Local();
+			modelMapper.map(toSave, finalEntity);
+			localRepository.save(finalEntity);
+		}catch(Exception ex) {return ex.getMessage();}
 		componentServ.evictAllCaches();
 		return "200";
 	}

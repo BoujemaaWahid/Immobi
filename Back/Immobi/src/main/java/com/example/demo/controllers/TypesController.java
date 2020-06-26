@@ -44,8 +44,8 @@ public class TypesController {
 	}
 	
 	@PutMapping("/update")
-	public String update(@RequestBody TypeLocalDto dto) {
-		return "400";
+	public String update(@RequestBody String json) {
+		return typeLocalService.update(json);
 	}
 	
 	@DeleteMapping("/delete")

@@ -54,8 +54,8 @@ public class LieuxController {
 	}
 	
 	@PutMapping("/update")
-	public String update(@RequestBody LieuxDto dto) {
-		return "400";
+	public String update(@RequestBody String json) {
+		return lieuxService.update(json);
 	}
 	
 	@DeleteMapping("/delete")

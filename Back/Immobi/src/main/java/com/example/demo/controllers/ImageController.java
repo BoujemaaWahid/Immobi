@@ -44,8 +44,8 @@ public class ImageController {
 	}
 	
 	@PutMapping("/update")
-	public String update(@RequestBody ImageDto dto) {
-		return "400";
+	public String update(@RequestBody String json) {
+		return imageService.update(json);
 	}
 	
 	@DeleteMapping("/delete")

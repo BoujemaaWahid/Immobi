@@ -45,8 +45,8 @@ public class LocalController {
 	}
 	
 	@PutMapping("/update")
-	public String update(@RequestBody LocalDto dto) {
-		return "400";
+	public String update(@RequestBody String json) {
+		return localService.update(json);
 	}
 	
 	@DeleteMapping("/delete")

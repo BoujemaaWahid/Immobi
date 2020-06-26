@@ -13,6 +13,9 @@ import com.example.demo.CacheComponent;
 import com.example.demo.dto.AdresseDto;
 import com.example.demo.entitys.Adresse;
 import com.example.demo.repositorys.AdressesRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 
 @Service
@@ -28,6 +31,9 @@ public class AdressesService {
 	
 	@Autowired
 	CacheComponent componentServ;
+	
+	@Autowired
+	ObjectMapper objectMapper;
 	
 	
 	@Cacheable("adresses_all")
@@ -46,7 +52,7 @@ public class AdressesService {
 		try {
 			AdresseDto dto = new AdresseDto();
 			Optional<Adresse> entity = adressesRepository.findById(id);
-			modelMapper.map(entity.get(), dto) ;
+			modelMapper.map(entity.get(), dto);
 			return dto;
 		}catch(Exception ex) { return new AdresseDto(); }
 	}
@@ -68,6 +74,31 @@ public class AdressesService {
 			modelMapper.map(dto, entity);
 			adressesRepository.save(entity);
 		}catch(Exception ex) { return ex.getMessage(); }
+		componentServ.evictAllCaches();
+		return "200";
+	}
+
+	@SuppressWarnings("deprecation")
+	public String update(String json) {
+		try {
+			JsonNode data = objectMapper.readTree(json);
+			Long id = data.get("id").asLong();
+			if ( data.get("id").isNull() ) return "UPDATE: ID NOT FOUND EXEPTION";
+			AdresseDto dtoNew = new AdresseDto();
+			Optional<Adresse> entity = adressesRepository.findById(id);
+			modelMapper.map(entity.get(), dtoNew);
+			JsonNode entityJson = objectMapper.readTree(objectMapper.writeValueAsString(dtoNew));
+			data.fieldNames().forEachRemaining(field->{
+				if( !data.get(field).isNull()  ) {
+					System.out.println(field);
+					((ObjectNode)entityJson).put(field, data.get(field));
+				}
+			});
+			AdresseDto toSave = objectMapper.convertValue(entityJson, AdresseDto.class);
+			Adresse finalEntity = new Adresse();
+			modelMapper.map(toSave, finalEntity);
+			adressesRepository.save(finalEntity);
+		}catch(Exception ex) {return ex.getMessage();}
 		componentServ.evictAllCaches();
 		return "200";
 	}

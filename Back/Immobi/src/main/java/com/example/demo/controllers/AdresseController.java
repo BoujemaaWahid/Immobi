@@ -51,8 +51,8 @@ public class AdresseController {
 	}
 	
 	@PutMapping("/update")
-	public String update(@RequestBody AdresseDto dto) {
-		return "400";
+	public String update(@RequestBody String json) {
+		return adresseServices.update(json);
 	}
 	
 	@DeleteMapping("/delete")

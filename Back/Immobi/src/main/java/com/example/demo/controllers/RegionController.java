@@ -45,8 +45,8 @@ public class RegionController {
 	}
 	
 	@PutMapping("/update")
-	public String update(@RequestBody RegionDto dto) {
-		return "400";
+	public String update(@RequestBody String json) {
+		return regionService.update(json);
 	}
 	
 	@DeleteMapping("/delete")
