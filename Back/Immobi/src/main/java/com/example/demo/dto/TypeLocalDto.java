@@ -6,15 +6,13 @@ import com.example.demo.entitys.Local;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class TypeLocalDto implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -24,10 +22,5 @@ public class TypeLocalDto implements Serializable{
 	private String label;
 	@JsonProperty("locales")
 	private List<Local> locales;
-
-	@Override
-	public String toString() {
-		return "TypeLocal [id=" + id + ", label=" + label + ", locales=" + locales + "]";
-	}
 
 }

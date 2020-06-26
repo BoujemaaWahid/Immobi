@@ -24,16 +24,13 @@ public class AdressesService {
 	private AdressesRepository adressesRepository;
 	
 	@Autowired
-	LieuxService lieuxService;
+	private ModelMapper modelMapper;
 	
 	@Autowired
-	ModelMapper modelMapper;
+	private CacheComponent componentServ;
 	
 	@Autowired
-	CacheComponent componentServ;
-	
-	@Autowired
-	ObjectMapper objectMapper;
+	private ObjectMapper objectMapper;
 	
 	
 	@Cacheable("adresses_all")
@@ -90,7 +87,6 @@ public class AdressesService {
 			JsonNode entityJson = objectMapper.readTree(objectMapper.writeValueAsString(dtoNew));
 			data.fieldNames().forEachRemaining(field->{
 				if( !data.get(field).isNull()  ) {
-					System.out.println(field);
 					((ObjectNode)entityJson).put(field, data.get(field));
 				}
 			});

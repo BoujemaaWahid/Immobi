@@ -8,14 +8,12 @@ import com.example.demo.entitys.TypeLocal;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class LocalDto implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -44,13 +42,5 @@ public class LocalDto implements Serializable{
 	private boolean projet;
 	@JsonProperty("date_pub")
 	private String date_publication;
-
-	@Override
-	public String toString() {
-		return "Local [id=" + id + ", adresse=" + adresse + ", description=" + description + ", prix=" + prix
-				+ ", types=" + types + ", images=" + images + ", surface=" + surface + ", surface_terrain="
-				+ surface_terrain + ", num_pieces=" + num_pieces + ", num_chambres=" + num_chambres + ", projet="
-				+ projet + ", date_publication=" + date_publication + "]";
-	}
 
 }

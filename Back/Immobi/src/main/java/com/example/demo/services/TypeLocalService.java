@@ -20,16 +20,16 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 @Service
 public class TypeLocalService {
 	@Autowired
-	TypeRepository typeRepository;
+	private TypeRepository typeRepository;
 	
 	@Autowired
-	CacheComponent componentServ;
+	private CacheComponent componentServ;
 	
 	@Autowired
-	ModelMapper modelMapper;
+	private ModelMapper modelMapper;
 	
 	@Autowired
-	ObjectMapper objectMapper;
+	private ObjectMapper objectMapper;
 
 	@Cacheable("types_all")
 	public List<TypeLocalDto> findAll(){
@@ -86,7 +86,6 @@ public class TypeLocalService {
 			JsonNode entityJson = objectMapper.readTree(objectMapper.writeValueAsString(dtoNew));
 			data.fieldNames().forEachRemaining(field->{
 				if( !data.get(field).isNull()  ) {
-					System.out.println(field);
 					((ObjectNode)entityJson).put(field, data.get(field));
 				}
 			});

@@ -6,15 +6,13 @@ import com.example.demo.entitys.Lieux;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class RegionDto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -25,10 +23,5 @@ public class RegionDto implements Serializable{
 	private String label;
 	@JsonProperty("lieux")
 	private List<Lieux> lieux;
-
-	@Override
-	public String toString() {
-		return "Region [id=" + id + ", label=" + label + ", lieux=" + lieux + "]";
-	}
 
 }

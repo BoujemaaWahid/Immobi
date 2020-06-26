@@ -16,17 +16,15 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "LIEUX")
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class Lieux {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -47,10 +45,4 @@ public class Lieux {
 	@JsonIgnore
 	private List<Adresse> adresses = new ArrayList<Adresse>();
 	
-	@Override
-	public String toString() {
-		return "Lieux [id=" + id + ", label=" + label + ", code_postal=" + code_postal + ", region=" + region
-				+ ", adresses=" + adresses + "]";
-	}
-
 }

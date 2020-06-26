@@ -13,16 +13,14 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "REGION")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class Region {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -35,10 +33,5 @@ public class Region {
 	@OneToMany(mappedBy = "region")
 	@JsonIgnore
 	List<Lieux> lieux;
-
-	@Override
-	public String toString() {
-		return "Region [id=" + id + ", label=" + label + ", lieux=" + lieux + "]";
-	}
 	
 }

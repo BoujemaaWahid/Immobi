@@ -23,13 +23,13 @@ public class ImageService {
 	private ImageRepository imageRepository;
 	
 	@Autowired
-	ModelMapper modelMapper;
+	private ModelMapper modelMapper;
 	
 	@Autowired
-	CacheComponent componentServ;
+	private CacheComponent componentServ;
 	
 	@Autowired
-	ObjectMapper objectMapper;
+	private ObjectMapper objectMapper;
 	
 	@Cacheable("images_all")
 	public List<ImageDto> findAll(){
@@ -86,7 +86,6 @@ public class ImageService {
 			JsonNode entityJson = objectMapper.readTree(objectMapper.writeValueAsString(dtoNew));
 			data.fieldNames().forEachRemaining(field->{
 				if( !data.get(field).isNull()  ) {
-					System.out.println(field);
 					((ObjectNode)entityJson).put(field, data.get(field));
 				}
 			});

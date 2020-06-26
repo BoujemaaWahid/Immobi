@@ -13,16 +13,14 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "TYPE")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class TypeLocal {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -34,9 +32,4 @@ public class TypeLocal {
 	@ManyToMany(mappedBy = "types")
 	@JsonIgnore
 	private List<Local> locales;
-	
-	@Override
-	public String toString() {
-		return "TypeLocal [id=" + id + ", label=" + label + ", locales=" + locales + "]";
-	}
 }

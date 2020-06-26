@@ -18,16 +18,14 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "LOCAL")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class Local {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -74,13 +72,5 @@ public class Local {
 	
 	@Column(name = "date_publication")
 	private Date date_publication;
-
-	@Override
-	public String toString() {
-		return "Local [id=" + id + ", adresse=" + adresse + ", description=" + description + ", prix=" + prix
-				+ ", types=" + types + ", images=" + images + ", surface=" + surface + ", surface_terrain="
-				+ surface_terrain + ", num_pieces=" + num_pieces + ", num_chambres=" + num_chambres + ", projet="
-				+ projet + ", date_publication=" + date_publication + "]";
-	}
 
 }

@@ -20,17 +20,16 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 @Service
 public class RegionService {
 	@Autowired
-	RegionRepository regionRepository;
-	
-
-	@Autowired
-	ModelMapper modelMapper;
+	private RegionRepository regionRepository;
 	
 	@Autowired
-	CacheComponent componentServ;
+	private ModelMapper modelMapper;
 	
 	@Autowired
-	ObjectMapper objectMapper;
+	private CacheComponent componentServ;
+	
+	@Autowired
+	private ObjectMapper objectMapper;
 	
 	@Cacheable("region_all")
 	public List<RegionDto> findAll(){
@@ -86,7 +85,6 @@ public class RegionService {
 			JsonNode entityJson = objectMapper.readTree(objectMapper.writeValueAsString(dtoNew));
 			data.fieldNames().forEachRemaining(field->{
 				if( !data.get(field).isNull()  ) {
-					System.out.println(field);
 					((ObjectNode)entityJson).put(field, data.get(field));
 				}
 			});

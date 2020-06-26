@@ -8,14 +8,12 @@ import com.example.demo.entitys.Local;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class AdresseDto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -43,13 +41,6 @@ public class AdresseDto implements Serializable{
 	
 	@JsonProperty("locales")
 	private List<Local> locales;
-	
-	@Override
-	public String toString() {
-		return "AdresseDto [id=" + id + ", rue=" + rue + ", numero=" + numero + ", complement=" + complement
-				+ ", latitude=" + latitude + ", longitude=" + longitude + ", lieu=" + lieu + ", locales=" + locales
-				+ "]";
-	}
 
 }
 

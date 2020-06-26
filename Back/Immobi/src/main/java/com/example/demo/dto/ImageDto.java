@@ -5,15 +5,13 @@ import com.example.demo.entitys.Local;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class ImageDto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -23,10 +21,5 @@ public class ImageDto implements Serializable{
 	private String base64;
 	@JsonProperty("local")
 	private Local local;
-
-	@Override
-	public String toString() {
-		return "Image [id=" + id + ", base64=" + base64 + ", local=" + local + "]";
-	}
 
 }

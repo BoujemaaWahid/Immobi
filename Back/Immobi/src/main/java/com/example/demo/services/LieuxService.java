@@ -25,18 +25,16 @@ public class LieuxService {
 	private LieuxRepository lieuxRepository;
 	
 	@Autowired
-	ModelMapper modelMapper;
+	private ModelMapper modelMapper;
 	
 	@Autowired
-	CacheComponent componentServ;
+	private CacheComponent componentServ;
 	
 	@Autowired
-	ObjectMapper objectMapper;
+	private ObjectMapper objectMapper;
 	
 	@Cacheable("lieux_all")
-	public List<LieuxDto> findAll(){
-		System.out.println(lieuxRepository.listLieuxRegion());
-		
+	public List<LieuxDto> findAll(){		
 		List<LieuxDto> list = new ArrayList<>();
 		lieuxRepository.findAll().forEach(item -> {
 			LieuxDto ld = new LieuxDto();
@@ -100,7 +98,6 @@ public class LieuxService {
 			JsonNode entityJson = objectMapper.readTree(objectMapper.writeValueAsString(dtoNew));
 			data.fieldNames().forEachRemaining(field->{
 				if( !data.get(field).isNull()  ) {
-					System.out.println(field);
 					((ObjectNode)entityJson).put(field, data.get(field));
 				}
 			});

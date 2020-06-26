@@ -24,13 +24,13 @@ public class LocalService {
 	private LocalRepository localRepository;
 	
 	@Autowired
-	ModelMapper modelMapper;
+	private ModelMapper modelMapper;
 	
 	@Autowired
-	CacheComponent componentServ;
+	private CacheComponent componentServ;
 	
 	@Autowired
-	ObjectMapper objectMapper;
+	private ObjectMapper objectMapper;
 	
 	@Cacheable("local_all")
 	public List<LocalDto> findAll(){
@@ -87,7 +87,6 @@ public class LocalService {
 			JsonNode entityJson = objectMapper.readTree(objectMapper.writeValueAsString(dtoNew));
 			data.fieldNames().forEachRemaining(field->{
 				if( !data.get(field).isNull()  ) {
-					System.out.println(field);
 					((ObjectNode)entityJson).put(field, data.get(field));
 				}
 			});

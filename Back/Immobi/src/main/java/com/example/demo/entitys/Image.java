@@ -13,16 +13,14 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "Images")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class Image {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -35,10 +33,5 @@ public class Image {
 	@JoinColumn(name="local_id", nullable = false)
 	@JsonIgnore
 	private Local local;
-
-	@Override
-	public String toString() {
-		return "Image [id=" + id + ", base64=" + base64 + ", local=" + local + "]";
-	}
 	
 }
