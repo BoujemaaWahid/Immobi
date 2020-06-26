@@ -52,7 +52,7 @@ public class AdresseController {
 	
 	@PutMapping("/update")
 	public String update(@RequestBody AdresseDto dto) {
-		return adresseServices.save(dto);
+		return "400";
 	}
 	
 	@DeleteMapping("/delete")

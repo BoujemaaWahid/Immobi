@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.demo.entitys.Adresse;
+import com.example.demo.entitys.Region;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class LieuxDto implements Serializable{
@@ -19,6 +20,9 @@ public class LieuxDto implements Serializable{
 	
 	@JsonProperty("postal")
     private String code_postal;
+	
+	@JsonProperty("region")
+	private Region region;
 	
 	@JsonProperty("adresses")
 	private List<Adresse> adresses = new ArrayList<Adresse>();
@@ -63,11 +67,19 @@ public class LieuxDto implements Serializable{
 	public void setAdresses(List<Adresse> adresses) {
 		this.adresses = adresses;
 	}
+	
+	public Region getRegion() {
+		return region;
+	}
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+	
 	@Override
 	public String toString() {
-		return "LieuxDto [id=" + id + ", label=" + label + ", code_postal=" + code_postal + ", adresses=" + adresses
-				+ "]";
-	}	
+		return "Lieux [id=" + id + ", label=" + label + ", code_postal=" + code_postal + ", region=" + region
+				+ ", adresses=" + adresses + "]";
+	}
 
 	
 }

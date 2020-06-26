@@ -2,7 +2,6 @@ package com.example.demo.controllers;
 
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,54 +12,48 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo.dto.LieuxDto;
-import com.example.demo.services.LieuxService;
-
-
-import com.example.demo.services.AdressesService;
+import com.example.demo.dto.TypeLocalDto;
+import com.example.demo.services.TypeLocalService;
 
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
-@RequestMapping("/lieux")
-public class LieuxController {
+@RequestMapping("/types")
+public class TypesController {
 	@Autowired
-	LieuxService lieuxService;
-	
-	@Autowired
-	AdressesService adressesService;
-	
-	@Autowired
-	ModelMapper modelMapper;
-	
+	TypeLocalService typeLocalService;
+
+
 	@GetMapping("/find")
-	public LieuxDto find(@RequestParam(value = "id")Long id) {
-		return lieuxService.findOne(id);
+	public TypeLocalDto find(@RequestParam(value = "id")Long id) {
+		return typeLocalService.findOne(id);
 	}
 	
 	@GetMapping("/findAll")
-	public List<LieuxDto> findAll() {
-		return lieuxService.findAll();	
+	public List<TypeLocalDto> findAll() {
+		return typeLocalService.findAll();	
 	}
 	
 	@GetMapping("/inRange")
-	public List<LieuxDto> findAllById(@RequestParam(value = "ids") List<Long> ids) {
-		return lieuxService.findAllById(ids);
+	public List<TypeLocalDto> findAllById(@RequestParam(value = "ids") List<Long> ids) {
+		return typeLocalService.findAllById(ids);
 	}
 	
 	@PostMapping("/save")
-	public String save(@RequestBody LieuxDto dto) {
-		return lieuxService.save(dto);
+	public String save(@RequestBody TypeLocalDto dto) {
+		return typeLocalService.save(dto);
 	}
 	
 	@PutMapping("/update")
-	public String update(@RequestBody LieuxDto dto) {
+	public String update(@RequestBody TypeLocalDto dto) {
 		return "400";
 	}
 	
 	@DeleteMapping("/delete")
 	public String delete(@RequestParam( value = "id") Long id) {
-		return lieuxService.delete(id);
+		System.out.println("ID" + id);
+		return typeLocalService.delete(id);
 	}
 
+	
+	
 }

@@ -11,12 +11,18 @@ public class CacheComponent {
 	@Autowired
 	CacheManager cacheManager;
 	
+	public CacheComponent() {
+		try {
+			evictAllcachesAtIntervals();
+		}catch(Exception ex) {}
+	}
+	
 	public void evictAllCaches() {
 	    cacheManager.getCacheNames().stream()
 	      .forEach(cacheName -> cacheManager.getCache(cacheName).clear());
 	}
 	
-	@Scheduled(fixedRate = 1000)
+	@Scheduled(fixedRate = 5000)
 	public void evictAllcachesAtIntervals() {
 	    evictAllCaches();
 	}

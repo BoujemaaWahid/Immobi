@@ -10,15 +10,14 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.CacheComponent;
-import com.example.demo.dto.LocalDto;
-import com.example.demo.entitys.Local;
-import com.example.demo.repositorys.LocalRepository;
+import com.example.demo.dto.ImageDto;
+import com.example.demo.entitys.Image;
+import com.example.demo.repositorys.ImageRepository;
 
 @Service
-public class LocalService {
-
+public class ImageService {
 	@Autowired
-	private LocalRepository localRepository;
+	private ImageRepository imageRepository;
 	
 	@Autowired
 	ModelMapper modelMapper;
@@ -26,43 +25,43 @@ public class LocalService {
 	@Autowired
 	CacheComponent componentServ;
 	
-	@Cacheable("local_all")
-	public List<LocalDto> findAll(){
-		List<LocalDto> list = new ArrayList<>();
-		localRepository.findAll().forEach(item -> {
-			LocalDto ld = new LocalDto();
+	@Cacheable("images_all")
+	public List<ImageDto> findAll(){
+		List<ImageDto> list = new ArrayList<>();
+		imageRepository.findAll().forEach(item -> {
+			ImageDto ld = new ImageDto();
 			modelMapper.map(item, ld);
 			list.add(ld);
 		});
 		return list;
 	}
 	
-	@Cacheable("local_one")
-	public LocalDto findOne(Long id) {
+	@Cacheable("image_one")
+	public ImageDto findOne(Long id) {
 		try {
-			LocalDto dto = new LocalDto();
-			Optional<Local> entity = localRepository.findById(id);
+			ImageDto dto = new ImageDto();
+			Optional<Image> entity = imageRepository.findById(id);
 			modelMapper.map(entity.get(), dto) ;
 			return dto;
-		}catch(Exception ex) { return new LocalDto(); }
+		}catch(Exception ex) { return new ImageDto(); }
 	}
 	
-	@Cacheable("local_all_ids")
-	public List<LocalDto> findAllById(List<Long> ids){
-		List<LocalDto> list = new ArrayList<>();
-		localRepository.findAllById(ids).forEach(item -> {
-			LocalDto ld = new LocalDto();
+	@Cacheable("images_all_ids")
+	public List<ImageDto> findAllById(List<Long> ids){
+		List<ImageDto> list = new ArrayList<>();
+		imageRepository.findAllById(ids).forEach(item -> {
+			ImageDto ld = new ImageDto();
 			modelMapper.map(item, ld);
 			list.add(ld);
 		});
 		return list;
 	}
 	
-	public String save(LocalDto dto) {
+	public String save(ImageDto dto) {
 		try {
-			Local entity = new Local();
+			Image entity = new Image();
 			modelMapper.map(dto, entity);
-			localRepository.save(entity);
+			imageRepository.save(entity);
 		}catch(Exception ex) { return ex.getMessage(); }
 		
 		componentServ.evictAllCaches();
@@ -71,7 +70,7 @@ public class LocalService {
 	
 	public String delete(Long id) {
 		try {
-			localRepository.deleteById(id);
+			imageRepository.deleteById(id);
 		}catch(Exception ex) { return ex.getMessage(); }
 		
 		componentServ.evictAllCaches();

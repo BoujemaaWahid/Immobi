@@ -10,59 +10,59 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.CacheComponent;
-import com.example.demo.dto.LocalDto;
-import com.example.demo.entitys.Local;
-import com.example.demo.repositorys.LocalRepository;
+import com.example.demo.dto.RegionDto;
+import com.example.demo.entitys.Region;
+import com.example.demo.repositorys.RegionRepository;
 
 @Service
-public class LocalService {
-
+public class RegionService {
 	@Autowired
-	private LocalRepository localRepository;
+	RegionRepository regionRepository;
 	
+
 	@Autowired
 	ModelMapper modelMapper;
 	
 	@Autowired
 	CacheComponent componentServ;
 	
-	@Cacheable("local_all")
-	public List<LocalDto> findAll(){
-		List<LocalDto> list = new ArrayList<>();
-		localRepository.findAll().forEach(item -> {
-			LocalDto ld = new LocalDto();
+	@Cacheable("region_all")
+	public List<RegionDto> findAll(){
+		List<RegionDto> list = new ArrayList<>();
+		regionRepository.findAll().forEach(item -> {
+			RegionDto ld = new RegionDto();
 			modelMapper.map(item, ld);
 			list.add(ld);
 		});
 		return list;
 	}
 	
-	@Cacheable("local_one")
-	public LocalDto findOne(Long id) {
+	@Cacheable("region_one")
+	public RegionDto findOne(Long id) {
 		try {
-			LocalDto dto = new LocalDto();
-			Optional<Local> entity = localRepository.findById(id);
+			RegionDto dto = new RegionDto();
+			Optional<Region> entity = regionRepository.findById(id);
 			modelMapper.map(entity.get(), dto) ;
 			return dto;
-		}catch(Exception ex) { return new LocalDto(); }
+		}catch(Exception ex) { return new RegionDto(); }
 	}
 	
-	@Cacheable("local_all_ids")
-	public List<LocalDto> findAllById(List<Long> ids){
-		List<LocalDto> list = new ArrayList<>();
-		localRepository.findAllById(ids).forEach(item -> {
-			LocalDto ld = new LocalDto();
+	@Cacheable("region_all_ids")
+	public List<RegionDto> findAllById(List<Long> ids){
+		List<RegionDto> list = new ArrayList<>();
+		regionRepository.findAllById(ids).forEach(item -> {
+			RegionDto ld = new RegionDto();
 			modelMapper.map(item, ld);
 			list.add(ld);
 		});
 		return list;
 	}
 	
-	public String save(LocalDto dto) {
+	public String save(RegionDto dto) {
 		try {
-			Local entity = new Local();
+			Region entity = new Region();
 			modelMapper.map(dto, entity);
-			localRepository.save(entity);
+			regionRepository.save(entity);
 		}catch(Exception ex) { return ex.getMessage(); }
 		
 		componentServ.evictAllCaches();
@@ -71,10 +71,11 @@ public class LocalService {
 	
 	public String delete(Long id) {
 		try {
-			localRepository.deleteById(id);
+			regionRepository.deleteById(id);
 		}catch(Exception ex) { return ex.getMessage(); }
 		
 		componentServ.evictAllCaches();
 		return "200";
 	}
+
 }
