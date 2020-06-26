@@ -5,6 +5,16 @@ import java.util.List;
 import com.example.demo.entitys.Lieux;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class RegionDto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -15,32 +25,6 @@ public class RegionDto implements Serializable{
 	private String label;
 	@JsonProperty("lieux")
 	private List<Lieux> lieux;
-
-	public RegionDto() {}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public List<Lieux> getLieux() {
-		return lieux;
-	}
-
-	public void setLieux(List<Lieux> lieux) {
-		this.lieux = lieux;
-	}
 
 	@Override
 	public String toString() {

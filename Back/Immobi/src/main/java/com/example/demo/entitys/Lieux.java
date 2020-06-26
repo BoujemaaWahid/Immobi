@@ -15,8 +15,18 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "LIEUX")
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Lieux {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -36,52 +46,6 @@ public class Lieux {
 	@OneToMany(mappedBy = "lieu")
 	@JsonIgnore
 	private List<Adresse> adresses = new ArrayList<Adresse>();
-	
-	public Lieux() {}
-	public Lieux(String label, String code_postal) {
-		this.label = label;
-		this.code_postal = code_postal;
-	}
-	public Lieux(String label, String code_postal, List<Adresse> adresses) {
-		this(label, code_postal);
-		this.adresses = adresses;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public String getCode_postal() {
-		return code_postal;
-	}
-	public void setCode_postal(String code_postal) {
-		this.code_postal = code_postal;
-	}
-
-	public List<Adresse> getAdresses() {
-		return adresses;
-	}
-	public void setAdresses(List<Adresse> adresses) {
-		this.adresses = adresses;
-	}
-	public Region getRegion() {
-		return region;
-	}
-	public void setRegion(Region region) {
-		this.region = region;
-	}
 	
 	@Override
 	public String toString() {

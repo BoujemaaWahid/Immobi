@@ -2,11 +2,19 @@ package com.example.demo.dto;
 
 import java.io.Serializable;
 import java.util.List;
-
-
 import com.example.demo.entitys.Local;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class TypeLocalDto implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -16,37 +24,6 @@ public class TypeLocalDto implements Serializable{
 	private String label;
 	@JsonProperty("locales")
 	private List<Local> locales;
-	
-	public TypeLocalDto() {}
-	
-	public TypeLocalDto(String label, List<Local>locales) {
-		this.label = label;
-		this.locales = locales;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public List<Local> getLocales() {
-		return locales;
-	}
-
-	public void setLocales(List<Local> locales) {
-		this.locales = locales;
-	}
 
 	@Override
 	public String toString() {

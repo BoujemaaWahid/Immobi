@@ -16,8 +16,17 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "adresses")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Adresse {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -48,82 +57,6 @@ public class Adresse {
 	@JsonIgnore
 	List<Local> locales = new ArrayList<>();
 	
-	public Adresse() {}
-	
-	public Adresse(String rue, int numero, String complement, double latitude, double longitude, Lieux lieu, List<Local>locales) {
-		this.rue = rue;
-		this.numero = numero;
-		this.complement = complement;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.lieu = lieu;
-		this.locales = locales;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getRue() {
-		return rue;
-	}
-
-	public void setRue(String rue) {
-		this.rue = rue;
-	}
-
-	public int getNumero() {
-		return numero;
-	}
-
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-
-	public double getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
-
-	public double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-
-	public Lieux getLieu() {
-		return lieu;
-	}
-
-	public void setLieu(Lieux lieu) {
-		this.lieu = lieu;
-	}
-
-	public List<Local> getLocales() {
-		return locales;
-	}
-
-	public void setLocales(List<Local> locales) {
-		this.locales = locales;
-	}
-
-	public String getComplement() {
-		return complement;
-	}
-
-	public void setComplement(String complement) {
-		this.complement = complement;
-	}
-
 	@Override
 	public String toString() {
 		return "Adresse [id=" + id + ", rue=" + rue + ", numero=" + numero + ", complement=" + complement

@@ -12,8 +12,17 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "TYPE")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class TypeLocal {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -26,42 +35,8 @@ public class TypeLocal {
 	@JsonIgnore
 	private List<Local> locales;
 	
-	public TypeLocal() {}
-	
-	public TypeLocal(String label, List<Local>locales) {
-		this.label = label;
-		this.locales = locales;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public List<Local> getLocales() {
-		return locales;
-	}
-
-	public void setLocales(List<Local> locales) {
-		this.locales = locales;
-	}
-
 	@Override
 	public String toString() {
 		return "TypeLocal [id=" + id + ", label=" + label + ", locales=" + locales + "]";
 	}
-	
-	
-
 }
