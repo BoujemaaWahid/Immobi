@@ -12,7 +12,8 @@ import com.example.demo.entitys.Lieux;
 public interface LieuxRepository extends CrudRepository<Lieux, Long>{
 	
 	@Query( 
-	value = "select id, label, 'lieux' as flag from lieux union select id, label, 'region' as flag from region",
+	value = "select id, label, 'lieux' as flag from lieux "
+			+ "union select id, label, 'region' as flag from region order by label asc",
 	nativeQuery = true)
 	List<Result> listLieuxRegion();
 	
