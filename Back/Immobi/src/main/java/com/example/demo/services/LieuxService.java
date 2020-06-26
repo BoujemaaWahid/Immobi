@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.CacheComponent;
 import com.example.demo.dto.LieuxDto;
 import com.example.demo.entitys.Lieux;
+import com.example.demo.extradtos.LieuxRegion;
 import com.example.demo.repositorys.LieuxRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,11 +35,23 @@ public class LieuxService {
 	
 	@Cacheable("lieux_all")
 	public List<LieuxDto> findAll(){
+		System.out.println(lieuxRepository.listLieuxRegion());
+		
 		List<LieuxDto> list = new ArrayList<>();
 		lieuxRepository.findAll().forEach(item -> {
 			LieuxDto ld = new LieuxDto();
 			modelMapper.map(item, ld);
 			list.add(ld);
+		});
+		return list;
+	}
+	
+	@Cacheable("lieux_region")
+	public List<LieuxRegion> getLieuxRegion(){
+		List<LieuxRegion> list = new ArrayList<>();
+		lieuxRepository.listLieuxRegion().forEach(e->{
+			LieuxRegion lr = new LieuxRegion(e.getId(), e.getLabel(), e.getFlag());
+			list.add(lr);
 		});
 		return list;
 	}

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.LieuxDto;
+import com.example.demo.extradtos.LieuxRegion;
 import com.example.demo.services.LieuxService;
 
 
@@ -41,6 +42,11 @@ public class LieuxController {
 	@GetMapping("/findAll")
 	public List<LieuxDto> findAll() {
 		return lieuxService.findAll();	
+	}
+	
+	@GetMapping("/lieuxRegion")
+	public List<LieuxRegion> getLieuxRegion(){
+		return lieuxService.getLieuxRegion();
 	}
 	
 	@GetMapping("/inRange")
