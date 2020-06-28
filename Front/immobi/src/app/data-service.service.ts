@@ -15,16 +15,17 @@ export class DataService {
     this.headers.append('Content-Type', 'text/plain; charset=utf-8');
 
     this.http.post(
-      "http://127.0.0.1:4300/t",
+      "http://127.0.0.1:4300/auth/X",
       {},
-      {headers: this.headers, params:{'data':'45'}, responseType:"text"}
-      ).subscribe(m => {console.log(m)})
-
+      {headers: this.headers, responseType:"text"}
+      ).subscribe(
+        (response)=>{console.log(response);}
+      )
 
 
     let data = this.http.get(
-      "http://127.0.0.1:4300/basicFilter",
-      { headers: this.headers, params:{data:"xxsx"}, responseType: "text" }
+      "http://127.0.0.1:4300/auth/wahid",
+      { headers: this.headers, responseType: "text" }
     )
     return data;
   }
