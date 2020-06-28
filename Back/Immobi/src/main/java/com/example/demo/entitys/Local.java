@@ -44,7 +44,7 @@ public class Local {
 	
 	@ManyToMany
 	@JoinTable(
-	  name = "locales_types", 
+	  name = "locales_types",
 	  joinColumns = @JoinColumn(name = "local_id"), 
 	  inverseJoinColumns = @JoinColumn(name = "type_id"))
 	@JsonIgnore
@@ -72,5 +72,8 @@ public class Local {
 	
 	@Column(name = "date_publication")
 	private Date date_publication;
+	
+	@Column(name = "disponible", nullable = false)
+	private boolean disponible = true;
 
 }

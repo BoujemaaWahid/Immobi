@@ -2,6 +2,8 @@ package com.example.demo.dto;
 
 import java.io.Serializable;
 import java.util.List;
+
+
 import com.example.demo.entitys.Adresse;
 import com.example.demo.entitys.Image;
 import com.example.demo.entitys.TypeLocal;
@@ -42,5 +44,7 @@ public class LocalDto implements Serializable{
 	private boolean projet;
 	@JsonProperty("date_pub")
 	private String date_publication;
-
+	@JsonProperty("disponible")
+	private boolean disponible;
+	
 }

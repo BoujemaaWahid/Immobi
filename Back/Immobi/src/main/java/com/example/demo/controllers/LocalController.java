@@ -39,6 +39,11 @@ public class LocalController {
 		return localService.findAllById(ids);
 	}
 	
+	@GetMapping("/filters")
+	public List<LocalDto> X(@RequestBody String json) {
+		return localService.getByFilters(json);
+	}
+	
 	@PostMapping("/save")
 	public String save(@RequestBody LocalDto dto) {
 		return localService.save(dto);
