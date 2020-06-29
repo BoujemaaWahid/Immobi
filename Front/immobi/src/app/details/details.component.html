@@ -4,16 +4,19 @@
     <div class="ui stackable column grid container">
       <div class="column">
         <div class="ui raised segment">
-          <div class="ui top attached black label"><h4>VILLA à Rosny sous bois</h4><p>Immobi</p></div>
+          <div class="ui top attached black label"><h4>{{item.titre}} à {{item.adresse.lieu.label}}</h4><p>Immobi</p></div>
           <div class="ui grid stackable two column">
-            <div class="three wide column"><a class="ui green ribbon big left label"><b>Prix 4447 <i class="euro icon"></i></b></a></div>
+            <div class="three wide column"><a class="ui green ribbon big left label"><b>Prix {{item.prix}} <i class="euro icon"></i></b></a></div>
           </div>
           <p></p><br>
           <div class="column">
             <div class="two wide column"><a class="ui blue ribbon label"><b>Description</b></a></div>
             <div class="sixteen column">
               <p>
+               <!--
                 I wanted a specific pin icon so I went and made one with inkscape, then opened the SVG file and copied the svg path into the path into the code, but this works with any SVG path that you put in the "path" attribute of the icon object.Here is the result:
+                -->
+                {{item.description}}
               </p>
             </div>
           </div>
@@ -22,13 +25,13 @@
             <div class="two wide column"><a class="ui blue ribbon label"><b>Figures</b></a></div>
             <p></p>
             <ul id="gallery" style="display:none">
-                  <li *ngFor="let cmp of [0,1,2,3,4,5,6,7,8,9]">
-                    <img class="ui small rounded image"  src="https://picsum.photos/200">
+                  <li *ngFor="let obj of item.images">
+                    <img class="ui small rounded image"  src="{{obj.base64}}">
                   </li>
             </ul>
             <div style="overflow-x:scroll; display:flex">
-                  <ng-container *ngFor="let cmp of [0,1,2,3,4,5,6,7,8,9]">
-                  <img id="{{cmp}}" class="ui small rounded image"  (click)="showGalleryAt(cmp)" src="https://picsum.photos/200">
+                  <ng-container *ngFor="let obj of item.images">
+                  <img id="{{obj.id}}" class="ui small rounded image"  (click)="showGalleryAt(obj.id)" src="{{obj.base64}}">
                   </ng-container>
             </div>
           </div>

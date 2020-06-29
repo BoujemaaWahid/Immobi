@@ -48,12 +48,14 @@ public class LocalService {
 	public List<LocalDto> getByFilters(String jsonFilters){
 		List<LocalDto> list = new ArrayList<>();
 		List<Long> types = null;
+		Integer pieces = null;
+		Integer chambres = null;
 		List<Long> adresses = null;
 		Date[] datesRange = {null, null};
 		Double[] surface = {null, null, null, null};
 		Double[] prix = {null, null};
 		boolean disponible = true;
-		Boolean projet = null;
+		Boolean[] projet = {null, null};
 		try {
 			JsonNode data = objectMapper.readTree(jsonFilters);
 			try { 
@@ -111,7 +113,14 @@ public class LocalService {
 				}
 			}catch(Exception ex) {}
 			try { disponible = data.get("disponible").asBoolean(); }catch(Exception ex) {}
-			try { projet = data.get("projet").asBoolean(); }catch(Exception ex) {}
+			try { pieces = data.get("pieces").asInt(); }catch(Exception ex) {}
+			try { chambres = data.get("chambres").asInt(); }catch(Exception ex) {}
+			
+			try { 
+				JsonNode p = data.get("projet");
+				projet[0] = p.get(0).asBoolean();
+				projet[1] = p.get(1).asBoolean();
+			}catch(Exception ex) {}
 		}catch(Exception ex) {}
 		
 
@@ -121,9 +130,11 @@ public class LocalService {
 				.and(LocalCustom.dateRange(datesRange[0], datesRange[1]))
 				.and(LocalCustom.surfaceRange(surface[0], surface[1]))
 				.and(LocalCustom.surfaceTerrainRange(surface[2], surface[3]))
-				.and(LocalCustom.isAchat(projet))
+				.and(LocalCustom.isAchat(projet[0], projet[1]))
 				.and(LocalCustom.prixRange(prix[0], prix[1]))
 				.and(LocalCustom.adresses(adresses))
+				.and(LocalCustom.pieces(pieces))
+				.and(LocalCustom.chambres(chambres))
 				.and(LocalCustom.types(types));
 		
 		

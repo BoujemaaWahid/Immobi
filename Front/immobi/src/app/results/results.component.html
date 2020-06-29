@@ -61,7 +61,7 @@
 
               <div class="ui clearing divider"></div>
 
-                <button (click)="budgetProc()" style="outline:none;width:100%" class="btnClosepp ui primary button">
+                <button (click)="findLocalesWith()" style="outline:none;width:100%" class="btnClosepp ui primary button">
                   Appliquer
                 </button>
             </div>
@@ -86,14 +86,9 @@
       <div class="column">
         <select class="selection_lieux pulse ui fluid search dropdown" [(ngModel)]="filter.lieux.villes" [ngModelOptions]="{standalone:true}" multiple="">
             <option value="" disabled selected hidden>Dans quelle ville Quartier ?</option>
-                <option value="AL" selected>Paris</option>
-                <option value="AL1">Ile de france</option>
-                <option value="AL2">Nanterre</option>
-                <option value="AL3">la Défense</option>
-
-                <option value="ALa">Ile de france</option>
-                <option value="ALaa">Nanterre</option>
-                <option value="ALaaa">la Défense</option>
+                <ng-container *ngFor="let item of listLieuxRegions">
+                    <option value="{{item.id}}_{{item.flag}}">{{item.label}}</option>
+                </ng-container>
         </select>
       </div>
     </div>
@@ -128,7 +123,7 @@
       </div>
 
       <div class="ui clearing divider"></div>
-      <button (click)="budgetProc()" style="outline:none;width:100%" class="btnClosepp ui primary button">
+      <button (click)="findLocalesWith()" style="outline:none;width:100%" class="btnClosepp ui primary button">
                   Appliquer
       </button>
   </div>
@@ -165,7 +160,7 @@
               </div>
               <div class="ui clearing divider"></div>
               <div class="field">
-                <button [disabled]="filter.budget.max_budget <= filter.budget.min_budget" (click)="budgetProc()" style="outline:none;width:100%" class="btnClosepp ui primary button">
+                <button [disabled]="filter.budget.max_budget <= filter.budget.min_budget" (click)="findLocalesWith()" style="outline:none;width:100%" class="btnClosepp ui primary button">
                   Appliquer
                 </button>
               </div>
@@ -223,7 +218,7 @@
               </div>
               <div class="field">
                 <button
-                (click)="budgetProc()" style="outline:none;width:100%" class="btnClosepp ui primary button">
+                (click)="findLocalesWith()" style="outline:none;width:100%" class="btnClosepp ui primary button">
                   Appliquer
                 </button>
                 </div>
@@ -355,7 +350,7 @@
               </div>
               <div class="ui clearing divider"></div>
               <div class="field">
-                <button (click)="budgetProc()" style="outline:none;width:100%" class="btnClosepp ui primary button">
+                <button (click)="findLocalesWith()" style="outline:none;width:100%" class="btnClosepp ui primary button">
                   Appliquer
                 </button>
               </div>
@@ -383,7 +378,7 @@
     </div>
     <div class="ui clearing divider"></div>
         <div class="field">
-          <button (click)="budgetProc()" style="outline:none;width:100%" class="btnClosepp ui primary button">
+          <button (click)="findLocalesWith()" style="outline:none;width:100%" class="btnClosepp ui primary button">
             Appliquer
           </button>
         </div>
@@ -460,7 +455,7 @@
 
               <div class="ui clearing divider"></div>
 
-                <button (click)="budgetProc()" style="outline:none;width:100%" class="btnClosepp ui primary button">
+                <button (click)="findLocalesWith()" style="outline:none;width:100%" class="btnClosepp ui primary button">
                   Appliquer
                 </button>
             </div>
@@ -492,14 +487,9 @@
       <div class="column">
         <select class="pulse selection_lieux ui fluid search dropdown" [(ngModel)]="filter.lieux.villes" [ngModelOptions]="{standalone:true}" multiple="">
             <option value="" disabled selected hidden>Dans quelle ville Quartier ?</option>
-                <option value="AL">Paris</option>
-                <option value="AL1">Ile de france</option>
-                <option value="AL2">Nanterre</option>
-                <option value="AL3">la Défense</option>
-
-                <option value="ALa">Ile de france</option>
-                <option value="ALaa">Nanterre</option>
-                <option value="ALaaa">la Défense</option>
+                <ng-container *ngFor="let item of listLieuxRegions">
+                    <option value="{{item.id}}_{{item.flag}}">{{item.label}}</option>
+                </ng-container>
         </select>
       </div>
     </div>
@@ -511,9 +501,9 @@
         <p style="float:left"><b>Je veux trouver mon bien immobilier à moin de </b></p>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-5">
-          <div class="ui temp_filter floating labeled icon dropdown button basic">
+      <div class="row justify-content-center">
+        <div  class="col-md-8">
+          <div style="width:114%" class="ui temp_filter floating labeled icon dropdown button basic">
             <i class="clock outline icon"></i>
 
             <span class="text"><b>Temp</b></span>
@@ -522,8 +512,8 @@
               </div>
           </div>
         </div>
-        <div class="col-md-5">
-          <div class="ui floating labeled icon dropdown button basic">
+        <div class="col-md-8">
+          <div style="width:114%"  class="ui floating labeled icon dropdown button basic">
           <i class="bus icon"></i>
             <span class="text"><b>Transport</b></span>
               <div class="menu">
@@ -534,7 +524,7 @@
       </div>
 
       <div class="ui clearing divider"></div>
-      <button (click)="budgetProc()" style="outline:none;width:100%" class="btnClosepp ui primary button">
+      <button (click)="findLocalesWith()" style="outline:none;width:100%" class="btnClosepp ui primary button">
                   Appliquer
       </button>
   </div>
@@ -571,7 +561,7 @@
               </div>
               <div class="ui clearing divider"></div>
               <div class="field">
-                <button [disabled]="filter.budget.max_budget <= filter.budget.min_budget" (click)="budgetProc()" style="outline:none;width:100%" class="btnClosepp ui primary button">
+                <button [disabled]="filter.budget.max_budget <= filter.budget.min_budget" (click)="findLocalesWith()" style="outline:none;width:100%" class="btnClosepp ui primary button">
                   Appliquer
                 </button>
               </div>
@@ -630,7 +620,7 @@
               <div class="ui clearing divider"></div>
               <div class="field">
                 <button
-                (click)="budgetProc()" style="outline:none;width:100%" class="btnClosepp ui primary button">
+                (click)="findLocalesWith()" style="outline:none;width:100%" class="btnClosepp ui primary button">
                   Appliquer
                 </button>
               </div>
@@ -709,7 +699,7 @@
               </div>
               <div class="ui clearing divider"></div>
               <div class="field">
-                <button (click)="budgetProc()" style="outline:none;width:100%" class="btnClosepp ui primary button">
+                <button (click)="findLocalesWith()" style="outline:none;width:100%" class="btnClosepp ui primary button">
                   Appliquer
                 </button>
               </div>
@@ -736,7 +726,7 @@
 
         <div class="ui clearing divider"></div>
         <div class="field">
-            <button (click)="budgetProc()" style="outline:none;width:100%" class="btnClosepp ui primary button">
+            <button (click)="findLocalesWith()" style="outline:none;width:100%" class="btnClosepp ui primary button">
                 Appliquer
               </button>
         </div>
@@ -750,36 +740,40 @@
 
   <div id="resp_results_1" class="container">
     <div class="ui grid">
-      <div class="row" *ngFor="let cmp of [1,2,3,4,5,6,7,8,9]">
+
+      <div class="row" *ngFor="let item of locales">
         <div class="column">
 
-          <div class="ui card">
+          <div class="ui card" (click)="seeDetails(item.id)">
+
             <div style="height:10%;width:100%" class="image">
-              <img src="https://picsum.photos/200">
+              <img src="{{item.images[0].base64}}">
+
             </div>
             <div class="content">
               <div class="row">
               <div class="col">
-                <a class="header"><b>Maison/Villa</b></a>
+                <a class="header"><b>{{item.titre}}</b></a>
               </div>
               <div class="col">
-                <a style="float:right; color:#5cb85c" class="ui basic circular label">4447<i class="euro sign icon"></i></a>
+                <a style="float:right; color:#5cb85c" class="ui basic circular label">{{item.prix}} <i class="euro sign icon"></i></a>
               </div>
               </div>
               <div class="meta">
-                <span class="description">Surface <b>350 m²</b></span>
+                <span class="description">Surface <b>{{item.surface}} m²</b></span>
               </div>
               <div class="description">
                 <p style="text-overflow: ellipsis ">
-                ROSNY-SOUS-BOIS; Gare de Rosny, RER E et centre ville à 10 min à pieds. 15 min du golf de Rosny et des bords de Marne. Un arrêt de bus se situe à 50 mètres du domicile. Les aéroport d'Orly et de Roissy sont à 25 minutes. L'Adresse vous présente une maison familiale de 5 pièces</p>
+                {{item.description}}
+                </p>
               </div>
             </div>
             <div class="extra content">
               <a class="ui text" style="color:#0275d8">
                 <i class="map marker alternate icon"></i>
-                <b>Rosny sous bois</b>
+                <b>{{item.adresse.lieu.label}}</b>
               </a>
-              Le pré gentil
+              {{item.adresse.numero}} {{item.adresse.rue}}
             </div>
           </div>
 
@@ -791,36 +785,36 @@
   </div>
 
     <div id="resp_results_2" class="ui grid" style="position:absolute; margin-top:6%">
+<!--1 c, 2 7, 3 5, -->
+        <div class="{{grid_resp_class}}" *ngFor="let item of locales">
 
-        <div class="four wide column" *ngFor="let cmp of [1,2,3,4,5,6,7,8,9]">
-
-          <div class="ui card" (click)="seeDetails(cmp)" style="height:1%">
+          <div class="ui card" (click)="seeDetails(item.id)" style="height:1%">
             <div style="height:10%;width:100%" class="image">
-              <img src="https://picsum.photos/200">
+              <img src="{{item.images[0].base64}}" />
             </div>
             <div class="content">
               <div class="row">
               <div class="col">
-                <a class="header"><b>Maison/Villa</b></a>
+                <a class="header"><b>{{item.titre}}</b></a>
               </div>
               <div class="col">
-                <a style="float:right; color:#5cb85c" class="ui basic circular label">4447<i class="euro sign icon"></i></a>
+                <a style="float:right; color:#5cb85c" class="ui basic circular label">{{item.prix}} <i class="euro sign icon"></i></a>
               </div>
               </div>
               <div class="meta">
-                <span class="description">Surface <b>350 m²</b></span>
+                <span class="description">Surface <b>{{item.surface}} m²</b></span>
               </div>
               <div class="description">
                 <p style="text-overflow: ellipsis ">
-                ROSNY-SOUS-BOIS; Gare de Rosny, RER E et centre ville à 10 min à pieds. 15 min du golf de Rosny et des bords de Marne.</p>
+                {{item.description}}
               </div>
             </div>
             <div class="extra content">
               <a class="ui text" style="color:#0275d8">
                 <i class="map marker alternate icon"></i>
-                <b>Rosny sous bois</b>
+                <b>{{item.adresse.lieu.label}}</b>
               </a>
-              Le pré gentil
+              {{item.adresse.numero}} {{item.adresse.rue}}
             </div>
           </div>
         </div>

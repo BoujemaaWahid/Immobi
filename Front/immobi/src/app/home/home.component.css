@@ -18,10 +18,11 @@
     position: relative;
   }
   .login-snip {
-    width: 130%;
+    width: 150%;
     height: 35%;
+    margin-left:-10%;
     margin-top:-5%;
-    margin-right: 10%;
+    margin-right: 50%;
     position: absolute;
     padding: 90px 70px 50px 70px;
     opacity: 92%;

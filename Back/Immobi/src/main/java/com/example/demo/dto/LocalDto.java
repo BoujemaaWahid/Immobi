@@ -22,6 +22,8 @@ public class LocalDto implements Serializable{
 	
 	@JsonProperty("id")
 	private Long id;
+	@JsonProperty("titre")
+	private String titre;
 	@JsonProperty("adresse")
 	private Adresse adresse;
 	@JsonProperty("description")

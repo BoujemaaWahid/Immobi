@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { BasicFilter } from './BasicFilter';
 import { DataShare } from '../dataShare.service';
 import { DataService } from '../data-service.service';
+import { LieuxRegions } from '../models/LieuxRegions';
 declare var $: any;
 declare var AOS: any;
 declare var pulseAnimation: any;
@@ -21,14 +22,22 @@ export class HomeComponent implements OnInit, AfterViewInit {
   angContactForm: FormGroup;
   contactFormButtonIsClicked = false;
   basicFilter: BasicFilter;
+  listLieuxRegions = new Array<LieuxRegions>();
 
   constructor(private dataService: DataService, private dataShare: DataShare, private formBuilder: FormBuilder, private router: Router) {
     this.createContactForm();
     this.basicFilter = new BasicFilter();
-    this.dataService.getBasicSearch().subscribe(data => {
-      console.log("data", data)
+    try{ localStorage.removeItem("basicFilter") }catch(e){}
+    this.dataService.getLieuxEtRegions().subscribe(data => {
+      if( data instanceof Array){
+        data.forEach(item=>{
+          this.listLieuxRegions.push(item)
+          localStorage.setItem("villes", JSON.stringify(this.listLieuxRegions))
+        })
+      }
     })
   }
+
   ngAfterViewInit(): void {}
 
   sendContactFormMsg(){

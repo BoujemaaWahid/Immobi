@@ -8,25 +8,29 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  private headers = new HttpHeaders({Authorization : 'Basic ' + btoa('immobi' + ':' + '0000')})
   constructor(private http: HttpClient) { }
 
-  getBasicSearch(): Observable<any> {
-    this.headers.append('Content-Type', 'text/plain; charset=utf-8');
+  getLieuxEtRegions(): Observable<any> {
+    return this.http.get("http://127.0.0.1:4300/lieux/lieuxRegion");
+  }
 
+  getLocalsWithFilters(filter: any): Observable<any>{
+    return this.http.get("http://127.0.0.1:4300/local/filters",
+    {headers:{}, params: {"data": JSON.stringify(filter)}}
+    )
+  }
+
+  getLocals(): Observable<any>{
+    return this.http.get("http://127.0.0.1:4300/local/findAll")
+  }
+/*
     this.http.post(
       "http://127.0.0.1:4300/auth/X",
       {},
       {headers: this.headers, responseType:"text"}
       ).subscribe(
-        (response)=>{console.log(response);}
-      )
+        (response)=>{
 
-
-    let data = this.http.get(
-      "http://127.0.0.1:4300/auth/wahid",
-      { headers: this.headers, responseType: "text" }
-    )
-    return data;
-  }
+          console.log(response);}
+      )*/
 }

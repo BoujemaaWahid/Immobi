@@ -4,6 +4,7 @@ import { Filters } from './Filters';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataShare } from '../dataShare.service';
+import { DataService } from '../data-service.service';
 
 
 declare var $: any;
@@ -15,20 +16,34 @@ declare var basicInit: any;
 })
 export class ResultsComponent implements OnInit, AfterViewInit, OnDestroy {
   filter: Filters;
-  msg : any;
+  listLieuxRegions = []
+  locales = []
+  grid_resp_class = ""
 
-  constructor(private dataShare: DataShare, private formBuilder: FormBuilder, private router: Router ) {
+
+  constructor(private dataService: DataService,private dataShare: DataShare, private formBuilder: FormBuilder, private router: Router ) {
     this.filter = new Filters()
 
     try{
+      this.listLieuxRegions = JSON.parse(localStorage.getItem("villes"))
       let bf = JSON.parse(localStorage.getItem('basicFilter'))
+
       this.filter.budget.max_budget = bf['max_budget']
       this.filter.lieux.villes = bf['villes']
       this.filter.projets.acheter_bien = (bf['projet'] == '2')
       this.filter.projets.louer_bien = (bf['projet'] == '1')
-    }catch(exception){}
+      this.findLocalesWith()
+    }catch(exception){
+      try{
+        this.locales = JSON.parse(localStorage.get("locales"))
+      }catch(ex){
+        this.dataService.getLocals().subscribe(data=>{
+          this.locales = data
+          this.forResponsivity(data)
+        })
+      }
+    }
   }
-
   ngOnDestroy(): void {
     localStorage.removeItem('basicFilter')
   }
@@ -53,15 +68,24 @@ export class ResultsComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     basicInit();
   }
-  budgetProc(){}
-
-  seeDetails(item){
-    this.dataShare.changeMessage({
-      id: 5,
-      price: 447.2,
-      name: "Villa"
+  findLocalesWith(){
+    this.dataService.getLocalsWithFilters(this.filter.prepare()).subscribe(data => {
+      this.locales = data
+      localStorage.removeItem("basicFilter")
+      localStorage.set("locales", JSON.stringify(data))
+      this.forResponsivity(data)
     })
+  }
+  forResponsivity(data){
+    if( data.length <= 1)this.grid_resp_class = "column"
+    else if( data.length <= 2 )this.grid_resp_class = "seven wide column"
+    else if( data.length <= 3) this.grid_resp_class = "five wide column"
+    else this.grid_resp_class = "four wide column"
+  }
+  seeDetails(id){
+    let e = this.locales.find(item => item.id == id)
+    console.log(e)
+    this.dataShare.changeMessage(e)
     this.router.navigate(['details']);
   }
-
 }

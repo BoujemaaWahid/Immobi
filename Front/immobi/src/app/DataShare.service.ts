@@ -6,11 +6,10 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class DataShare {
-  private messageSource = new BehaviorSubject<any>("ok");
+  private messageSource = new BehaviorSubject<any>(null);
   currentMessage = this.messageSource.asObservable();
   constructor() { }
   changeMessage(message: any) {
-    console.log(message)
     this.messageSource.next(message)
   }
 }

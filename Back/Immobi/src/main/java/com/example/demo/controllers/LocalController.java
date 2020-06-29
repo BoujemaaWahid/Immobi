@@ -40,7 +40,7 @@ public class LocalController {
 	}
 	
 	@GetMapping("/filters")
-	public List<LocalDto> X(@RequestBody String json) {
+	public List<LocalDto> X(@RequestParam(value = "data") String json) {
 		return localService.getByFilters(json);
 	}
 	

@@ -59,7 +59,7 @@ style="left: auto;right: auto; top: auto; overflow-y: scroll; bottom: auto; heig
                            <div class="col-md-3">
                            <input value="2" [checked]="true" [(ngModel)]="basicFilter.projet" id="tab-2" type="radio" name="tab" class="animate__animated to_pulse_anim sign-up"><label id="acheter_label" for="tab-2" class="tab">Acheter</label>
                            </div>
-                           <div class="col-md-3">
+                           <div class="col-md-3" hidden>
                            <input [value]="3" [(ngModel)]="basicFilter.projet" id="tab-3" type="radio" name="tab" class="animate__animated to_pulse_anim sign-in"><label class="animate__animated to_pulse_anim" for="tab-3" class="tab">Estimer</label>
                            </div>
                           </div>
@@ -68,10 +68,9 @@ style="left: auto;right: auto; top: auto; overflow-y: scroll; bottom: auto; heig
                               <div class="field">
                               <select [(ngModel)]="basicFilter.villes" [ngModelOptions]="{standalone:true}" class="pulse ui fluid search dropdown" multiple="">
                                 <option value="" disabled selected hidden>Dans quelle ville Quartier ?</option>
-                                <option value="AL">Paris</option>
-                                <option value="AL1">Ile de france</option>
-                                <option value="AL2">Nanterre</option>
-                                <option value="AL3">la Défense</option>
+                                <ng-container *ngFor="let item of listLieuxRegions">
+                                  <option value="{{item.id}}_{{item.flag}}">{{item.label}}</option>
+                                </ng-container>
                               </select>
                               </div>
                               <div class="field">

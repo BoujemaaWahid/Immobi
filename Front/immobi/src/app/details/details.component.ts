@@ -15,9 +15,15 @@ export class DetailsComponent implements OnInit, AfterViewInit {
   markers: Array<any>;
   angContactForm: FormGroup;
   gallery: Viewer;
+  item: any;
   constructor(private dataShare: DataShare, private formBuilder: FormBuilder) {
-    this.dataShare.currentMessage.subscribe(message => {
-      console.log(message)
+    this.dataShare.currentMessage.subscribe(item => {
+
+      if( item == null ) this.item = JSON.parse ( localStorage.getItem("details") )
+      else {
+        this.item = item
+        localStorage.setItem("details", JSON.stringify(item))
+      }
     })
     this.markers = new Array<any>();
     this.createContactForm();
@@ -32,7 +38,7 @@ export class DetailsComponent implements OnInit, AfterViewInit {
         lat: 48.859874,
         lng: 2.310024,
       },
-      title: 'Adresse ' + (this.markers.length + 1),
+      title: this.item['adresse']['numero'] + " " + this.item['adresse']['rue'] + " " + this.item['adresse']['lieu']['label'],
       options: { animation: google.maps.Animation.BOUNCE },
     });
     var marker = new google.maps.Marker({

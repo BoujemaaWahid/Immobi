@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.ImageDto;
 import com.example.demo.services.ImageService;
+import com.example.demo.services.LocalService;
 
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
@@ -21,7 +23,10 @@ import com.example.demo.services.ImageService;
 public class ImageController {
 	@Autowired
 	ImageService imageService;
-	
+	@Autowired
+	LocalService sss;
+	@Autowired
+	ModelMapper mapper;
 	
 	@GetMapping("/find")
 	public ImageDto find(@RequestParam(value = "id")Long id) {

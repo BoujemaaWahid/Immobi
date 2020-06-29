@@ -48,7 +48,6 @@ public class Adresse {
 	
 	@ManyToOne
 	@JoinColumn(name="lieu_id", nullable = false)
-	@JsonIgnore
 	Lieux lieu;
 	
 	@OneToMany(mappedBy = "adresse")

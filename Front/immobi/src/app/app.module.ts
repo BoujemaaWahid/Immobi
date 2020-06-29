@@ -11,8 +11,8 @@ import { RegisterComponent } from './register/register.component';
 import { ResultsComponent } from './results/results.component';
 import { DetailsComponent } from './details/details.component';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { HttpClientModule, HttpClientXsrfModule, HttpXsrfTokenExtractor, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -31,10 +31,10 @@ import { HttpClientModule, HttpClientXsrfModule, HttpXsrfTokenExtractor, HTTP_IN
     FormsModule,
     ReactiveFormsModule,
     GoogleMapsModule,
-    HttpClientModule,
-    HttpClientXsrfModule.withOptions({cookieName: 'X-XSRF-TOKEN', headerName: 'X-XSRF-TOKEN'})
+    HttpClientModule
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })

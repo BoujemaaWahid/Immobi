@@ -38,7 +38,7 @@ public class LocalCustom {
 	}
 	
 	public static Specification<Local> pieces(Integer nombre){
-		if( nombre == null ) return null;
+		if( nombre == null || nombre == 0 ) return null;
 		if( nombre < 5 ) {
 			return (root, query, cb) ->{ 
 		        return cb.equal(root.get("num_pieces"), nombre);
@@ -50,7 +50,7 @@ public class LocalCustom {
 	}
 	
 	public static Specification<Local> chambres(Integer nombre){
-		if( nombre == null ) return null;
+		if( nombre == null || nombre == 0 ) return null;
 		if( nombre < 5 ) {
 			return (root, query, cb) ->{ 
 		        return cb.equal(root.get("num_chambres"), nombre);
@@ -83,10 +83,15 @@ public class LocalCustom {
 	        return cb.equal(root.get("disponible"), disponible);
 		};
 	}
-	public static Specification<Local> isAchat(Boolean achat){
-		if( achat == null) return null;
-		return (root, query, cb) ->{ 
-	        return cb.equal(root.get("achat_loue"), achat);
+	public static Specification<Local> isAchat(Boolean achat, Boolean louer){
+		return (root, query, cb) ->{
+			if( achat == null && louer == null) return null;
+			if( achat && !louer)
+				return cb.equal(root.get("projet"), true);
+			else if( !achat && louer )
+				return cb.equal(root.get("projet"), false);
+			else return null;		
 		};
 	}
+	
 }
