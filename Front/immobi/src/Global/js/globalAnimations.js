@@ -1,4 +1,6 @@
 function pulseAnimation(){
+
+  $("#baseMenu").css({'display':'flex'})
   $(".to_pulse_anim")
   .mouseenter(function(){$(this).addClass('animate__pulse')})
   .mouseleave(function(){$(this).removeClass('animate__pulse')})

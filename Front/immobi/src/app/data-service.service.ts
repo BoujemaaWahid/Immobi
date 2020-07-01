@@ -23,6 +23,18 @@ export class DataService {
   getLocals(): Observable<any>{
     return this.http.get("http://127.0.0.1:4300/local/findAll")
   }
+  isThere(type, value): Observable<any>{
+    return this.http.get("http://127.0.0.1:4300/auth/isThere", {params:{"type": type, "value": value}});
+  }
+  compteValidation(email): Observable<any>{
+    return this.http.get("http://127.0.0.1:4300/auth/validation", {params:{"email": email}});
+  }
+  registerUser(user): Observable<any>{
+    return this.http.post("http://127.0.0.1:4300/auth/register", user, {headers:{'Content-Type':'application/json'}});
+  }
+  connectAccount(data): Observable<any>{
+    return this.http.post("http://127.0.0.1:4300/auth/login", data, {headers:{'Content-Type':'application/json'}});
+  }
 /*
     this.http.post(
       "http://127.0.0.1:4300/auth/X",

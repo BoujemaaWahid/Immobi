@@ -13,6 +13,7 @@ import { DetailsComponent } from './details/details.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TokenInterceptorService } from './token-interceptor.service';
     MenuComponent,
     RegisterComponent,
     ResultsComponent,
-    DetailsComponent
+    DetailsComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,

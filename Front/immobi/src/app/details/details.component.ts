@@ -35,8 +35,8 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     })
     this.markers.push({
       position: {
-        lat: 48.859874,
-        lng: 2.310024,
+        lat: this.item['adresse']['latitude'],
+        lng: this.item['adresse']['longitude'],
       },
       title: this.item['adresse']['numero'] + " " + this.item['adresse']['rue'] + " " + this.item['adresse']['lieu']['label'],
       options: { animation: google.maps.Animation.BOUNCE },
@@ -52,6 +52,7 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     this.markers.push(marker);
   }
   ngAfterViewInit(): void {
+    $("#baseMenu").css({'display':'flex'})
     this.gallery = new Viewer(document.getElementById("gallery"))
     this.gallery.show()
   }

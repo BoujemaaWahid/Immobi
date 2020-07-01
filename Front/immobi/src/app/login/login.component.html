@@ -10,14 +10,34 @@
 
                             <div class="login-space">
                                 <div class="login">
-                                    <form class="ui form animate__animated to_pulse_anim">
-                                    <div class="group"> <label for="user" class="label">Votre identifiant</label> <input id="user" type="text" style="outline:none" class="animate__animated to_pulse_anim input" placeholder="..."> </div>
-                                    <div class="group"> <label for="pass" class="label">Votre mot de passe</label> <input id="pass" type="password" style="outline:none" class="animate__animated to_pulse_anim input" data-type="password" placeholder="Votre mot de passe"> </div>
-                                    <div class="group animate__animated to_pulse_anim"> <input id="check" type="checkbox" class="animate__animated to_pulse_anim check" checked> <label for="check"><span class="icon"></span> Se souvenir de moi sur cette appareil
+                                    <form [formGroup]="angContactForm" novalidate class="ui form animate__animated to_pulse_anim">
+                                    <div class="group"> <label for="user" class="label">Votre identifiant</label> <input id="user" formControlName="id" type="text" style="outline:none" class="animate__animated to_pulse_anim input" placeholder="...">
+
+
+                                    <div *ngIf="IDT('id').error">
+                                      <div *ngIf ="angContactForm.controls['id'].errors.required" class="ui pointing red basic label">
+                                          Veuillez écrire votre identifiant.
+                                      </div>
+                                    </div>
+
+
+                                     </div>
+                                    <div class="group"> <label for="pass" class="label">Votre mot de passe</label> <input id="pass" formControlName="pwd" type="password" style="outline:none" class="animate__animated to_pulse_anim input" data-type="password" placeholder="Votre mot de passe">
+
+                                      <div *ngIf="IDT('pwd').error">
+                                      <div *ngIf ="angContactForm.controls['pwd'].errors.required" class="ui pointing red basic label">
+                                          Veuillez écrire votre mot de passe.
+                                      </div>
+                                    </div>
+
+
+                                    </div>
+                                    <div class="group animate__animated to_pulse_anim"> <input [ngModelOptions]="{standalone: true}" [(ngModel)]="session" id="check" type="checkbox" class="animate__animated to_pulse_anim check" checked> <label for="check"><span class="icon"></span> Se souvenir de moi sur cette appareil
 (déconseillé sur les ordinateurs publics ou partagés)</label> </div>
-                                    <div class="group"> <input type="submit" class="animate__animated to_pulse_anim button" style="outline:none" value="Accédez"> </div>
+                                    <div class="group"> <input (click)="connect()" [disabled]="angContactForm.invalid" type="submit" class="animate__animated to_pulse_anim button" style="outline:none" value="Accédez"> </div>
                                     </form>
-                                    <div class="hr"><p class="animate__animated to_pulse_anim" style="cursor:pointer;color:white;font-style:18px;">Avez vous oublié votre mot de passe ?</p></div>
+                                    <div class="hr" style="display:contents"><p class="animate__animated to_pulse_anim" style="cursor:pointer;color:white;font-style:18px;">Avez vous oublié votre mot de passe ?</p></div>
+                                    <h2 *ngIf="error_identifiants" style="margin-left:10%; color:#d9534f; font-weight: bold;">Verifier votre identifiants</h2>
                                 </div>
                               </div>
                             </div>

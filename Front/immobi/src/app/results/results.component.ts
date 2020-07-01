@@ -48,7 +48,7 @@ export class ResultsComponent implements OnInit, AfterViewInit, OnDestroy {
     localStorage.removeItem('basicFilter')
   }
   ngAfterViewInit(): void {
-
+    $("#baseMenu").css({'display':'flex'})
   }
 
   setTempTransport(item, isTemp): void{

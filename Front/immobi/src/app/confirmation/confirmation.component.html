@@ -1,0 +1,36 @@
+<div id="SearchPart" class="hero-wrap" style="overflow-y:none; background-image: url('assets/bg_2.jpg');" >
+
+              <div class="cardss">
+                    <div class="login-box">
+                        <div class="login-snip">
+                          <div style="margin-top:10%;" class="container">
+                            <div class="row d-flex justify-content-center">
+                              <div class="column">
+                              <h1 *ngIf="redirect==0 || redirect==2" style="color:white; font-weight: bold;">Vous êtes perdus ?</h1>
+                              <h1 *ngIf="redirect==1" style="color:white; font-weight: bold;">Email confirmé</h1>
+                              </div>
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                              <div class="column">
+                              <h4 *ngIf="redirect==1" style="color:white;">Votre email est confirmé, la création de votre compte est en cours.</h4>
+                              </div>
+                            </div>
+                             <div class="row d-flex justify-content-center">
+                              <div class="column">
+                              <button *ngIf="redirect==1" (click)="redirection()" class="ui loading button primary">connecter</button>
+                              <button *ngIf="redirect==0 || redirect == 2" (click)="redirection()" class="ui button primary">revenire à l'acceuil</button>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                    </div>
+              </div>
+
+
+    </div>
+
+
+
+
+

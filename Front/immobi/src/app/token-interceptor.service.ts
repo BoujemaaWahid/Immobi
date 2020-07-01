@@ -7,13 +7,16 @@ import { HttpInterceptor } from '@angular/common/http';
 })
 export class TokenInterceptorService implements HttpInterceptor{
 
-  constructor() { }
+  constructor() {
+    if ( localStorage.getItem("authorize") == null )
+      localStorage.setItem("authorize", "immobi:0000")
+  }
 
   intercept(req, next){
 
     const signature = req.clone({
       setHeaders: {
-        Authorization : 'Basic ' + btoa('immobi' + ':' + '0000'),
+        Authorization : 'Basic ' + btoa(localStorage.getItem("authorize")),
       }
     });
 

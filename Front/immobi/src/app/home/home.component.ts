@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     })
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {$("#baseMenu").css({'display':'flex'})}
 
   sendContactFormMsg(){
   }

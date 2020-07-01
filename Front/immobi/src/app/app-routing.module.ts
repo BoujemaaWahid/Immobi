@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ResultsComponent } from './results/results.component';
 import { DetailsComponent } from './details/details.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, data: { animation: 'isLogin'}},
   {path: 'register', component: RegisterComponent, data: {animation: 'isRegister'}},
   {path: 'recherche', component: ResultsComponent, data: {animation: 'isResults'}},
-  {path: 'details', component: DetailsComponent, data: {animation: 'isDetails'}}
+  {path: 'details', component: DetailsComponent, data: {animation: 'isDetails'}},
+  {path: 'validation', component: ConfirmationComponent}
 ];
 
 @NgModule({

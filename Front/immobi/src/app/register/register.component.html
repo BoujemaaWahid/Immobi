@@ -9,14 +9,76 @@
 
                             <div class="login-space">
                                 <div class="sign-up-form">
-                                  <form class="ui form">
-                                    <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" placeholder="Create your Username"></div>
-                                    <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Create your password"> </div>
-                                    <div class="group"> <label for="pass" class="label">Repeat Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Repeat your password"> </div>
-                                    <div class="group"> <label for="pass" class="label">Email Address</label> <input id="pass" type="text" class="input" placeholder="Enter your email address"> </div>
-                                    <div class="group"> <input type="submit" class="button" value="Sign Up"> </div>
+                                  <form [formGroup]="angContactForm" novalidate class="ui form">
+                                    <div class="group"> <label for="user" class="label">Username</label> <input (keyup)="isNameExist()" id="user" type="text" formControlName="username" class="input" placeholder="Votre username...">
+
+                                       <div *ngIf="IDT('username').error">
+                                          <div *ngIf ="angContactForm.controls['username'].errors.required" class="ui pointing red basic label">
+                                            Votre username est nécessaire pour la création du compte.
+                                          </div>
+                                        </div>
+                                        <div *ngIf ="!IDT('username').error && username_exist" class="ui pointing red basic label">
+                                            Ce username existe déja.
+                                        </div>
+                                      </div>
+
+
+
+                                    <div class="group"> <label for="pass" class="label">Mot de passe</label> <input id="pass" formControlName="password" type="password" class="input" data-type="password" placeholder="Votre mot de passe...">
+
+                                       <div *ngIf="IDT('password').error">
+                                          <div *ngIf ="angContactForm.controls['password'].errors.required" class="ui pointing red basic label">
+                                            Votre password est nécessaire pour la création du compte.
+                                          </div>
+                                          <div *ngIf ="angContactForm.controls['password'].errors.minlength" class="ui pointing red basic label">
+                                            Le password contient au minimum 6 caractéres.
+                                          </div>
+                                        </div>
+                                      </div>
+
+
+
+
+
+                                    <div class="group"> <label for="pass" class="label">Téléphone</label><input (keyup)="isTelExist()" style="outline:none" id="tel" type="phone" formControlName="phone" class="input" data-type="phone" placeholder="Votre téléphone...">
+                                      <div *ngIf="IDT('phone').error">
+                                          <div *ngIf ="angContactForm.controls['phone'].errors.required" class="ui pointing red basic label">
+                                            Votre téléphone est nécessaire pour la création du compte.
+                                          </div>
+                                          <div *ngIf ="angContactForm.controls['phone'].errors.pattern" class="ui pointing red basic label">
+                                            Veuillez écrire votre numéro correctement, il semble qu'il ya une erreur.
+                                          </div>
+                                        </div>
+                                      <div *ngIf ="!IDT('phone').error && tel_exist" class="ui pointing red basic label">
+                                            Ce numéro existe déja.
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+                                    <div class="group"> <label for="pass" class="label">Email Adresse</label> <input (keyup)="isEmailExist()" id="mail" formControlName="email" type="email" class="input" placeholder="Votre email...">
+
+                                      <div *ngIf="IDT('email').error">
+                                        <div *ngIf ="angContactForm.controls['email'].errors.required" class="ui pointing red basic label">
+                                          Votre email est nécessaire pour la création du compte.
+                                        </div>
+                                        <div *ngIf ="angContactForm.controls['email'].errors.email" class="ui pointing red basic label">
+                                          Veuillez écrire votre email correctement, il semble qu'il ya une erreur.
+                                        </div>
+                                      </div>
+                                      <div *ngIf ="!IDT('email').error && email_exist" class="ui pointing red basic label">
+                                            Ce email existe déja.
+                                        </div>
+                                    </div>
+                                    <div class="group">
+                                    <input style="outline: none" [disabled]= "angContactForm.invalid || username_exist || email_exist || tel_exist" (click)="save()" type="submit" class="ui button" value="Sign Up"> </div>
+
                                     <div class="hr"></div>
                                     </form>
+
                                 </div>
                               </div>
                             </div>
