@@ -32,7 +32,9 @@
               "src/styles.css",
               "src/Global/css/ionicons.min.css",
               "src/Global/css/flaticon.css",
-              "src/Global/css/icomoon.css"
+              "src/Global/css/icomoon.css",
+              "node_modules/sweetalert2/dist/sweetalert2.min.css",
+              "node_modules/tabulator-tables/dist/css/tabulator_midnight.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -44,7 +46,9 @@
               "src/Global/js/forNavBar.js",
               "src/Global/js/placeholderTypewriter.js",
               "src/Global/js/searchScript.js",
-              "node_modules/viewerjs/dist/viewer.min.js"
+              "node_modules/viewerjs/dist/viewer.min.js",
+              "node_modules/sweetalert2/dist/sweetalert2.min.js",
+              "node_modules/tabulator-tables/dist/js/tabulator.min.js"
             ]
           },
           "configurations": {

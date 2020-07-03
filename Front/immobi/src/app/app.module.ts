@@ -14,6 +14,9 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminmenuComponent } from './adminmenu/adminmenu.component';
+import { LocaladminComponent } from './localadmin/localadmin.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
     RegisterComponent,
     ResultsComponent,
     DetailsComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    AdminComponent,
+    AdminmenuComponent,
+    LocaladminComponent
   ],
   imports: [
     BrowserModule,

@@ -10,7 +10,7 @@
                             <div class="login-space">
                                 <div class="sign-up-form">
                                   <form [formGroup]="angContactForm" novalidate class="ui form">
-                                    <div class="group"> <label for="user" class="label">Username</label> <input (keyup)="isNameExist()" id="user" type="text" formControlName="username" class="input" placeholder="Votre username...">
+                                    <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" formControlName="username" class="input" placeholder="Votre username...">
 
                                        <div *ngIf="IDT('username').error">
                                           <div *ngIf ="angContactForm.controls['username'].errors.required" class="ui pointing red basic label">
@@ -40,7 +40,7 @@
 
 
 
-                                    <div class="group"> <label for="pass" class="label">Téléphone</label><input (keyup)="isTelExist()" style="outline:none" id="tel" type="phone" formControlName="phone" class="input" data-type="phone" placeholder="Votre téléphone...">
+                                    <div class="group"> <label for="pass" class="label">Téléphone</label><input style="outline:none" id="tel" type="phone" formControlName="phone" class="input" data-type="phone" placeholder="Votre téléphone...">
                                       <div *ngIf="IDT('phone').error">
                                           <div *ngIf ="angContactForm.controls['phone'].errors.required" class="ui pointing red basic label">
                                             Votre téléphone est nécessaire pour la création du compte.
@@ -59,7 +59,7 @@
 
 
 
-                                    <div class="group"> <label for="pass" class="label">Email Adresse</label> <input (keyup)="isEmailExist()" id="mail" formControlName="email" type="email" class="input" placeholder="Votre email...">
+                                    <div class="group"> <label for="pass" class="label">Email Adresse</label> <input id="mail" formControlName="email" type="email" class="input" placeholder="Votre email...">
 
                                       <div *ngIf="IDT('email').error">
                                         <div *ngIf ="angContactForm.controls['email'].errors.required" class="ui pointing red basic label">
@@ -73,12 +73,10 @@
                                             Ce email existe déja.
                                         </div>
                                     </div>
-                                    <div class="group">
-                                    <input style="outline: none" [disabled]= "angContactForm.invalid || username_exist || email_exist || tel_exist" (click)="save()" type="submit" class="ui button" value="Sign Up"> </div>
-
+                                    <div class="groups">
+                                    <input style="outline: none; width: -webkit-fill-available" [disabled]= "angContactForm.invalid || username_exist || email_exist || tel_exist" (click)="save()" type="submit" class="ui button primary" value="Enregistrer"> </div>
                                     <div class="hr"></div>
                                     </form>
-
                                 </div>
                               </div>
                             </div>

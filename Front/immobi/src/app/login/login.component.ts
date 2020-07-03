@@ -7,6 +7,7 @@ declare var $: any;
 declare var pulseAnimation: any;
 declare var navBarActions: any;
 import * as bcrypt from 'bcryptjs';
+declare var Swal: any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +15,6 @@ import * as bcrypt from 'bcryptjs';
 })
 export class LoginComponent implements OnInit {
   angContactForm: FormGroup;
-  error_identifiants = false;
   session = true;
   constructor(private data: DataService, private router: Router, private formBuilder: FormBuilder) {
     this.createContactForm()
@@ -35,29 +35,41 @@ export class LoginComponent implements OnInit {
 
 
   connect(){
+
     this.data.connectAccount({
       "fact_1": this.angContactForm.get("id").value,
       "fact_2": this.angContactForm.get("pwd").value
     }).subscribe(res=>{
       if( res['fact_1'] == null ){
-        this.error_identifiants = true;
-        setTimeout(()=>{this.error_identifiants = false;}, 2500)
+        Swal.fire({
+          icon: 'error',
+          title: '',
+          text: 'Verifiez votre identifiants'
+        })
       }else{
-        console.log("ok")
         bcrypt.compare(this.angContactForm.get("pwd").value, res['fact_2'], (err, valid)=>{
           if( !valid ){
-            this.error_identifiants = true;
-            setTimeout(()=>{this.error_identifiants = false;}, 2500)
+            Swal.fire({
+              icon: 'error',
+              title: '',
+              text: 'Verifiez votre identifiants'
+            })
           }else{
             localStorage.setItem("idUser", ""+res['fact_1'])
             if ( this.session ){ localStorage.setItem("keep_session", "true")}
             else { localStorage.setItem("keep_session", "false") }
-            if( res['fact_3'] )localStorage.setItem("authorize", "admin:"+res['fact_2'])
+            if( res['fact_3'] )localStorage.setItem("authorize", "admin:"+this.angContactForm.get("pwd").value)
             else localStorage.setItem("authorize", "member:member")
               //TO ACCOUNT
           }
         })
       }
+    }, error=>{
+      Swal.fire(
+        'Internet',
+        'Vous pouvez pas accéder à votre compte pour le moment',
+        'info'
+      )
     })
   }
 

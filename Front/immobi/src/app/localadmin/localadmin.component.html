@@ -1,0 +1,312 @@
+<button style="border-radius:0px; width:100%" (click)="showFormulaire()" class="ui primary button">Ajouter</button>
+<div id="locales-table"></div>
+
+<div class="ui fullscreen modal" style="height:auto;position:relative">
+<i class="close icon"></i>
+  <div class="header">
+    {{local.titre}}
+  </div>
+  <div class="content">
+    <form class="ui form">
+      <h4 class="ui dividing header">Détailles de local numéro {{local.id}}</h4>
+  <div class="field">
+
+    <div class="two fields">
+      <div class="field">
+      <label>Titre</label>
+        <input type="text" [(ngModel)]="local.titre" name="titre" placeholder="Titre">
+      </div>
+
+      <div class="field">
+      <label>Prix</label>
+        <div class="ui icon input">
+          <input type="number" name="prix" [(ngModel)]="local.prix" placeholder="prix">
+          <i class="euro sign icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label>Adresse</label>
+    <div class="fields">
+      <div class="twelve wide field">
+        <select id="adresses_locales" [ngModelOptions]="{standalone: true}" [(ngModel)]="local.adresse" class="ui fluid search dropdown">
+          <ng-container *ngFor="let item of [1,2,3,4]">
+            <option value="{{item}}">{{item}}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="fields">
+    <div class="six wide field">
+      <label>Date de publication</label>
+      <input type="date" [(ngModel)]="local.date_pub" name="pub" placeholder="Card #">
+    </div>
+    <div class="three wide field">
+      <label>Surface (m²)</label>
+      <input type="number" [(ngModel)]="local.surface" name="surface" placeholder="Surface ...m²">
+    </div>
+    <div class="six wide field">
+      <div class="two wide fields">
+        <div class="field">
+          <label>Surface terrain(m²)</label>
+          <input type="number" [(ngModel)]="local.surface_terrain" name="surface_terrain" placeholder="Terrain ...m²">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+      <div class="two fields">
+        <div class="field">
+          <label>Numéro des chambres</label>
+          <input type="number" name="chambres" [(ngModel)]="local.chambres"/>
+        </div>
+        <div class="field">
+          <label>Numéro des piéces</label>
+          <input type="text" name="pieces" [(ngModel)]="local.pieces" />
+        </div>
+      </div>
+
+  <div class="field">
+  <label>Description</label>
+  <textarea [(ngModel)]="local.description" name="desc" rows="3"></textarea>
+  </div>
+
+   <div class="field">
+    <label>Types</label>
+    <select id="types" [(ngModel)]="local.type" name="type" class="ui fluid search dropdown" multiple="">
+      <ng-container *ngFor="let item of [1,2,3,4]">
+            <option value="{{item}}">{{item}}</option>
+      </ng-container>
+    </select>
+
+  </div>
+  <div class="field">
+    <label>Images</label>
+      <div class="ui small images" style="overflow-x:scroll; display:flex">
+          <ng-container *ngFor="let obj of images">
+            <img (click)="detache(obj.id)" src="{{obj.src}}" class="rounded" />
+          </ng-container>
+      </div>
+    </div>
+    <div class="field">
+      <label for="imagesim"class="ui label fluid blue" style="text-align:center">Importer des nouveaux images et atacher</label>
+      <input type="file" id="imagesim" accept="image/*" multiple hidden (change)="fileChange($event)" />
+    </div>
+   <div class="ui segment" style="display:table-row;">
+
+  <div class="two fields">
+
+    <div class="field">
+      <div class="ui slider checkbox">
+        <input id="disponible" type="checkbox" [(ngModel)]="local.disponible" name="disponible">
+        <label for="disponible"><b>Disponible</b></label>
+      </div>
+    </div>
+
+
+    <div class="field">
+      <div class="ui slider checkbox">
+        <input id="projet" type="checkbox" [(ngModel)]="local.projet" name="projet">
+        <label for="projet"><b>{{local.projet?"à acheter":"à louer"}}</b></label>
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+
+  </div>
+  <button class="ui button primary" style="width:100%">Enregistrer</button>
+</form>
+  </div>
+  </div>
+
+
+
+
+
+
+
+<div class="ui fullscreen modal" id="ajoutModal" style="height:auto;position:relative">
+<i class="close icon"></i>
+  <div class="header">
+    Ajout d'un local
+  </div>
+  <div class="content">
+    <form class="ui form" [formGroup]="angContactForm" novalidate>
+    <div class="field">
+      <div class="two fields">
+        <div class="field">
+          <label>Titre</label>
+          <input formControlName="titre" type="text" placeholder="Titre">
+
+
+          <div *ngIf="IDT('titre').error">
+              <div *ngIf ="angContactForm.controls['titre'].errors.required" class="ui pointing red basic label">
+                  Veuillez saisire ce champ
+              </div>
+          </div>
+
+
+
+        </div>
+
+      <div class="field">
+      <label>Prix</label>
+        <div class="ui icon input">
+          <input type="number" formControlName="prix" placeholder="prix">
+          <i class="euro sign icon"></i>
+        </div>
+        <div *ngIf="IDT('prix').error">
+              <div *ngIf ="angContactForm.controls['prix'].errors.required" class="ui pointing red basic label">
+                  Veuillez saisire ce champ
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label>Adresse</label>
+    <div class="fields">
+      <div class="twelve wide field">
+        <select formControlName="adresse" class="ui fluid search dropdown">
+          <ng-container *ngFor="let item of [1,2,3,4]">
+            <option value="{{item}}">{{item}}</option>
+          </ng-container>
+        </select>
+      </div>
+
+      <div *ngIf="IDT('adresse').error">
+        <div *ngIf ="angContactForm.controls['adresse'].errors.required" class="ui pointing red basic label">
+            Veuillez saisire ce champ
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fields">
+    <div class="six wide field">
+      <label>Date de publication</label>
+      <input type="date" formControlName="date" placeholder="Date...">
+      <div *ngIf="IDT('date').error">
+        <div *ngIf ="angContactForm.controls['date'].errors.required" class="ui pointing red basic label">
+            Veuillez saisire ce champ
+        </div>
+      </div>
+    </div>
+
+    <div class="three wide field">
+      <label>Surface (m²)</label>
+      <input type="number"  formControlName="surface" placeholder="Surface ...m²">
+      <div *ngIf="IDT('surface').error">
+        <div *ngIf ="angContactForm.controls['surface'].errors.required" class="ui pointing red basic label">
+            Veuillez saisire ce champ
+        </div>
+      </div>
+    </div>
+    <div class="six wide field">
+      <div class="two wide fields">
+        <div class="field">
+          <label>Surface terrain(m²)</label>
+          <input type="number" formControlName="terrain" placeholder="Terrain ...m²">
+          <div *ngIf="IDT('terrain').error">
+        <div *ngIf ="angContactForm.controls['terrain'].errors.required" class="ui pointing red basic label">
+            Veuillez saisire ce champ
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+      <div class="two fields">
+        <div class="field">
+          <label>Numéro des chambres</label>
+          <input formControlName="chambres" type="number"/>
+          <div *ngIf="IDT('chambres').error">
+        <div *ngIf ="angContactForm.controls['chambres'].errors.required" class="ui pointing red basic label">
+            Veuillez saisire ce champ
+        </div>
+      </div>
+        </div>
+        <div class="field">
+          <label>Numéro des piéces</label>
+          <input formControlName="pieces" type="text" />
+          <div *ngIf="IDT('pieces').error">
+        <div *ngIf ="angContactForm.controls['pieces'].errors.required" class="ui pointing red basic label">
+            Veuillez saisire ce champ
+        </div>
+      </div>
+        </div>
+      </div>
+
+  <div class="field">
+  <label>Description</label>
+  <textarea formControlName="description" name="desc" rows="3"></textarea>
+  <div *ngIf="IDT('description').error">
+        <div *ngIf ="angContactForm.controls['date'].errors.required" class="ui pointing red basic label">
+            Veuillez saisire ce champ
+        </div>
+      </div>
+  </div>
+
+   <div class="field">
+    <label>Types</label>
+    <select formControlName="types" class="ui fluid search dropdown" multiple="">
+      <ng-container *ngFor="let item of [1,2,3,4]">
+            <option value="{{item}}">{{item}}</option>
+      </ng-container>
+    </select>
+
+  </div>
+  <div class="field">
+    <label>Images</label>
+      <div class="ui small images" style="overflow-x:scroll; display:flex">
+          <ng-container *ngFor="let obj of images">
+            <img (click)="detache(obj.id)" src="{{obj.src}}" class="rounded" />
+          </ng-container>
+      </div>
+    </div>
+    <div class="field">
+      <label for="imagesim" class="ui label fluid blue" style="text-align:center">Importer des nouveaux images et atacher</label>
+      <input type="file" accept="image/*" multiple hidden (change)="fileChange($event)" />
+    </div>
+   <div class="ui segment" style="display:table-row;">
+
+  <div class="two fields">
+
+    <div class="field">
+      <div class="ui slider checkbox">
+        <input formControlName="disponible"  id="disponible2" type="checkbox">
+        <label  for="disponible2"><b>Disponible</b></label>
+      </div>
+    </div>
+
+
+    <div class="field">
+      <div class="ui slider checkbox">
+        <input id="projet2" type="checkbox" formControlName="projet">
+        <label for="projet2"><b>{{angContactForm.get("projet").value?"à acheter":"à louer"}}</b></label>
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+
+  </div>
+  <button [disabled]="angContactForm.invalid" class="ui button primary" style="width:100%">Enregistrer</button>
+</form>
+  </div>
+  </div>
+
+
+
+

@@ -3,8 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../data-service.service';
 import * as bcrypt from 'bcryptjs';
+import { fromEvent } from 'rxjs';
 declare var $: any;
 declare var pulseAnimation: any;
+declare var Swal: any;
+import { debounceTime, map, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -32,6 +35,28 @@ export class RegisterComponent implements OnInit {
     $('#baseMenu').removeAttr('data-aos');
     $(".forServicesLink").css({'display':'none'})
     $(".forInformationsLink").css({'display':'none'})
+
+    this.angContactForm.get("username").valueChanges.pipe(
+      debounceTime(2000),
+      tap(val=>{
+        this.username_exist = true
+        this.services.isThere(2, val).subscribe(res=> this.username_exist = res)
+      })
+    ).subscribe()
+    this.angContactForm.get("email").valueChanges.pipe(
+      debounceTime(2000),
+      tap(val=>{
+        this.email_exist = true
+        this.services.isThere(1, val).subscribe(res=> this.email_exist = res)
+      })
+    ).subscribe()
+    this.angContactForm.get("phone").valueChanges.pipe(
+      debounceTime(2000),
+      tap(val=>{
+        this.tel_exist = true
+        this.services.isThere(3, val).subscribe(res=> this.tel_exist = res)
+      })
+    ).subscribe()
   }
 
   IDT(e){
@@ -40,23 +65,9 @@ export class RegisterComponent implements OnInit {
       'state':this.angContactForm.controls[e].errors}
   }
 
-  isEmailExist(){
-    let email = this.angContactForm.get("email").value
-    //this.email_exist = true
-    //this.services.isThere(1, email).subscribe(res=> this.email_exist = res)
-  }
-  isTelExist(){
-    let phone = this.angContactForm.get("phone").value
-    this.tel_exist = true
-    this.services.isThere(3, phone).subscribe(res=> this.tel_exist = res)
-  }
-  isNameExist(){
-    let username = this.angContactForm.get("username").value
-    this.username_exist = true
-    this.services.isThere(2, username).subscribe(res=> this.username_exist = res)
-  }
   save(){
     const salt = bcrypt.genSaltSync(10);
+
     let data = {
       "username": this.angContactForm.get("username").value,
       "telephone": this.angContactForm.get("phone").value,
@@ -64,9 +75,20 @@ export class RegisterComponent implements OnInit {
       "email": this.angContactForm.get("email").value
     }
     localStorage.setItem("register", JSON.stringify(data) );
-    console.log("ok")
     this.services.compteValidation(data.email).subscribe(res=>{
-      console.log("RES0", res)
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Un email vous était envoyé pour confirmer votre adresse',
+        showConfirmButton: false,
+        timer: 3500
+      })
+    }, error=>{
+      Swal.fire(
+        'Internet',
+        'Vous pouvez pas enregistrer votre compte pour le moment',
+        'info'
+      )
     })
   }
 }
