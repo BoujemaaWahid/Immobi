@@ -179,15 +179,15 @@ public class LocalService {
 		return list;
 	}
 	
-	public String save(LocalDto dto) {
+	public Long save(LocalDto dto) {
+		Long id = (long) 0;
 		try {
 			Local entity = new Local();
 			modelMapper.map(dto, entity);
-			localRepository.save(entity);
-		}catch(Exception ex) { return ex.getMessage(); }
-		
+			id = localRepository.saveAndFlush(entity).getId();
+		}catch(Exception ex) { }
 		componentServ.evictAllCaches();
-		return "200";
+		return id;
 	}
 	
 	@SuppressWarnings("deprecation")

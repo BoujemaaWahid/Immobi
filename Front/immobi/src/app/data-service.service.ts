@@ -23,8 +23,14 @@ export class DataService {
   getLocals(): Observable<any>{
     return this.http.get("http://127.0.0.1:4300/local/findAll")
   }
+  saveLocal(data): Observable<any>{
+    return this.http.post("http://127.0.0.1:4300/local/save", data, {headers:{'Content-Type':'application/json'}, responseType: "text"});
+  }
   isThere(type, value): Observable<any>{
     return this.http.get("http://127.0.0.1:4300/auth/isThere", {params:{"type": type, "value": value}});
+  }
+  supprimerLocal(data): Observable<any>{
+    return this.http.delete("http://127.0.0.1:4300/local/delete", {params:{"id": data}, responseType:"text"});
   }
   compteValidation(email): Observable<any>{
     return this.http.get("http://127.0.0.1:4300/auth/validation", {params:{"email": email}});
@@ -34,6 +40,24 @@ export class DataService {
   }
   connectAccount(data): Observable<any>{
     return this.http.post("http://127.0.0.1:4300/auth/login", data, {headers:{'Content-Type':'application/json'}});
+  }
+  adresses(): Observable<any>{
+    return this.http.get("http://127.0.0.1:4300/adresses/findAll");
+  }
+  getTypes(): Observable<any>{
+    return this.http.get("http://127.0.0.1:4300/types/findAll");
+  }
+  saveImages(data): Observable<any>{
+    return this.http.post("http://127.0.0.1:4300/local/images/saveAll", data, {headers:{'Content-Type':'application/json'}});
+  }
+
+  updateLocal(data): Observable<any>{
+    data['adresse'] = {id: data['adresse']}
+
+    data['images'].forEach(item=>{
+      delete item['base64']
+    })
+    return this.http.put("http://127.0.0.1:4300/local/update", data, {headers:{'Content-Type':'application/json'}, responseType: "text"})
   }
 /*
     this.http.post(

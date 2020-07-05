@@ -39,7 +39,7 @@ export class Headers {
             columns:[
             {title:"adresse", field:"adresse", align:"center"},
             {title:"ville", field:"ville", align:"center"},
-            {title: "region", field:"region", align:"center"},
+            {title: "postal", field:"postal", align:"center"},
           ]
           },
           {title:"", field:"delete", align:"center", formatter: function(cell, fp){return "<i class='trash alternate outline icon'></i>"}}

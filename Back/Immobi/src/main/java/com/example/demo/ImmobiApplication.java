@@ -13,17 +13,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootApplication
 @EnableCaching
 public class ImmobiApplication {
-	@Bean
+	@Bean(name="modelmapper")
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
 	
-	@Bean
+	@Bean(name="objectmapper")
 	public ObjectMapper objectlMapper() {
 		return new ObjectMapper();
 	}
 	
-	@Bean
+	@Bean(name = "bcrypt")
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}

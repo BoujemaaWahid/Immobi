@@ -42,6 +42,17 @@ public class ImageService {
 		return list;
 	}
 	
+	public List<Long> saveAll(List<ImageDto> images){
+		List<Long> ids = new ArrayList<>();
+		for(ImageDto img: images) {
+			Image i = new Image();
+			modelMapper.map(img, i);
+			Long id = imageRepository.saveAndFlush(i).getId();
+			ids.add(id);
+		}
+		return ids;
+	}
+	
 	@Cacheable("image_one")
 	public ImageDto findOne(Long id) {
 		try {

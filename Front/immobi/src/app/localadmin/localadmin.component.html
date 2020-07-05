@@ -1,7 +1,7 @@
 <button style="border-radius:0px; width:100%" (click)="showFormulaire()" class="ui primary button">Ajouter</button>
 <div id="locales-table"></div>
 
-<div class="ui fullscreen modal" style="height:auto;position:relative">
+<div class="ui fullscreen modal" id="updateModal" style="height:auto;position:relative">
 <i class="close icon"></i>
   <div class="header">
     {{local.titre}}
@@ -31,8 +31,8 @@
     <div class="fields">
       <div class="twelve wide field">
         <select id="adresses_locales" [ngModelOptions]="{standalone: true}" [(ngModel)]="local.adresse" class="ui fluid search dropdown">
-          <ng-container *ngFor="let item of [1,2,3,4]">
-            <option value="{{item}}">{{item}}</option>
+          <ng-container *ngFor="let item of listAdresses">
+            <option value="{{item.id}}">{{item.adresse}}</option>
           </ng-container>
         </select>
       </div>
@@ -77,8 +77,9 @@
    <div class="field">
     <label>Types</label>
     <select id="types" [(ngModel)]="local.type" name="type" class="ui fluid search dropdown" multiple="">
-      <ng-container *ngFor="let item of [1,2,3,4]">
-            <option value="{{item}}">{{item}}</option>
+      <ng-container *ngFor="let item of listTypes">
+
+            <option value="{{item.label}}">{{item.label}}</option>
       </ng-container>
     </select>
 
@@ -88,6 +89,9 @@
       <div class="ui small images" style="overflow-x:scroll; display:flex">
           <ng-container *ngFor="let obj of images">
             <img (click)="detache(obj.id)" src="{{obj.src}}" class="rounded" />
+          </ng-container>
+          <ng-container *ngFor="let obj of local.images">
+            <img (click)="detache(obj.id)" src="{{obj.base64}}" class="rounded" />
           </ng-container>
       </div>
     </div>
@@ -121,7 +125,7 @@
 
 
   </div>
-  <button class="ui button primary" style="width:100%">Enregistrer</button>
+  <button class="ui button primary" (click)="updateLocal()" style="width:100%">Enregistrer</button>
 </form>
   </div>
   </div>
@@ -175,8 +179,8 @@
     <div class="fields">
       <div class="twelve wide field">
         <select formControlName="adresse" class="ui fluid search dropdown">
-          <ng-container *ngFor="let item of [1,2,3,4]">
-            <option value="{{item}}">{{item}}</option>
+          <ng-container *ngFor="let item of listAdresses">
+            <option value="{{item.id}}">{{item.adresse}}</option>
           </ng-container>
         </select>
       </div>
@@ -258,8 +262,8 @@
    <div class="field">
     <label>Types</label>
     <select formControlName="types" class="ui fluid search dropdown" multiple="">
-      <ng-container *ngFor="let item of [1,2,3,4]">
-            <option value="{{item}}">{{item}}</option>
+      <ng-container *ngFor="let item of listTypes">
+            <option value="{{item.id}}">{{item.label}}</option>
       </ng-container>
     </select>
 
@@ -302,7 +306,7 @@
 
 
   </div>
-  <button [disabled]="angContactForm.invalid" class="ui button primary" style="width:100%">Enregistrer</button>
+  <button [disabled]="angContactForm.invalid" (click)="saveLocal()" class="ui button primary" style="width:100%">Enregistrer</button>
 </form>
   </div>
   </div>
@@ -310,3 +314,59 @@
 
 
 
+<div class="ui inverted segment" style="border-radius:0px;margin-top:0%; height:auto;">
+<div class="ui inverted secondary pointing menu">
+<div class="row stackable" style="display:-webkit-inline-box">
+<div class="column item">
+  <div class="ui icon input">
+            <input id="elementf" style="background: black; color:white" type="text" placeholder="element...">
+  </div>
+</div>
+
+<div class="column item">
+    <div id="operatorf" style="background: black; color:white" class="ui selection dropdown">
+    <input type="hidden" name="action">
+    <i class="dropdown icon"></i>
+    <div class="default text">action</div>
+    <div class="menu">
+      <div class="item" data-value="=">=</div>
+      <div class="item" data-value=">">></div>
+      <div class="item" data-value="<"><</div>
+    </div>
+  </div>
+</div>
+<div class="column item">
+  <div class="ui icon input">
+            <input id="valuef" style="background: black; color:white" type="text" placeholder="valeur...">
+  </div>
+</div>
+
+<div class="column item">
+<button (click)="setFilter()" title="appliquer" class="ui black icon button">
+  <i class="filter icon"></i>
+  </button>
+</div>
+
+</div><!--
+  <div class="item">
+    <div class="ui icon input">
+          <input style="background: black; color:white" type="text" placeholder="Search...">
+    </div>
+  </div>
+
+  <div class="item">
+          <select style="width:120px; text-align:center; background: black; color:white" id="operatorFilter">
+            <option value="=">=</option>
+            <option value="=">></option>
+            <option value="="><</option>
+          </select>
+  </div>
+
+  <div class="item">
+    <div class="ui icon input">
+          <input style="background: black; color:white" type="text" placeholder="Search...">
+    </div>
+  </div>
+-->
+</div>
+</div>

@@ -45,7 +45,7 @@ public class LocalController {
 	}
 	
 	@PostMapping("/save")
-	public String save(@RequestBody LocalDto dto) {
+	public Long save(@RequestBody LocalDto dto) {
 		return localService.save(dto);
 	}
 	

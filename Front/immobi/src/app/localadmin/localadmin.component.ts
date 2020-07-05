@@ -4,6 +4,9 @@ import Tabulator from 'tabulator-tables';
 import { Headers } from '../admin/Headers';
 import { Local } from './local.entity';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { DataService } from '../data-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
+declare var Swal: any;
 declare var $: any;
 @Component({
   selector: 'app-localadmin',
@@ -15,16 +18,69 @@ export class LocaladminComponent implements OnInit, OnDestroy, AfterViewInit {
   images = []
   idGenImage = 0;
   angContactForm: FormGroup;
-  constructor( private formBuilder: FormBuilder) {
+  listLocals = []
+  listAdresses = []
+  listTypes = []
+  tableData: Tabulator;
+  constructor(private arouter: Router, private services: DataService,  private formBuilder: FormBuilder) {
     this.local = new Local()
     this.createContactForm()
+    this.services.getLocals().subscribe(res=>{
+      this.services.adresses().subscribe(adr=>{
+        adr.forEach(item => {
+          this.listAdresses.push({
+            id: item.id,
+            adresse: item.numero+" "+item.rue+" "+item.lieu.label+" "+item.lieu.code_postal
+          })
+        });
+      })
+
+
+      this.services.getTypes().subscribe(adr=>{
+        adr.forEach(item => {
+          this.listTypes.push({
+            id: item.id,
+            label: item.label
+          })
+        });
+      })
+
+
+
+
+      this.listLocals = []
+      res.forEach(item => {
+        this.listLocals.push({
+          id:item.id,
+          titre:item.titre,
+          pub: item.date_pub,
+          desc: item.description,
+          dispo: item.disponible,
+          chambres: item.chambres,
+          pieces: item.pieces,
+          prix: item.prix,
+          achat: item.projet?'achat':'loue',
+          surface: item.surface,
+          terrain: item.surface_terrain,
+          type:item.types,
+          images: item.images,
+          idadr: item.adresse,
+          adresse: item.adresse.numero+" "+item.adresse.rue,
+          ville: item.adresse.lieu.label,
+          postal: item.adresse.lieu.code_postal,
+          delete:"deleteICO"
+        })
+      });
+      this.createTableData(this.listLocals)
+    })
   }
+
   ngAfterViewInit(): void {
     $('.special.cards .image').dimmer({
       on: 'hover'
     });
     $(".ui.dropdown").dropdown()
-    $(".modal").modal({allowMultiple: true})
+    $("#types").dropdown()
     $(".gallery").click(()=>{
       $(".small.modal").modal('show')
     })
@@ -65,8 +121,37 @@ export class LocaladminComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     $("#locales").addClass("active")
     this.images = []
-    let table = new Tabulator("#locales-table", Headers.localHeader(
+  }
+
+  createTableData(data){
+    this.tableData = new Tabulator("#locales-table", Headers.localHeader(
       (e, cell)=>{
+        if( cell._cell.value == "deleteICO" ){
+
+
+          Swal.fire({
+            title: 'voulez vous supprimer ce local ?',
+            text: "Vous ne pourrez pas revenir en arrière !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui, supprimer',
+            cancelButtonText: 'non'
+          }).then((result) => {
+            if (result.value) {
+              this.services.supprimerLocal(cell._cell.row.data.id).subscribe(res=>{
+                Swal.fire(
+                  'Local supprimer',
+                  '',
+                  'success'
+                )
+                location.reload()
+              })
+            }
+          })
+          return;
+        }
         this.local.id = cell._cell.row.data.id
         this.local.titre = cell._cell.row.data.titre
         this.local.chambres = cell._cell.row.data.chambres
@@ -79,28 +164,108 @@ export class LocaladminComponent implements OnInit, OnDestroy, AfterViewInit {
         this.local.date_pub = cell._cell.row.data.pub
         this.local.adresse = cell._cell.row.data.idadr
         this.local.type = cell._cell.row.data.type
-        console.log(this.local)
-        $("#adresses_locales").dropdown('set selected', this.local.adresse)
-        $("#types").dropdown('set selected', this.local.type)
-        $(".fullscreen.modal").modal('show')
+
+        this.local.images = cell._cell.row.data.images
+        $("#adresses_locales").dropdown('set selected', this.local.adresse['id'])
+        let t = []
+        this.local.type.forEach(element => {
+          t.push(element.label)
+        });
+        $("#types").dropdown('set selected', t)
+        $("#updateModal").modal('show')
       }
     ));
-    table.setData(this.data())
-    table.setLocale("fr-fr");
+    this.tableData.setData(data)
+    this.tableData.setLocale("fr-fr");
   }
 
+
   detache(id){
-    if( id.indexOf('new') != -1 ){
-      this.images = this.images.filter(i => {
-        return i.id != id
-      })
-      return
+    try{
+      if( id.indexOf('new') != -1 ){
+        this.images = this.images.filter(i => {
+          return i.id != id
+        })
+        return
+      }
+    }catch(e){
+      if ( this.local.images != null ){
+        this.local.images = this.local.images.filter(i=>{
+          return i.id != id
+        })
+      }
     }
-    if ( this.local.images != null ){
-      this.local.images = this.images.filter(i=>{
-        return i.id != id
+  }
+
+
+
+  saveLocal(){
+    let t = []
+    this.angContactForm.get("types").value.forEach(item => {
+      t.push({id: item})
+    });
+    let data = {
+      "adresse":{"id": this.angContactForm.get("adresse").value},
+      "chambres":this.angContactForm.get("chambres").value,
+      "pieces": this.angContactForm.get("pieces").value,
+      "titre": this.angContactForm.get("titre").value,
+      "description": this.angContactForm.get("description").value,
+      "prix": this.angContactForm.get("prix").value,
+      "types":t,
+      "surface": this.angContactForm.get("surface").value,
+      "surface_terrain": this.angContactForm.get("terrain").value,
+      "projet":this.angContactForm.get("projet").value,
+      "date_pub": this.angContactForm.get("date").value,
+      "disponible": this.angContactForm.get("disponible").value,
+    }
+    this.services.saveLocal(data).subscribe(res=>{
+      if( res != 0 && this.images.length > 0){
+         let imgs = []
+          this.images.forEach(item=>{
+            imgs.push({"base64": item.src, "local":{id: res}})
+          })
+          $("#ajoutModal").modal('hide')
+          this.services.saveImages(imgs).subscribe(res=>{
+          this.images = []
+          })
+          location.reload()
+      }else{
+        location.reload()
+      }
+    })
+  }
+
+
+
+
+
+
+
+
+  updateLocal(){
+    if( this.images.length > 0 ){
+      let imgs = []
+      this.images.forEach(item=>{
+        imgs.push({"base64": item.src, "local":{id: this.local.id}})
+      })
+      this.services.saveImages(imgs).subscribe(res=>{
+      this.images = []
       })
     }
+    let t =[]
+    this.local.type.forEach(item=>{
+      this.listTypes.forEach(item2=>{
+        if( item == item2.label )
+        t.push({id: item2.id})
+      })
+    })
+    this.local["types"] = t
+    delete this.local['type']
+    this.services.updateLocal(this.local).subscribe(res=>{
+      console.log(res)
+      $("#updateModal").modal('hide')
+      location.reload()
+    })
   }
   fileChange(event){
 
@@ -114,30 +279,18 @@ export class LocaladminComponent implements OnInit, OnDestroy, AfterViewInit {
         reader.readAsDataURL(fileList[cmp])
     }
   }
-  data(){
 
-    return [
-      {id:1, titre:"maison/villa", pub:"2020-03-07", desc:"DESCRIPTION", dispo:true,
-      chambres:5, pieces:3, prix:456, achat:"loue", surface:250, terrain:100,
-      type:["1","2"],
-      idadr:1, adresse:"67 rue de courbevoi", ville:"Nanterre", region: "paris"
-      },
-
-      {id:2, titre:"maison/villa", pub:"2020-03-07", desc:"DESCRIPTION", dispo:true,
-      chambres:5, pieces:3, prix:456, achat:"loue", surface:250, terrain:100,
-      idadr:2, adresse:"67 rue de courbevoi", ville:"Nanterre", region: "paris"
-      },
-
-      {id:3, titre:"maison/villa", pub:"2020-03-07", desc:"DESCRIPTION", dispo:true,
-      chambres:5, pieces:3, prix:456, achat:"achat", surface:250, terrain:100,
-      adresse:"67 rue de courbevoi", ville:"Nanterre", region: "paris"
-      },
-
-
-      {id:4, titre:"maison/villa", pub:"2020-03-07", desc:"DESCRIPTION", dispo:true,
-      chambres:5, pieces:3, prix:456, achat:"achat", surface:"250 ", terrain:100,
-      adresse:"67 rue de courbevoi", ville:"Nanterre", region: "paris"
-      }
-    ]
+  filter = []
+  setFilter(){
+    try{
+      this.tableData.removeFilter(this.filter[0], this.filter[1], this.filter[2])
+      this.filter = []
+    }catch(e){}
+    this.filter.push($("#elementf").val())
+    this.filter.push($("#operatorf").dropdown('get value'))
+    this.filter.push($("#valuef").val())
+    if(this.filter[0] != "" && this.filter[1] != "" && this.filter[2] != ""){
+      this.tableData.setFilter(this.filter[0], this.filter[1],this.filter[2])
+    }
   }
 }

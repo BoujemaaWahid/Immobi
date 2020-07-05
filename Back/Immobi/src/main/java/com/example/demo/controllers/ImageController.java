@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -46,6 +47,11 @@ public class ImageController {
 	@PostMapping("/save")
 	public String save(@RequestBody ImageDto dto) {
 		return imageService.save(dto);
+	}
+	
+	@PostMapping("/saveAll")
+	public List<Long> saveAll(@RequestBody List<ImageDto> images){
+		return imageService.saveAll(images);
 	}
 	
 	@PutMapping("/update")
