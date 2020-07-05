@@ -9,14 +9,14 @@ export class TokenInterceptorService implements HttpInterceptor{
 
   constructor() {
     if ( localStorage.getItem("authorize") == null )
-      localStorage.setItem("authorize", "admin:0000")
+      localStorage.setItem("authorize", "immobi:0000")
   }
 
   intercept(req, next){
-
+    let auth = localStorage.getItem("authorize").split(":")
     const signature = req.clone({
       setHeaders: {
-        Authorization : 'Basic ' + btoa('admin'+':'+'0000'),
+        Authorization : 'Basic ' + btoa(auth[0]+':'+auth[1]),
       }
     });
 

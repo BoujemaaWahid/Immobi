@@ -31,9 +31,9 @@ public class AppSecurity extends WebSecurityConfigurerAdapter implements WebMvcC
 	
 	@Bean
 	public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
-		String password = userRepository.findAdmin().getPassword();
+		//String password = userRepository.findAdmin().getPassword();
 		List<UserDetails> userDetailsList = new ArrayList<>();
-		userDetailsList.add(User.withUsername("admin").password(bCryptPasswordEncoder.encode(password)).roles("ADMIN").build());
+		userDetailsList.add(User.withUsername("admin").password(bCryptPasswordEncoder.encode("0000")).roles("ADMIN").build());
 		userDetailsList.add(User.withUsername("immobi").password(bCryptPasswordEncoder.encode("0000")).roles("PASSAGER").build());
 		userDetailsList.add(User.withUsername("member").password(bCryptPasswordEncoder.encode("member")).roles("MEMBER").build());
 		return new InMemoryUserDetailsManager(userDetailsList);

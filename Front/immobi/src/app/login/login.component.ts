@@ -17,6 +17,10 @@ export class LoginComponent implements OnInit {
   angContactForm: FormGroup;
   session = true;
   constructor(private data: DataService, private router: Router, private formBuilder: FormBuilder) {
+    if( localStorage.getItem("idUser") != null ){
+      if( localStorage.getItem("user_type") == "1")
+      this.router.navigate(['/admin'])
+    }
     this.createContactForm()
    }
 
@@ -58,7 +62,11 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("idUser", ""+res['fact_1'])
             if ( this.session ){ localStorage.setItem("keep_session", "true")}
             else { localStorage.setItem("keep_session", "false") }
-            if( res['fact_3'] )localStorage.setItem("authorize", "admin:"+this.angContactForm.get("pwd").value)
+            if( res['fact_3'] ){
+              localStorage.setItem("user_type", "1")
+              localStorage.setItem("authorize", "admin:0000"/*+this.angContactForm.get("pwd").value*/)
+              this.router.navigate(['/admin'])
+            }
             else localStorage.setItem("authorize", "member:member")
               //TO ACCOUNT
           }

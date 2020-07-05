@@ -6,6 +6,7 @@ import { Local } from './local.entity';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../data-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 declare var Swal: any;
 declare var $: any;
 @Component({
@@ -23,6 +24,7 @@ export class LocaladminComponent implements OnInit, OnDestroy, AfterViewInit {
   listTypes = []
   tableData: Tabulator;
   constructor(private arouter: Router, private services: DataService,  private formBuilder: FormBuilder) {
+
     this.local = new Local()
     this.createContactForm()
     this.services.getLocals().subscribe(res=>{
@@ -290,7 +292,11 @@ export class LocaladminComponent implements OnInit, OnDestroy, AfterViewInit {
     this.filter.push($("#operatorf").dropdown('get value'))
     this.filter.push($("#valuef").val())
     if(this.filter[0] != "" && this.filter[1] != "" && this.filter[2] != ""){
-      this.tableData.setFilter(this.filter[0], this.filter[1],this.filter[2])
+      if( this.filter[2] == "true"){ this.filter[2] = true }
+      else if( this.filter[2] == "false"){this.filter[2] = false}
+      //this.tableData.setFilter(this.filter[0], this.filter[1],this.filter[2])
+
     }
+    this.tableData.setFilter("disponible", "=", 1)
   }
 }

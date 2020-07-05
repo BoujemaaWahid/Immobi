@@ -12,7 +12,9 @@ declare var Tabulator: any;
 export class AdminComponent implements OnInit {
 
   constructor(private route: Router, private aroute: ActivatedRoute) {
-
+    if( localStorage.getItem("idUser") == null ){
+      this.route.navigate(['/login'])
+    }else if( localStorage.getItem("user_type") != "1" ){this.route.navigate(['/login'])}
    }
 
   ngOnInit(): void {
