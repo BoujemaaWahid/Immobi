@@ -4,6 +4,7 @@ package com.example.demo.entitys;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,7 +51,7 @@ public class Adresse {
 	@JoinColumn(name="lieu_id", nullable = false)
 	Lieux lieu;
 	
-	@OneToMany(mappedBy = "adresse")
+	@OneToMany(mappedBy = "adresse", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Local> locales = new ArrayList<>();
 	

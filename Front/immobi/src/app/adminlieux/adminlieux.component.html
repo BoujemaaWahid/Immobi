@@ -1,55 +1,162 @@
 <button style="border-radius:0px; width:100%" (click)="showFormulaire()" class="ui primary button">Ajouter</button>
 <div id="lieux-table"></div>
-<div class="ui fullscreen modal" id="updateAdresse" style="height:auto;position:relative">
+
+
+
+
+
+
+
+<div class="ui fullscreen modal" id="ajoutAdresse" style="height:auto;position:relative">
   <div class="header">
-    Modification de l'adresse {{adresse.numero}} {{adresse.rue}}
+    Ajouter une adresse
   </div>
   <div class="content">
-  <form class="ui form">
-    <div class="row stackable">
-      <div class="column"></div>
+  <form class="ui form" [formGroup]="angContactForm" novalidate>
+
+    <div class="field">
+      <div class="two fields">
+        <div class="field">
+        <label>Numero de la rue</label>
+          <div class="ui input">
+           <input formControlName="numero" type="number" placeholder="numero de la rue..." />
+          </div>
+          <div *ngIf="IDT('numero').error">
+            <div *ngIf ="angContactForm.controls['numero'].errors.required" class="ui pointing red basic label">
+                Veuillez saisire ce champ
+            </div>
+        </div>
+        </div>
+        <div class="field">
+          <label>Nom de la rue</label>
+          <div class="ui input">
+            <input formControlName="nom" type="text" placeholder="rue..." />
+          </div>
+          <div *ngIf="IDT('nom').error">
+            <div *ngIf ="angContactForm.controls['nom'].errors.required" class="ui pointing red basic label">
+                Veuillez saisire ce champ
+            </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Complement d'adresse</label>
+        <div class="ui input"><input type="text" formControlName="complement" placeholder="Complement d'adresse..." /></div>
+        <div *ngIf="IDT('complement').error">
+          <div *ngIf ="angContactForm.controls['complement'].errors.required" class="ui pointing red basic label">
+              Veuillez saisire ce champ
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="two fields">
+          <div class="field">
+            <label>Latitude</label>
+            <div class="ui input">
+            <input type="number" formControlName="lat" placeholder="Latitude..." />
+            </div>
+            <div *ngIf="IDT('lat').error">
+              <div *ngIf ="angContactForm.controls['lat'].errors.required" class="ui pointing red basic label">
+                  Veuillez saisire ce champ
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Longitude</label>
+            <div class="ui input">
+              <input type="text" formControlName="lng" placeholder="Longitude..." />
+            </div>
+            <div *ngIf="IDT('lng').error">
+              <div *ngIf ="angContactForm.controls['lng'].errors.required" class="ui pointing red basic label">
+                Veuillez saisire ce champ
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <select formControlName="ville" class="ui search dropdown">
+          <ng-container *ngFor="let item of villes">
+            <option value="{{item.id}}">{{item.label}} {{item.postal}}</option>
+          </ng-container>
+        </select>
+        <div *ngIf="IDT('ville').error">
+          <div *ngIf ="angContactForm.controls['ville'].errors.required" class="ui pointing red basic label">
+              Veuillez saisire ce champ
+          </div>
+        </div>
+      </div>
     </div>
   </form>
   </div>
   <div class="actions">
-  </div>
-</div>
-<!--
-<div class="ui fullscreen modal" id="updateLieux" style="height:auto;position:relative">
-  <div class="header">
-    update une ville
-  </div>
-  <div class="content">
-  </div>
-  <div class="actions">
+    <button (click)="saveAdresse()" [disabled]="angContactForm.invalid" class="ui button primary">Enregistrer</button>
   </div>
 </div>
 
-<div class="ui small modal" id="updateRegion" style="height:auto;position:relative">
+
+<div class="ui fullscreen modal" id="updateAdresse" style="height:auto;position:relative">
   <div class="header">
-    Modification de la region <b>{{region.label}}</b>
+
+    Modification de l'adresse {{adresse.numero}} {{adresse.rue}}
   </div>
   <div class="content">
-    <div class="ui input">
-    <input type="text" [(ngModel)]="region.label" id="regionname" />
+  <form class="ui form" [formGroup]="angContactForm2" novalidate>
+
+    <div class="field">
+      <div class="two fields">
+        <div class="field">
+        <label>Numero de la rue</label>
+          <div class="ui input">
+           <input formControlName="numero" type="number" placeholder="numero de la rue..." />
+          </div>
+        </div>
+        <div class="field">
+          <label>Nom de la rue</label>
+          <div class="ui input">
+            <input formControlName="nom" type="text" placeholder="rue..." />
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Complement d'adresse</label>
+        <div class="ui input"><input type="text" formControlName="complement" placeholder="Complement d'adresse..." /></div>
+
+      </div>
+
+      <div class="field">
+        <div class="two fields">
+          <div class="field">
+            <label>Latitude</label>
+            <div class="ui input">
+            <input type="number" formControlName="lat" placeholder="Latitude..." />
+            </div>
+          </div>
+          <div class="field">
+            <label>Longitude</label>
+            <div class="ui input">
+              <input type="text" formControlName="lng" placeholder="Longitude..." />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <select id="villesUp" formControlName="ville" class="ui search dropdown">
+          <ng-container *ngFor="let item of villes">
+            <option value="{{item.id}}">{{item.label}} {{item.postal}}</option>
+          </ng-container>
+        </select>
+      </div>
     </div>
+  </form>
   </div>
   <div class="actions">
-  <button class="ui button primary">Enregistrer</button>
+    <button (click)="updateAdresse()" [disabled]="angContactForm2.invalid" class="ui button primary">Enregistrer</button>
   </div>
 </div>
 
-<div class="ui small modal" id="ajoutRegion" style="height:auto;position:relative">
-  <div class="header">
-    Ajouter une region
-  </div>
-  <div class="content">
-    <div class="ui input">
-    <input type="text" [(ngModel)]="region.label" id="regionname" />
-    </div>
-  </div>
-  <div class="actions">
-  <button (click)="saveRegion()" class="ui button primary">ajouter</button>
-  </div>
-</div>
--->

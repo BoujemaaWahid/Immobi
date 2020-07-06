@@ -7,6 +7,7 @@ export class Headers {
       groupHeader:function(value, count, data, group){
         return value + "<span style='color:#d00; margin-left:10px;'>(" + count + " elements)</span>";
       },
+      placeholder:"La liste des adresses est vide.",
       cellClick: rowClick,
       paginationSize:15,
       layout:"fitColumns",
@@ -40,7 +41,8 @@ export class Headers {
             {title:"postale", field:"postale", align:"center", headerFilter: true}
           ]
         },
-        {title:"region", field:"region", align:"center", headerFilter: true}
+        {title:"region", field:"region", align:"center", headerFilter: true},
+        {title:"", field:"delete", align:"center", formatter: function(cell, fp){return "<i class='trash alternate outline icon'></i>"}}
       ]
     }
   }
@@ -49,6 +51,7 @@ export class Headers {
       groupHeader:function(value, count, data, group){
         return value + "<span style='color:#d00; margin-left:10px;'>(" + count + " elements)</span>";
       },
+      placeholder:"La liste des appartements est vide.",
       cellClick: rowClick,
       layout:"fitColumns",
       pagination:"local",

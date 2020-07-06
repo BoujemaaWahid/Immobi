@@ -19,8 +19,14 @@ export class DataService {
     {headers:{}, params: {"data": JSON.stringify(filter)}}
     )
   }
+  getLieux(): Observable<any>{
+    return this.http.get("http://127.0.0.1:4300/lieux/findAll")
+  }
   saveLieux(data): Observable<any>{
     return this.http.post("http://127.0.0.1:4300/lieux/save", data, {headers:{'Content-Type':'application/json'}, responseType: "text"})
+  }
+  saveAdresses(data): Observable<any>{
+    return this.http.post("http://127.0.0.1:4300/adresses/save", data, {headers:{'Content-Type':'application/json'}, responseType: "text"})
   }
   getRegion(): Observable<any>{
     return this.http.get("http://localhost:4300/lieux/region/findAll")
@@ -42,6 +48,9 @@ export class DataService {
   }
   supprimerLocal(data): Observable<any>{
     return this.http.delete("http://127.0.0.1:4300/local/delete", {params:{"id": data}, responseType:"text"});
+  }
+  supprimerAdresse(data): Observable<any>{
+    return this.http.delete("http://127.0.0.1:4300/adresses/delete", {params:{"id": data}, responseType:"text"});
   }
   compteValidation(email): Observable<any>{
     return this.http.get("http://127.0.0.1:4300/auth/validation", {params:{"email": email}});
@@ -69,6 +78,9 @@ export class DataService {
       delete item['base64']
     })
     return this.http.put("http://127.0.0.1:4300/local/update", data, {headers:{'Content-Type':'application/json'}, responseType: "text"})
+  }
+  updateAdresses(data): Observable<any>{
+    return this.http.put("http://127.0.0.1:4300/adresses/update", data, {headers:{'Content-Type':'application/json'}, responseType: "text"})
   }
 /*
     this.http.post(

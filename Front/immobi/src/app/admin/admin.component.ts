@@ -20,7 +20,6 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
 
     $("#baseMenu").css({display:'none'})
-    this.route.navigate(['locales'], {relativeTo: this.aroute})
   }
   lieux(){
     this.route.navigate(['lieux'], {relativeTo: this.aroute})

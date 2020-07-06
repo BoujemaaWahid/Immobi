@@ -264,8 +264,6 @@ export class LocaladminComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   updateLocal(){
-    console.log(this.local)
-    return
     if( this.images.length > 0 ){
       let imgs = []
       this.images.forEach(item=>{
