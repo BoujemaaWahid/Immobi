@@ -38,7 +38,7 @@ public class Lieux {
 	
 	@ManyToOne
 	@JoinColumn(name="region", nullable = false)
-	@JsonIgnore
+	
 	private Region region;
 	
 	@OneToMany(mappedBy = "lieu")

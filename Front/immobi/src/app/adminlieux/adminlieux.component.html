@@ -1,0 +1,55 @@
+<button style="border-radius:0px; width:100%" (click)="showFormulaire()" class="ui primary button">Ajouter</button>
+<div id="lieux-table"></div>
+<div class="ui fullscreen modal" id="updateAdresse" style="height:auto;position:relative">
+  <div class="header">
+    Modification de l'adresse {{adresse.numero}} {{adresse.rue}}
+  </div>
+  <div class="content">
+  <form class="ui form">
+    <div class="row stackable">
+      <div class="column"></div>
+    </div>
+  </form>
+  </div>
+  <div class="actions">
+  </div>
+</div>
+<!--
+<div class="ui fullscreen modal" id="updateLieux" style="height:auto;position:relative">
+  <div class="header">
+    update une ville
+  </div>
+  <div class="content">
+  </div>
+  <div class="actions">
+  </div>
+</div>
+
+<div class="ui small modal" id="updateRegion" style="height:auto;position:relative">
+  <div class="header">
+    Modification de la region <b>{{region.label}}</b>
+  </div>
+  <div class="content">
+    <div class="ui input">
+    <input type="text" [(ngModel)]="region.label" id="regionname" />
+    </div>
+  </div>
+  <div class="actions">
+  <button class="ui button primary">Enregistrer</button>
+  </div>
+</div>
+
+<div class="ui small modal" id="ajoutRegion" style="height:auto;position:relative">
+  <div class="header">
+    Ajouter une region
+  </div>
+  <div class="content">
+    <div class="ui input">
+    <input type="text" [(ngModel)]="region.label" id="regionname" />
+    </div>
+  </div>
+  <div class="actions">
+  <button (click)="saveRegion()" class="ui button primary">ajouter</button>
+  </div>
+</div>
+-->

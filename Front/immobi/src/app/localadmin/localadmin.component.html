@@ -7,20 +7,20 @@
     {{local.titre}}
   </div>
   <div class="content">
-    <form class="ui form">
+    <form class="ui form" [formGroup]="angContactForm2" novalidate>
       <h4 class="ui dividing header">Détailles de local numéro {{local.id}}</h4>
   <div class="field">
 
     <div class="two fields">
       <div class="field">
       <label>Titre</label>
-        <input type="text" [(ngModel)]="local.titre" name="titre" placeholder="Titre">
+        <input type="text" formControlName="titre" [(ngModel)]="local.titre" name="titre" placeholder="Titre">
       </div>
 
       <div class="field">
       <label>Prix</label>
         <div class="ui icon input">
-          <input type="number" name="prix" [(ngModel)]="local.prix" placeholder="prix">
+          <input type="number" formControlName="prix" name="prix" [(ngModel)]="local.prix" placeholder="prix">
           <i class="euro sign icon"></i>
         </div>
       </div>
@@ -30,7 +30,7 @@
     <label>Adresse</label>
     <div class="fields">
       <div class="twelve wide field">
-        <select id="adresses_locales" [ngModelOptions]="{standalone: true}" [(ngModel)]="local.adresse" class="ui fluid search dropdown">
+        <select id="adresses_locales" formControlName="adresse" [(ngModel)]="local.adresse" class="ui fluid search dropdown">
           <ng-container *ngFor="let item of listAdresses">
             <option value="{{item.id}}">{{item.adresse}}</option>
           </ng-container>
@@ -41,17 +41,17 @@
   <div class="fields">
     <div class="six wide field">
       <label>Date de publication</label>
-      <input type="date" [(ngModel)]="local.date_pub" name="pub" placeholder="Card #">
+      <input type="date" formControlName="date" [(ngModel)]="local.date_pub" name="pub" placeholder="Card #">
     </div>
     <div class="three wide field">
       <label>Surface (m²)</label>
-      <input type="number" [(ngModel)]="local.surface" name="surface" placeholder="Surface ...m²">
+      <input type="number" formControlName="surface" [(ngModel)]="local.surface" name="surface" placeholder="Surface ...m²">
     </div>
     <div class="six wide field">
       <div class="two wide fields">
         <div class="field">
           <label>Surface terrain(m²)</label>
-          <input type="number" [(ngModel)]="local.surface_terrain" name="surface_terrain" placeholder="Terrain ...m²">
+          <input type="number" formControlName="terrain" [(ngModel)]="local.surface_terrain" name="surface_terrain" placeholder="Terrain ...m²">
         </div>
       </div>
     </div>
@@ -61,22 +61,22 @@
       <div class="two fields">
         <div class="field">
           <label>Numéro des chambres</label>
-          <input type="number" name="chambres" [(ngModel)]="local.chambres"/>
+          <input type="number" name="chambres" formControlName="chambres" [(ngModel)]="local.chambres"/>
         </div>
         <div class="field">
           <label>Numéro des piéces</label>
-          <input type="text" name="pieces" [(ngModel)]="local.pieces" />
+          <input type="text" name="pieces" formControlName="pieces" [(ngModel)]="local.pieces" />
         </div>
       </div>
 
   <div class="field">
   <label>Description</label>
-  <textarea [(ngModel)]="local.description" name="desc" rows="3"></textarea>
+  <textarea [(ngModel)]="local.description" formControlName="description" name="desc" rows="3"></textarea>
   </div>
 
    <div class="field">
     <label>Types</label>
-    <select id="types" [(ngModel)]="local.type" name="type" class="ui fluid search dropdown" multiple="">
+    <select id="types" [(ngModel)]="local.type" formControlName="types" name="type" class="ui fluid search dropdown" multiple="">
       <ng-container *ngFor="let item of listTypes">
 
             <option value="{{item.label}}">{{item.label}}</option>
@@ -105,7 +105,7 @@
 
     <div class="field">
       <div class="ui slider checkbox">
-        <input id="disponible" type="checkbox" [(ngModel)]="local.disponible" name="disponible">
+        <input id="disponible" formControlName="disponible" type="checkbox" [(ngModel)]="local.disponible" name="disponible">
         <label for="disponible"><b>Disponible</b></label>
       </div>
     </div>
@@ -113,7 +113,7 @@
 
     <div class="field">
       <div class="ui slider checkbox">
-        <input id="projet" type="checkbox" [(ngModel)]="local.projet" name="projet">
+        <input id="projet" formControlName="projet" type="checkbox" [(ngModel)]="local.projet" name="projet">
         <label for="projet"><b>{{local.projet?"à acheter":"à louer"}}</b></label>
       </div>
 
@@ -125,7 +125,7 @@
 
 
   </div>
-  <button class="ui button primary" (click)="updateLocal()" style="width:100%">Enregistrer</button>
+  <button class="ui button primary" [disabled]="angContactForm2.invalid || (images.length == 0 && (local.images == null || local.images.length == 0))" (click)="updateLocal()" style="width:100%">Enregistrer</button>
 </form>
   </div>
   </div>
@@ -258,15 +258,19 @@
         </div>
       </div>
   </div>
-
+  {{types_extras}}
    <div class="field">
     <label>Types</label>
-    <select formControlName="types" class="ui fluid search dropdown" multiple="">
+    <select formControlName="types" [(ngModel)]="types_extras" class="ui fluid search dropdown" multiple="">
       <ng-container *ngFor="let item of listTypes">
             <option value="{{item.id}}">{{item.label}}</option>
       </ng-container>
     </select>
-
+    <div *ngIf="IDT('types').error">
+        <div *ngIf ="angContactForm.controls['types'].errors.required" class="ui pointing red basic label">
+            Veuillez saisire ce champ
+        </div>
+      </div>
   </div>
   <div class="field">
     <label>Images</label>
@@ -306,7 +310,7 @@
 
 
   </div>
-  <button [disabled]="angContactForm.invalid" (click)="saveLocal()" class="ui button primary" style="width:100%">Enregistrer</button>
+  <button [disabled]="angContactForm.invalid || images.length == 0" (click)="saveLocal()" class="ui button primary" style="width:100%">Enregistrer</button>
 </form>
   </div>
   </div>

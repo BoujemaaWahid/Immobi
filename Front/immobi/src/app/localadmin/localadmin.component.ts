@@ -19,14 +19,17 @@ export class LocaladminComponent implements OnInit, OnDestroy, AfterViewInit {
   images = []
   idGenImage = 0;
   angContactForm: FormGroup;
+  angContactForm2: FormGroup;
   listLocals = []
   listAdresses = []
   listTypes = []
   tableData: Tabulator;
+  types_extras = [];
   constructor(private arouter: Router, private services: DataService,  private formBuilder: FormBuilder) {
 
     this.local = new Local()
     this.createContactForm()
+    this.updateContactForm()
     this.services.getLocals().subscribe(res=>{
       this.services.adresses().subscribe(adr=>{
         adr.forEach(item => {
@@ -107,8 +110,23 @@ export class LocaladminComponent implements OnInit, OnDestroy, AfterViewInit {
       chambres:['', Validators.required],
       pieces:['', Validators.required],
       description:['', Validators.required],
-      types:[''],
-      images:[''],
+      types:['', Validators.required],
+      disponible:['', Validators.required],
+      projet:['', Validators.required]
+    })
+  }
+  updateContactForm(){
+    this.angContactForm2 = this.formBuilder.group({
+      titre:['', Validators.required],
+      prix:['', Validators.required],
+      adresse:['', Validators.required],
+      date:['', Validators.required],
+      surface:['', Validators.required],
+      terrain:['', Validators.required],
+      chambres:['', Validators.required],
+      pieces:['', Validators.required],
+      description:['', Validators.required],
+      types:['', Validators.required],
       disponible:['', Validators.required],
       projet:['', Validators.required]
     })
@@ -244,7 +262,10 @@ export class LocaladminComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
 
+
   updateLocal(){
+    console.log(this.local)
+    return
     if( this.images.length > 0 ){
       let imgs = []
       this.images.forEach(item=>{

@@ -1,4 +1,6 @@
+//tslint:disable
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 declare var $: any;
 @Component({
   selector: 'app-adminmenu',
@@ -7,10 +9,14 @@ declare var $: any;
 })
 export class AdminmenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: Router, private ar: ActivatedRoute) { }
 
   ngOnInit(): void {
-    $("#baseMenu").css({display:'none'})
+    $('#baseMenu').css({display: 'none'})
   }
+  locales(){
+    this.route.navigate(['locales'], {relativeTo: this.ar})
+  }
+
 
 }

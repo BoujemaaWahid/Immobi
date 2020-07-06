@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Headers } from './Headers';
 import { Router, ActivatedRoute } from '@angular/router';
-
+declare var $: any;
 declare var Tabulator: any;
 @Component({
   selector: 'app-admin',
@@ -18,8 +18,14 @@ export class AdminComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
+    $("#baseMenu").css({display:'none'})
     this.route.navigate(['locales'], {relativeTo: this.aroute})
   }
-
-
+  lieux(){
+    this.route.navigate(['lieux'], {relativeTo: this.aroute})
+  }
+  locales(){
+    this.route.navigate(['locales'], {relativeTo: this.aroute})
+  }
 }

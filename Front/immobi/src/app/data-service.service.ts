@@ -19,9 +19,20 @@ export class DataService {
     {headers:{}, params: {"data": JSON.stringify(filter)}}
     )
   }
-
+  saveLieux(data): Observable<any>{
+    return this.http.post("http://127.0.0.1:4300/lieux/save", data, {headers:{'Content-Type':'application/json'}, responseType: "text"})
+  }
+  getRegion(): Observable<any>{
+    return this.http.get("http://localhost:4300/lieux/region/findAll")
+  }
   getLocals(): Observable<any>{
     return this.http.get("http://127.0.0.1:4300/local/findAll")
+  }
+  saveRegion(data): Observable<any>{
+    return this.http.post("http://127.0.0.1:4300/lieux/region/save", data, {headers:{'Content-Type':'application/json'}, responseType: "text"})
+  }
+  getAdresses(): Observable<any>{
+    return this.http.get("http://127.0.0.1:4300/adresses/findAll")
   }
   saveLocal(data): Observable<any>{
     return this.http.post("http://127.0.0.1:4300/local/save", data, {headers:{'Content-Type':'application/json'}, responseType: "text"});

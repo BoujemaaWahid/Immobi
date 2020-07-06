@@ -17,6 +17,7 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminmenuComponent } from './adminmenu/adminmenu.component';
 import { LocaladminComponent } from './localadmin/localadmin.component';
+import { AdminlieuxComponent } from './adminlieux/adminlieux.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LocaladminComponent } from './localadmin/localadmin.component';
     ConfirmationComponent,
     AdminComponent,
     AdminmenuComponent,
-    LocaladminComponent
+    LocaladminComponent,
+    AdminlieuxComponent
   ],
   imports: [
     BrowserModule,

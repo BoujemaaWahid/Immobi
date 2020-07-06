@@ -32,4 +32,9 @@ public class TypeLocal {
 	@ManyToMany(mappedBy = "types")
 	@JsonIgnore
 	private List<Local> locales;
+	
+	public TypeLocal(long id, String label) {
+		this.id = id;
+		this.label = label;
+	}
 }

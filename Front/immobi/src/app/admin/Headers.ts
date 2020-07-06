@@ -1,5 +1,49 @@
 //tslint:disable
+declare var $: any;
 export class Headers {
+
+  public static lieuxHeader(rowClick){
+    return{
+      groupHeader:function(value, count, data, group){
+        return value + "<span style='color:#d00; margin-left:10px;'>(" + count + " elements)</span>";
+      },
+      cellClick: rowClick,
+      paginationSize:15,
+      layout:"fitColumns",
+      responsiveLayout:"collapse",
+      groupBy:["region"],
+      langs:{"fr-fr":{"pagination":{
+        "first":"Premier",
+        "first_title":"Premier Page",
+        "last":"Dernier",
+        "last_title":"Dernier Page",
+        "prev":"Précédent",
+        "prev_title":"Précédent Page",
+        "next":"Prochain",
+        "next_title":"Prochain Page",
+      }}},
+      columns:[
+        {formatter:"responsiveCollapse", width:30, minWidth:30, align:"center", resizable:false, headerSort:false},
+
+        {title:"id", field:"id", align:"center", headerFilter:true},
+        {title:"numero", field:"numero",  align:"center", headerFilter:true},
+        {title:"rue", field:"rue",  align:"center", headerFilter:true},
+        {title:"complement", field:"complement",  align:"center", headerFilter:true},
+        {title:"lat", field:"lat",  align:"center", headerFilter:true},
+        {title:"lng", field:"lng",  align:"center", headerFilter:true},
+        {
+          title:"Lieux",
+          field:"lieux",
+          align:"center",
+          columns:[
+            {title:"ville", field:"ville", align:"center", headerFilter: true},
+            {title:"postale", field:"postale", align:"center", headerFilter: true}
+          ]
+        },
+        {title:"region", field:"region", align:"center", headerFilter: true}
+      ]
+    }
+  }
   public static localHeader(rowClick){
     return {
       groupHeader:function(value, count, data, group){
