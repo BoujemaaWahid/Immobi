@@ -18,13 +18,15 @@ export class AdminComponent implements OnInit {
    }
 
   ngOnInit(): void {
-
     $("#baseMenu").css({display:'none'})
   }
-  lieux(){
-    this.route.navigate(['lieux'], {relativeTo: this.aroute})
+  adresses(){
+    this.route.navigate(['adresses'], {relativeTo: this.aroute})
   }
   locales(){
     this.route.navigate(['locales'], {relativeTo: this.aroute})
+  }
+  villes(){
+    this.route.navigate(['villes'], {relativeTo: this.aroute})
   }
 }

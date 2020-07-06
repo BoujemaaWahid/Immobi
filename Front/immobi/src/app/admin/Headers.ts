@@ -2,6 +2,37 @@
 declare var $: any;
 export class Headers {
 
+  public static villesHeader(rowClick){
+    return{
+      groupHeader:function(value, count, data, group){
+        return value + "<span style='color:#d00; margin-left:10px;'>(" + count + " elements)</span>";
+      },
+      placeholder:"La liste des villes est vide.",
+      cellClick: rowClick,
+      paginationSize:15,
+      pagination:"local",
+      layout:"fitColumns",
+      responsiveLayout:true,
+      groupBy:["region"],
+      langs:{"fr-fr":{"pagination":{
+        "first":"Premier",
+        "first_title":"Premier Page",
+        "last":"Dernier",
+        "last_title":"Dernier Page",
+        "prev":"Précédent",
+        "prev_title":"Précédent Page",
+        "next":"Prochain",
+        "next_title":"Prochain Page",
+      }}},
+      columns:[
+        {title:"id", responsive:2, field:"id", align:"center", headerFilter:true},
+        {title:"ville", responsive:0, field:"ville", align:"center", headerFilter:true},
+        {title:"postale", field:"postale", align:"center", headerFilter:true},
+        {title:"region", field:"region", align:"center", headerFilter:true},
+        {title:"", responsive: 2, headerSort: false, field:"delete", align:"center", formatter: function(cell, fp){return "<i class='trash alternate outline icon'></i>"}}
+      ]
+    }
+  }
   public static lieuxHeader(rowClick){
     return{
       groupHeader:function(value, count, data, group){
@@ -10,6 +41,7 @@ export class Headers {
       placeholder:"La liste des adresses est vide.",
       cellClick: rowClick,
       paginationSize:15,
+      pagination:"local",
       layout:"fitColumns",
       responsiveLayout:"collapse",
       groupBy:["region"],
@@ -42,7 +74,7 @@ export class Headers {
           ]
         },
         {title:"region", field:"region", align:"center", headerFilter: true},
-        {title:"", field:"delete", align:"center", formatter: function(cell, fp){return "<i class='trash alternate outline icon'></i>"}}
+        {title:"", headerSort: false, field:"delete", align:"center", formatter: function(cell, fp){return "<i class='trash alternate outline icon'></i>"}}
       ]
     }
   }
@@ -89,7 +121,7 @@ export class Headers {
             {title: "postal", field:"postal", align:"center", headerFilter:true},
           ]
           },
-          {title:"", field:"delete", align:"center", formatter: function(cell, fp){return "<i class='trash alternate outline icon'></i>"}}
+          {title:"", headerSort: false, field:"delete", align:"center", formatter: function(cell, fp){return "<i class='trash alternate outline icon'></i>"}}
       ],
     }
   }

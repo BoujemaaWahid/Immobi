@@ -3,6 +3,7 @@ package com.example.demo.entitys;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class Lieux {
 	@Column(name="LABEL", length=50, nullable=false, unique=true)
     private String label;
 	
-	@Column(name="POSTAL", length=50, nullable=false, unique=true)
+	@Column(name="POSTAL", length=50, nullable=false)
     private String code_postal;
 	
 	@ManyToOne
@@ -41,7 +42,7 @@ public class Lieux {
 	
 	private Region region;
 	
-	@OneToMany(mappedBy = "lieu")
+	@OneToMany(mappedBy = "lieu", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Adresse> adresses = new ArrayList<Adresse>();
 	

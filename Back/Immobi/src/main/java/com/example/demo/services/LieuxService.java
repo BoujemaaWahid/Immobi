@@ -89,6 +89,7 @@ public class LieuxService {
 	@SuppressWarnings("deprecation")
 	public String update(String json) {
 		try {
+			System.out.println(json);
 			JsonNode data = objectMapper.readTree(json);
 			Long id = data.get("id").asLong();
 			if ( data.get("id").isNull() ) return "UPDATE: ID NOT FOUND EXEPTION";
@@ -105,7 +106,7 @@ public class LieuxService {
 			Lieux finalEntity = new Lieux();
 			modelMapper.map(toSave, finalEntity);
 			lieuxRepository.save(finalEntity);
-		}catch(Exception ex) {return ex.getMessage();}
+		}catch(Exception ex) {ex.printStackTrace();return ex.getMessage();}
 		componentServ.evictAllCaches();
 		return "200";
 	}

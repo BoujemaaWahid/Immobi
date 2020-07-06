@@ -56,6 +56,7 @@ public class LieuxController {
 	
 	@PostMapping("/save")
 	public String save(@RequestBody LieuxDto dto) {
+		System.out.println(dto);
 		return lieuxService.save(dto);
 	}
 	

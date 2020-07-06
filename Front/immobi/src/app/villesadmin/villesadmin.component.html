@@ -1,0 +1,86 @@
+<button style="border-radius:0px; width:100%" (click)="showFormulaire()" class="ui primary button">Ajouter</button>
+<div id="villes-table"></div>
+
+<div class="ui small modal" id="updateModal" style="height:40%;position:relative">
+  <div class="content" style="height:75%">
+    <div class="ui form" [formGroup]="angContactForm2" novalidate>
+      <div class="field">
+        <div class="field">
+          <label>Region</label>
+          <select id="region_field" formControlName="region" class="ui fluid dropdown search">
+          <ng-container *ngFor="let item of regions">
+            <option value="{{item.id}}">{{item.label}}</option>
+          </ng-container>
+          </select>
+        </div>
+        <div class="two fields">
+          <div class="field">
+            <label>Ville</label>
+            <div class="ui input">
+              <input formControlName="label" type="text" placeholder="Ville..."/>
+            </div>
+          </div>
+          <div class="field">
+            <label>Code postale</label>
+            <div class="ui input">
+              <input formControlName="postal" type="text" placeholder="code postale..."/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+  <button class="ui button primary" (click)="updateLieu()" [disabled]="angContactForm2.invalid">Enregistrer</button>
+  </div>
+</div>
+
+
+<div class="ui small modal" id="ajoutModal" style="height:40%;position:relative">
+  <div class="content" style="height:75%">
+    <div class="ui form" [formGroup]="angContactForm" novalidate>
+      <div class="field">
+        <div class="field">
+          <label>Region</label>
+          <select id="region_field" formControlName="region" class="ui fluid dropdown search">
+          <ng-container *ngFor="let item of regions">
+            <option value="{{item.id}}">{{item.label}}</option>
+          </ng-container>
+          </select>
+          <div *ngIf="IDT('region').error">
+            <div *ngIf ="angContactForm.controls['region'].errors.required" class="ui pointing red basic label">
+                Veuillez saisire ce champ
+            </div>
+          </div>
+        </div>
+        <div class="two fields">
+          <div class="field">
+            <label>Ville</label>
+            <div class="ui input">
+              <input formControlName="label" type="text" placeholder="Ville..."/>
+            </div>
+            <div *ngIf="IDT('label').error">
+              <div *ngIf ="angContactForm.controls['label'].errors.required" class="ui pointing red basic label">
+                  Veuillez saisire ce champ
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Code postale</label>
+            <div class="ui input">
+              <input formControlName="postal" type="text" placeholder="code postale..."/>
+            </div>
+            <div *ngIf="IDT('postal').error">
+              <div *ngIf ="angContactForm.controls['postal'].errors.required" class="ui pointing red basic label">
+                  Veuillez saisire ce champ
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+  <button class="ui button primary" (click)="saveLieu()" [disabled]="angContactForm.invalid">Enregistrer</button>
+  </div>
+</div>

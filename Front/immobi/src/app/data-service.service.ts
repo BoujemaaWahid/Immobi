@@ -46,6 +46,12 @@ export class DataService {
   isThere(type, value): Observable<any>{
     return this.http.get("http://127.0.0.1:4300/auth/isThere", {params:{"type": type, "value": value}});
   }
+  supprimerVille(data): Observable<any>{
+    return this.http.delete("http://127.0.0.1:4300/lieux/delete", {params:{"id": data}, responseType:"text"});
+  }
+  supprimerLieu(data): Observable<any>{
+    return this.http.delete("http://127.0.0.1:4300/lieux/delete", {params:{"id": data}, responseType:"text"});
+  }
   supprimerLocal(data): Observable<any>{
     return this.http.delete("http://127.0.0.1:4300/local/delete", {params:{"id": data}, responseType:"text"});
   }
@@ -81,6 +87,9 @@ export class DataService {
   }
   updateAdresses(data): Observable<any>{
     return this.http.put("http://127.0.0.1:4300/adresses/update", data, {headers:{'Content-Type':'application/json'}, responseType: "text"})
+  }
+  updateLieu(data): Observable<any>{
+    return this.http.put("http://127.0.0.1:4300/lieux/update", data, {headers:{'Content-Type':'application/json'}, responseType: "text"})
   }
 /*
     this.http.post(

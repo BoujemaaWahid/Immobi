@@ -9,6 +9,7 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { AdminComponent } from './admin/admin.component';
 import { LocaladminComponent } from './localadmin/localadmin.component';
 import { AdminlieuxComponent } from './adminlieux/adminlieux.component';
+import { VillesadminComponent } from './villesadmin/villesadmin.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, data: { animation: 'isHome'}},
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'validation', component: ConfirmationComponent},
   {path: 'admin', component: AdminComponent, children: [
     {path: 'locales', component: LocaladminComponent},
-    {path: 'lieux', component: AdminlieuxComponent},
+    {path: 'adresses', component: AdminlieuxComponent},
+    {path: 'villes', component: VillesadminComponent},
   ]}
 ];
 

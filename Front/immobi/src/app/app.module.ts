@@ -18,6 +18,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminmenuComponent } from './adminmenu/adminmenu.component';
 import { LocaladminComponent } from './localadmin/localadmin.component';
 import { AdminlieuxComponent } from './adminlieux/adminlieux.component';
+import { VillesadminComponent } from './villesadmin/villesadmin.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AdminlieuxComponent } from './adminlieux/adminlieux.component';
     AdminComponent,
     AdminmenuComponent,
     LocaladminComponent,
-    AdminlieuxComponent
+    AdminlieuxComponent,
+    VillesadminComponent
   ],
   imports: [
     BrowserModule,
