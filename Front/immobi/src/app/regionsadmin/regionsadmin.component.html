@@ -1,0 +1,37 @@
+<button style="border-radius:0px; width:100%" (click)="showFormulaire()" class="ui primary button">Ajouter</button>
+<div id="regions-table"></div>
+
+<div class="ui small modal" id="ajoutModal" style="height:auto;position:relative">
+    <div class="header">Ajouter une region</div>
+    <div class="content">
+        <form class="ui form" [formGroup]="angContactForm" novalidate >
+            <div class="field">
+                <label>Region</label>
+                <div class="ui input">
+                    <input formControlName="label" type="text" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+        <button (click)="ajoutRegion()" [disabled]="angContactForm.invalid" class="ui button primary">Enregistrer</button>
+    </div>
+</div>
+
+<div class="ui small modal" id="updateModal" style="height:auto;position:relative">
+    <div class="header">Modification de la region {{regionName}}</div>
+    <div class="content">
+        <form class="ui form" [formGroup]="angContactForm2" novalidate >
+            <div class="field">
+                <label>Region</label>
+                <div class="ui input">
+                    <input formControlName="label" type="text" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+        <button (click)="deleteRegion()" class="ui button red">Supprimer</button>
+        <button (click)="updateRegion()" [disabled]="angContactForm2.invalid" class="ui button primary">Enregistrer</button>
+    </div>
+</div>

@@ -2,6 +2,7 @@ package com.example.demo.entitys;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class Region {
 	private String label;
 	
 	
-	@OneToMany(mappedBy = "region")
+	@OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Lieux> lieux;
 	

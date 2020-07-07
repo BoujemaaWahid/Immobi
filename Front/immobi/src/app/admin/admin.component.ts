@@ -29,4 +29,7 @@ export class AdminComponent implements OnInit {
   villes(){
     this.route.navigate(['villes'], {relativeTo: this.aroute})
   }
+  regions(){
+    this.route.navigate(['regions'], {relativeTo: this.aroute})
+  }
 }

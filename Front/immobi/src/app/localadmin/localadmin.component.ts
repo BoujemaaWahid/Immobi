@@ -25,6 +25,7 @@ export class LocaladminComponent implements OnInit, OnDestroy, AfterViewInit {
   listTypes = []
   tableData: Tabulator;
   types_extras = [];
+  hover_image_popup = ""
   constructor(private arouter: Router, private services: DataService,  private formBuilder: FormBuilder) {
 
     this.local = new Local()
@@ -84,6 +85,7 @@ export class LocaladminComponent implements OnInit, OnDestroy, AfterViewInit {
     $('.special.cards .image').dimmer({
       on: 'hover'
     });
+    $('#Xpop').popup({on: 'hover'})
     $(".ui.dropdown").dropdown()
     $("#types").dropdown()
     $(".gallery").click(()=>{
@@ -145,6 +147,12 @@ export class LocaladminComponent implements OnInit, OnDestroy, AfterViewInit {
 
   createTableData(data){
     this.tableData = new Tabulator("#locales-table", Headers.localHeader(
+      (e, row)=>{
+        $("#image_popup").css({'margin-top':e.pageY - 20});
+        $("#Xpop").mouseenter()
+        
+        this.hover_image_popup = row._row.data.images[0].base64
+      },
       (e, cell)=>{
         if( cell._cell.value == "deleteICO" ){
 

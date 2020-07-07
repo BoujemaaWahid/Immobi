@@ -4,7 +4,6 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Headers } from '../admin/Headers';
 import Tabulator from 'tabulator-tables';
 import { DataService } from '../data-service.service';
-import { isNgTemplate } from '@angular/compiler';
 import { Adresse } from './Adresse';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 declare var Tabulator: any;
@@ -24,7 +23,7 @@ export class AdminlieuxComponent implements OnInit, OnDestroy, AfterViewInit {
   villes = []
   angContactForm: FormGroup;
   angContactForm2: FormGroup;
-
+  
   constructor(private service: DataService, private formBuilder: FormBuilder) {
     this.service.getLieux().subscribe(res=>this.villes= res)
     this.ajoutForm()
@@ -52,7 +51,7 @@ export class AdminlieuxComponent implements OnInit, OnDestroy, AfterViewInit {
     })
   }
   ngAfterViewInit(): void {
-
+    
   }
   ngOnDestroy(): void {
     $("#lieux").removeClass("active")

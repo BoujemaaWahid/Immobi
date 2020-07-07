@@ -10,6 +10,7 @@ import { AdminComponent } from './admin/admin.component';
 import { LocaladminComponent } from './localadmin/localadmin.component';
 import { AdminlieuxComponent } from './adminlieux/adminlieux.component';
 import { VillesadminComponent } from './villesadmin/villesadmin.component';
+import { RegionsadminComponent } from './regionsadmin/regionsadmin.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, data: { animation: 'isHome'}},
@@ -22,6 +23,7 @@ const routes: Routes = [
     {path: 'locales', component: LocaladminComponent},
     {path: 'adresses', component: AdminlieuxComponent},
     {path: 'villes', component: VillesadminComponent},
+    {path: 'regions', component: RegionsadminComponent},
   ]}
 ];
 

@@ -1,7 +1,32 @@
 //tslint:disable
 declare var $: any;
 export class Headers {
-
+  public static regionsHeader(rowClick){
+    return{
+      groupHeader:function(value, count, data, group){
+        return value + "<span style='color:#d00; margin-left:10px;'>(" + count + " elements)</span>";
+      },
+      placeholder:"La liste des regions est vide.",
+      cellClick: rowClick,
+      paginationSize:15,
+      pagination:"local",
+      layout:"fitColumns",
+      responsiveLayout:true,
+      langs:{"fr-fr":{"pagination":{
+        "first":"Premier",
+        "first_title":"Premier Page",
+        "last":"Dernier",
+        "last_title":"Dernier Page",
+        "prev":"Précédent",
+        "prev_title":"Précédent Page",
+        "next":"Prochain",
+        "next_title":"Prochain Page",
+      }}},
+      columns:[
+        {title:"region", field:"region", align:"center"}
+      ]
+    }
+  }
   public static villesHeader(rowClick){
     return{
       groupHeader:function(value, count, data, group){
@@ -78,11 +103,14 @@ export class Headers {
       ]
     }
   }
-  public static localHeader(rowClick){
+  public static localHeader(rowHover, rowClick){
     return {
       groupHeader:function(value, count, data, group){
         return value + "<span style='color:#d00; margin-left:10px;'>(" + count + " elements)</span>";
       },
+      
+      rowMouseEnter:rowHover,
+      rowMouseLeave:function(e, row){$("#Xpop").mouseleave()},
       placeholder:"La liste des appartements est vide.",
       cellClick: rowClick,
       layout:"fitColumns",

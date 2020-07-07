@@ -19,6 +19,9 @@ export class DataService {
     {headers:{}, params: {"data": JSON.stringify(filter)}}
     )
   }
+  getRegions(): Observable<any>{
+    return this.http.get("http://127.0.0.1:4300/lieux/regions/findAll")
+  }
   getLieux(): Observable<any>{
     return this.http.get("http://127.0.0.1:4300/lieux/findAll")
   }
@@ -58,6 +61,9 @@ export class DataService {
   supprimerAdresse(data): Observable<any>{
     return this.http.delete("http://127.0.0.1:4300/adresses/delete", {params:{"id": data}, responseType:"text"});
   }
+  supprimerRegion(data): Observable<any>{
+    return this.http.delete("http://127.0.0.1:4300/lieux/region/delete", {params:{"id": data}, responseType:"text"});
+  }
   compteValidation(email): Observable<any>{
     return this.http.get("http://127.0.0.1:4300/auth/validation", {params:{"email": email}});
   }
@@ -88,17 +94,10 @@ export class DataService {
   updateAdresses(data): Observable<any>{
     return this.http.put("http://127.0.0.1:4300/adresses/update", data, {headers:{'Content-Type':'application/json'}, responseType: "text"})
   }
+  updateRegion(data): Observable<any>{
+    return this.http.put("http://127.0.0.1:4300/lieux/region/update", data, {headers:{'Content-Type':'application/json'}, responseType: "text"})
+  }
   updateLieu(data): Observable<any>{
     return this.http.put("http://127.0.0.1:4300/lieux/update", data, {headers:{'Content-Type':'application/json'}, responseType: "text"})
   }
-/*
-    this.http.post(
-      "http://127.0.0.1:4300/auth/X",
-      {},
-      {headers: this.headers, responseType:"text"}
-      ).subscribe(
-        (response)=>{
-
-          console.log(response);}
-      )*/
 }
