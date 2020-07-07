@@ -1,0 +1,13 @@
+@media screen and (min-width: 800px) {
+    #sidebtn{ display: none;}
+    #respmenu{display: none;}
+    
+}
+@media screen and (max-width: 799px) {
+    #MENU{ display: none;}
+    #deconnect{display: none;}
+    #respmenu{display: flex}
+    #respmenu12{display: none;}
+}
+  
+  

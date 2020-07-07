@@ -1,21 +1,38 @@
 <div class="ui inverted segment" style="border-radius:0px;margin-bottom:0%">
   <div class="ui inverted secondary pointing menu">
-    <a class="active item dynitem">
+    <a class="item" (click)="toggleMenu()" id="sidebtn">
+      <i class="align justify icon"></i>
+    </a>
+    <div class="left menu" id="MENU">
+    <a class="active item">
       Administrateur
     </a>
-    <a (click)="locales()" class="item dynitem" id="locales">
+    <a (click)="locales()" class="item" id="locales">
       Locales
     </a>
-    <a (click)="adresses()" class="item dynitem" id="lieux">
+    <a (click)="adresses()" class="item" id="lieux">
       Adresses
     </a>
-    <a (click)="villes()" class="item dynitem" id="villes">
+    <a (click)="villes()" class="item" id="villes">
       Villes
     </a>
-    <a (click)="regions()" class="item dynitem" id="regions">
+    <a (click)="regions()" class="item" id="regions">
       Regions
     </a>
-    <div class="right menu">
+  </div>
+    <div class="left menu" id="respmenu">
+      <a class="item">
+        <i class="envelope outline icon"></i>
+          Messages
+          <div class="floating ui mini circular red label">22</div>
+        </a>
+        <a class="item">
+          <i class="info circle icon"></i>
+          Notifications
+          <div class="floating ui mini circular red label">22</div>
+        </a>
+    </div>
+    <div class="right menu" id="respmenu12">
       <a class="item">
       <i class="envelope outline icon"></i>
         Messages
@@ -26,11 +43,32 @@
         Notifications
         <div class="floating ui mini circular red label">22</div>
       </a>
-      <a (click)="deconnect()" class="item">
+      <a (click)="deconnect()" class="item" id="deconnect">
         <i class="sign out alternate icon"></i>
         Deconnexion
       </a>
     </div>
   </div>
+</div>
+<div class="ui left demo vertical inverted sidebar labeled icon menu">
+  <a class="active item dynitem">
+    Administrateur
+  </a>
+  <a (click)="locales()" class="item">
+    Locales
+  </a>
+  <a (click)="adresses()" class="item">
+    Adresses
+  </a>
+  <a (click)="villes()" class="item">
+    Villes
+  </a>
+  <a (click)="regions()" class="item">
+    Regions
+  </a>
+  <a (click)="deconnect()" class="item">
+    <i class="sign out alternate icon"></i>
+    Deconnexion
+  </a>
 </div>
 <router-outlet></router-outlet>

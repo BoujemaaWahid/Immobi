@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'recherche', component: ResultsComponent, data: {animation: 'isResults'}},
   {path: 'details', component: DetailsComponent, data: {animation: 'isDetails'}},
   {path: 'validation', component: ConfirmationComponent, canActivate: [Guard]},
-  {path: 'admin', component: AdminComponent, canActivate: [Guard, AdminGuard], children: [
+  {path: 'admin', component: AdminComponent, canActivate: [AdminGuard], children: [
     {path: 'locales', component: LocaladminComponent},
     {path: 'adresses', component: AdminlieuxComponent},
     {path: 'villes', component: VillesadminComponent},

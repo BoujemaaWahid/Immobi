@@ -20,6 +20,9 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     $("#baseMenu").css({display:'none'})
   }
+  toggleMenu(){
+    $('.ui.labeled.icon.sidebar').sidebar('toggle')
+  }
   adresses(){
     this.route.navigate(['adresses'], {relativeTo: this.aroute})
   }
