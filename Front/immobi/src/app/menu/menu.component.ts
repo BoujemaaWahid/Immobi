@@ -1,5 +1,6 @@
 //tslint:disable
 import { Component, OnInit, HostBinding, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 declare var $: any;
 declare var navBarHover: any;
 declare var navBarActions: any;
@@ -10,9 +11,15 @@ declare var navBarActions: any;
 })
 export class MenuComponent implements OnInit {
   showFilter = !(localStorage.getItem('forSideBar') == null)
-  constructor() {
+  display = {
+    disp: !localStorage.getItem("idUser")
   }
-
+  constructor(private route: Router) {
+  }
+  account(){
+    let tp = localStorage.getItem("user_type")
+    if( tp == '1') this.route.navigate(['admin'])
+  }
   ngOnInit(): void {
     navBarActions().updateActiveLink()
     navBarActions().hmUpdateActiveLink()
@@ -21,6 +28,5 @@ export class MenuComponent implements OnInit {
   showSideMenu(){
     navBarActions().navAnimation()
   }
-
 
 }

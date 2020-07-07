@@ -61,7 +61,7 @@ export class ConfirmationComponent implements OnInit {
   redirection(){
     if( this.redirect == 0 || this.redirect == 2) this.route.navigate([''])
     else if ( this.done == true ){
-      //redirect to account
+      this.route.navigate(['login'])
     }
   }
 

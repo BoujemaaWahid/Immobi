@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../data-service.service';
 import * as bcrypt from 'bcryptjs';
-import { fromEvent } from 'rxjs';
+import { fromEvent, Observable } from 'rxjs';
 declare var $: any;
 declare var pulseAnimation: any;
 declare var Swal: any;
@@ -75,6 +75,18 @@ export class RegisterComponent implements OnInit {
       "email": this.angContactForm.get("email").value
     }
     localStorage.setItem("register", JSON.stringify(data) );
+    const smsg = new Observable(observer=>{
+      observer.next(
+        Swal.fire({
+          position: 'top-end',
+          icon: 'info',
+          title: 'La préparation de votre compte est en cours.',
+          showConfirmButton: false,
+          timer: 2000
+        })
+      )
+    }).subscribe()
+
     this.services.compteValidation(data.email).subscribe(res=>{
       Swal.fire({
         position: 'center',

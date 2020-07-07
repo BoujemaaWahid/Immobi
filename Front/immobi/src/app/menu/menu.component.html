@@ -5,12 +5,16 @@
   <i class="home icon"></i>
   Acceuil
   </a>
-  <a routerLink="/login" id="forLogin"  class="FC hLink item" in="false">
+  <a routerLink="/login" *ngIf="display.disp" id="forLogin"  class="FC hLink item" in="false">
     <i class="user circle icon"></i>
     Connectez vous
   </a>
+  <a (click)="account()" *ngIf="!display.disp" id="forLogin"  class="FC hLink item" in="false">
+    <i class="user icon"></i>
+    mon compte
+  </a>
 
-  <a routerLink="/register" id="forRegister" class="FC hLink item" in="false">
+  <a *ngIf="display.disp" routerLink="/register" id="forRegister" class="FC hLink item" in="false">
     <i class="user plus icon"></i>
     Inscrivez vous
   </a>

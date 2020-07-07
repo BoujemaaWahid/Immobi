@@ -72,11 +72,12 @@ export class ResultsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataService.getLocalsWithFilters(this.filter.prepare()).subscribe(data => {
       this.locales = data
       localStorage.removeItem("basicFilter")
-      localStorage.set("locales", JSON.stringify(data))
+      localStorage.setItem("locales", JSON.stringify(data))
       this.forResponsivity(data)
     })
   }
   forResponsivity(data){
+    console.log(data)
     if( data.length <= 1)this.grid_resp_class = "column"
     else if( data.length <= 2 )this.grid_resp_class = "seven wide column"
     else if( data.length <= 3) this.grid_resp_class = "five wide column"
