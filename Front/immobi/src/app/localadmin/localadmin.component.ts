@@ -106,7 +106,7 @@ export class LocaladminComponent implements OnInit, OnDestroy, AfterViewInit {
       titre:['', Validators.required],
       prix:['', Validators.required],
       adresse:['', Validators.required],
-      date:['', Validators.required],
+      date:[new Date().toISOString().split("T")[0], Validators.required],
       surface:['', Validators.required],
       terrain:['', Validators.required],
       chambres:['', Validators.required],
