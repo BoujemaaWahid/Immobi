@@ -20,6 +20,7 @@ import { LocaladminComponent } from './localadmin/localadmin.component';
 import { AdminlieuxComponent } from './adminlieux/adminlieux.component';
 import { VillesadminComponent } from './villesadmin/villesadmin.component';
 import { RegionsadminComponent } from './regionsadmin/regionsadmin.component';
+import { Guard, AdminGuard } from './Guards';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,9 @@ import { RegionsadminComponent } from './regionsadmin/regionsadmin.component';
     HttpClientModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
+    Guard,
+    AdminGuard
   ],
   bootstrap: [AppComponent]
 })

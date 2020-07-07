@@ -11,15 +11,16 @@ import { LocaladminComponent } from './localadmin/localadmin.component';
 import { AdminlieuxComponent } from './adminlieux/adminlieux.component';
 import { VillesadminComponent } from './villesadmin/villesadmin.component';
 import { RegionsadminComponent } from './regionsadmin/regionsadmin.component';
+import { Guard, AdminGuard } from './Guards';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, data: { animation: 'isHome'}},
-  {path: 'login', component: LoginComponent, data: { animation: 'isLogin'}},
-  {path: 'register', component: RegisterComponent, data: {animation: 'isRegister'}},
+  {path: 'login', component: LoginComponent, canActivate: [Guard], data: { animation: 'isLogin'}},
+  {path: 'register', component: RegisterComponent, canActivate: [Guard], data: {animation: 'isRegister'}},
   {path: 'recherche', component: ResultsComponent, data: {animation: 'isResults'}},
   {path: 'details', component: DetailsComponent, data: {animation: 'isDetails'}},
-  {path: 'validation', component: ConfirmationComponent},
-  {path: 'admin', component: AdminComponent, children: [
+  {path: 'validation', component: ConfirmationComponent, canActivate: [Guard]},
+  {path: 'admin', component: AdminComponent, canActivate: [Guard, AdminGuard], children: [
     {path: 'locales', component: LocaladminComponent},
     {path: 'adresses', component: AdminlieuxComponent},
     {path: 'villes', component: VillesadminComponent},

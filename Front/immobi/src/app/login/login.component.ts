@@ -1,5 +1,5 @@
 //tslint:disable
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../data-service.service';
@@ -13,7 +13,7 @@ declare var Swal: any;
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   angContactForm: FormGroup;
   session = true;
   constructor(private data: DataService, private router: Router, private formBuilder: FormBuilder) {
@@ -23,6 +23,11 @@ export class LoginComponent implements OnInit {
     }
     this.createContactForm()
    }
+  ngOnDestroy(): void {
+    
+    $("#forLogin").removeClass("active")
+    $("#forLogin").removeClass("basicActiveLinkref")
+  }
 
   createContactForm(){
     this.angContactForm = this.formBuilder.group({
@@ -89,6 +94,9 @@ export class LoginComponent implements OnInit {
     $('#baseMenu').removeAttr('data-aos');
     $(".forServicesLink").css({'display':'none'})
     $(".forInformationsLink").css({'display':'none'})
+    
+    $("#forLogin").addClass("active")
+    $("#forLogin").addClass("basicActiveLinkref")
   }
 
 }

@@ -1,5 +1,5 @@
 //tslint:disable
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../data-service.service';
 import * as bcrypt from 'bcryptjs';
@@ -13,13 +13,18 @@ import { debounceTime, map, tap } from 'rxjs/operators';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   angContactForm: FormGroup;
   username_exist = false;
   email_exist = false;
   tel_exist = false;
 
   constructor(private services: DataService,private formBuilder: FormBuilder) { this.createContactForm()}
+  ngOnDestroy(): void {
+    
+    $("#forRegister").removeClass("active")
+    $("#forRegister").removeClass("basicActiveLinkref")
+  }
 
   createContactForm(){
     this.angContactForm = this.formBuilder.group({
@@ -35,6 +40,9 @@ export class RegisterComponent implements OnInit {
     $('#baseMenu').removeAttr('data-aos');
     $(".forServicesLink").css({'display':'none'})
     $(".forInformationsLink").css({'display':'none'})
+    
+    $("#forRegister").addClass("active")
+    $("#forRegister").addClass("basicActiveLinkref")
 
     this.angContactForm.get("username").valueChanges.pipe(
       debounceTime(2000),

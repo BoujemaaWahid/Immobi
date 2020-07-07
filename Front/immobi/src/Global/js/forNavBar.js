@@ -89,9 +89,8 @@ function navBarActions(){
         $(this).attr('in','false')
       })
 
-      if( localStorage.getItem('active_link') == undefined ){ localStorage.setItem('active_link', '#forRoot')}
+      if( localStorage.getItem('active_link') == undefined ){ localStorage.setItem('active_link', '#orRoot')}
       $(localStorage.getItem('active_link')).attr('in', 'true')
-      $(localStorage.getItem('active_link')).addClass(['active', 'basicActiveLinkref'])
 
     },
     InitScrollInside: function(){

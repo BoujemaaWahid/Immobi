@@ -1,5 +1,5 @@
 //tslint:disable
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BasicFilter } from './BasicFilter';
@@ -17,7 +17,7 @@ declare var navBarActions: any;
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   angContactForm: FormGroup;
   contactFormButtonIsClicked = false;
@@ -36,6 +36,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
         })
       }
     })
+  }
+  ngOnDestroy(): void {
+      $("#forRoot").removeClass("active")
+      $("#forRoot").removeClass("basicActiveLinkref")
   }
 
   ngAfterViewInit(): void {$("#baseMenu").css({'display':'flex'})}
