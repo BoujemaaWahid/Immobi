@@ -29,7 +29,7 @@ public class MsgController {
 		return demandeService.findAll();
 	}
 	
-	@GetMapping("/message/findAll")
+	@GetMapping("/msg/findAll")
 	public List<MessageDto> findAllMsg(){
 		return demandeService.findAllMsg();
 	}
@@ -39,7 +39,7 @@ public class MsgController {
 		return demandeService.findOne(id);
 	}
 	
-	@GetMapping("/message/findOne")
+	@GetMapping("/msg/findOne")
 	public MessageDto findOneMsg(@RequestParam("id") Long id){
 		return demandeService.findOneMsg(id);
 	}
@@ -49,7 +49,7 @@ public class MsgController {
 		return demandeService.save(dto);
 	}
 	
-	@PostMapping("/message/save")
+	@PostMapping("/msg/save")
 	public String saveMsg(@RequestBody MessageDto dto){
 		return demandeService.saveMsg(dto);
 	}
@@ -59,7 +59,7 @@ public class MsgController {
 		return demandeService.delete(id);
 	}
 	
-	@DeleteMapping("/message/delete")
+	@DeleteMapping("/msg/delete")
 	public String deleteMsg(@RequestParam("id") Long id) {
 		return demandeService.deleteMsg(id);
 	}

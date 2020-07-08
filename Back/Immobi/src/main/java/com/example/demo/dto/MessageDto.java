@@ -19,4 +19,6 @@ public class MessageDto implements Serializable{
 	private String email;
 	@JsonProperty("message")
 	private String message;
+	@JsonProperty("vue")
+	private boolean vue;
 }

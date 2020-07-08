@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Viewer from 'viewerjs';
 import { DataShare } from '../dataShare.service';
 import { Deactivator } from '../DeacGuard';
+import { DataService } from '../data-service.service';
 declare var Swal: any;
 declare var $: any;
 @Component({
@@ -17,7 +18,7 @@ export class DetailsComponent implements OnInit, AfterViewInit, Deactivator {
   angContactForm: FormGroup;
   gallery: Viewer;
   item: any;
-  constructor(private dataShare: DataShare, private formBuilder: FormBuilder) {
+  constructor(private services: DataService, private dataShare: DataShare, private formBuilder: FormBuilder) {
     this.dataShare.currentMessage.subscribe(item => {
 
       if( item == null ) this.item = JSON.parse ( localStorage.getItem("details") )
@@ -91,6 +92,7 @@ export class DetailsComponent implements OnInit, AfterViewInit, Deactivator {
   }
   createContactForm(){
     this.angContactForm = this.formBuilder.group({
+      
       email:['', [Validators.required, Validators.email]],
       phone:['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       message:['', Validators.required]
@@ -106,6 +108,24 @@ export class DetailsComponent implements OnInit, AfterViewInit, Deactivator {
       this.gallery.next(true)
     }
     this.gallery.show()
+  }
+
+  sendMessage(){
+    let data = {
+      local: { id: this.item['id'] },
+      email: this.angContactForm.get("email").value,
+      tel: this.angContactForm.get("phone").value,
+      message: this.angContactForm.get("message").value
+    }
+    this.services.saveDemande(data).subscribe(res=>{
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Votre message etait envoyé.',
+        showConfirmButton: false,
+        timer: 1100
+      })
+    })
   }
 
 }

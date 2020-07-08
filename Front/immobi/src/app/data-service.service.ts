@@ -31,6 +31,12 @@ export class DataService {
   saveAdresses(data): Observable<any>{
     return this.http.post("http://127.0.0.1:4300/adresses/save", data, {headers:{'Content-Type':'application/json'}, responseType: "text"})
   }
+  saveDemande(data): Observable<any>{
+    return this.http.post("http://127.0.0.1:4300/message/demande/save", data, {headers:{'Content-Type':'application/json'}, responseType: "text"})
+  }
+  saveMessage(data): Observable<any>{
+    return this.http.post("http://127.0.0.1:4300/message/msg/save", data, {headers:{'Content-Type':'application/json'}, responseType: "text"})
+  }
   getRegion(): Observable<any>{
     return this.http.get("http://localhost:4300/lieux/region/findAll")
   }

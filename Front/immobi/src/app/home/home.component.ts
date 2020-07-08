@@ -102,4 +102,21 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy, Deactiva
     HomeAnime().init()
     navBarActions().InitScrollInside()
   }
+
+  sendMessage(){
+    let data = {
+      email: this.angContactForm.get("email").value,
+      message: this.angContactForm.get("message").value
+    }
+    this.dataService.saveMessage(data).subscribe(res=>{
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Votre message etait envoyé.',
+        showConfirmButton: false,
+        timer: 1100
+      })
+    })
+  }
+
 }

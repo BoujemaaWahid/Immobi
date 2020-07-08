@@ -100,7 +100,7 @@
                 </div>
 
                 <div class="field">
-                  <button [disabled]="angContactForm.invalid" style="width:100%" class="ui button primary">Envoyer</button>
+                  <button (click)="sendMessage()" [disabled]="angContactForm.invalid" style="width:100%" class="ui button primary">Envoyer</button>
                 </div>
               </form>
             </div>
