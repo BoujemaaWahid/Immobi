@@ -63,6 +63,10 @@ public class Local {
 	@JsonIgnore
 	private List<Image> images;
 	
+	@OneToMany(mappedBy = "local")
+	@JsonIgnore
+	private List<Demande> demandes;
+	
 	@Column(name = "surface", nullable = false)
 	private double surface;
 	

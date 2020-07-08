@@ -21,6 +21,7 @@ import { AdminlieuxComponent } from './adminlieux/adminlieux.component';
 import { VillesadminComponent } from './villesadmin/villesadmin.component';
 import { RegionsadminComponent } from './regionsadmin/regionsadmin.component';
 import { Guard, AdminGuard } from './Guards';
+import { DeacGuard } from './DeacGuard';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { Guard, AdminGuard } from './Guards';
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
     Guard,
+    DeacGuard,
     AdminGuard
   ],
   bootstrap: [AppComponent]

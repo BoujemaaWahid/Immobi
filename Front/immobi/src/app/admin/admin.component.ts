@@ -35,9 +35,12 @@ export class AdminComponent implements OnInit {
   regions(){
     this.route.navigate(['regions'], {relativeTo: this.aroute})
   }
+  acceuil(){
+    this.route.navigate([''])
+  }
   deconnect(){
     localStorage.removeItem("idUser")
     localStorage.removeItem("user_type")
-    location.reload()
+    this.route.navigate(['login'])
   }
 }

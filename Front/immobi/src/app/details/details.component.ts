@@ -3,14 +3,15 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Viewer from 'viewerjs';
 import { DataShare } from '../dataShare.service';
-
+import { Deactivator } from '../DeacGuard';
+declare var Swal: any;
 declare var $: any;
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css']
 })
-export class DetailsComponent implements OnInit, AfterViewInit {
+export class DetailsComponent implements OnInit, AfterViewInit, Deactivator {
   center: any;
   markers: Array<any>;
   angContactForm: FormGroup;
@@ -51,6 +52,31 @@ export class DetailsComponent implements OnInit, AfterViewInit {
   });
     this.markers.push(marker);
   }
+  async confirm(): Promise<boolean> {
+    if( this.angContactForm.dirty )
+      return await this.exitPage()
+    return true;
+  }
+  exitPage(): Promise<boolean> {
+    return new Promise((resolve) => {
+      Swal.fire({
+        title: 'Vous voulez quitter la page ?',
+        text: "Vous vouliez envoyé un message, souhaitez vous continuer ?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'je reste',
+        cancelButtonText: 'je quitte'
+      }).then((result) => {
+        if (result.value) {
+          resolve(false)
+        }
+        resolve(true)
+      })
+    })
+  }
+
   ngAfterViewInit(): void {
     $("#baseMenu").css({'display':'flex'})
     this.gallery = new Viewer(document.getElementById("gallery"))

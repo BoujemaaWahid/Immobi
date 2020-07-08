@@ -6,18 +6,20 @@ import { BasicFilter } from './BasicFilter';
 import { DataShare } from '../dataShare.service';
 import { DataService } from '../data-service.service';
 import { LieuxRegions } from '../models/LieuxRegions';
+import { Deactivator } from '../DeacGuard';
 declare var $: any;
 declare var AOS: any;
 declare var pulseAnimation: any;
 declare var initAos:any;
 declare var HomeAnime: any;
 declare var navBarActions: any;
+declare var Swal: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy, Deactivator {
 
   angContactForm: FormGroup;
   contactFormButtonIsClicked = false;
@@ -35,6 +37,31 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           localStorage.setItem("villes", JSON.stringify(this.listLieuxRegions))
         })
       }
+    })
+  }
+  async confirm(): Promise<boolean> {
+    if( this.angContactForm.dirty )
+      return await this.exitPage();
+    else return true;
+  }
+
+  exitPage(): Promise<boolean> {
+    return new Promise((resolve) => {
+      Swal.fire({
+        title: 'Vous voulez quitter la page ?',
+        text: "Vous vouliez envoyé un message, souhaitez vous continuer ?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'je reste',
+        cancelButtonText: 'je quitte'
+      }).then((result) => {
+        if (result.value) {
+          resolve(false)
+        }
+        resolve(true)
+      })
     })
   }
   ngOnDestroy(): void {
