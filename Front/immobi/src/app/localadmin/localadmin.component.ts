@@ -95,6 +95,7 @@ export class LocaladminComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     $("#locales").removeClass("active")
+    $(".modal").remove()
   }
   showFormulaire(){
 

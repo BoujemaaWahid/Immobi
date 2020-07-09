@@ -15,7 +15,7 @@ export class RegionsadminComponent implements OnInit, OnDestroy, AfterViewInit {
   tableData: any;
   angContactForm: FormGroup;
   angContactForm2: FormGroup;
-  regionName = "Paris"
+  regionName = ""
   constructor(private service: DataService, private formBuilder: FormBuilder) { 
     this.createContactForm()
     this.updateContactForm()
@@ -24,21 +24,24 @@ export class RegionsadminComponent implements OnInit, OnDestroy, AfterViewInit {
       res.forEach(item=>{
         data.push({id: item.id, region: item.label})
       })
-      
+      console.log(data)
       this.createTableData(data)
     })
   }
   ngAfterViewInit(): void {
+    
+    this.createTableData(null)
   }
   ngOnDestroy(): void {
     $("#regions").removeClass("active")
+    $(".modal").remove()
   }
   ngOnInit(): void {
     $("#regions").addClass("active")
     $(".ui.modal").modal()
   }
   showFormulaire(){
-    $("#ajoutModal").modal('show')
+    $("#AM").modal('show')
   }
   
   createContactForm(){
@@ -61,13 +64,13 @@ export class RegionsadminComponent implements OnInit, OnDestroy, AfterViewInit {
   createTableData(data){
     this.tableData = new Tabulator("#regions-table", Headers.regionsHeader(
       (e, row)=>{
+        this.updateContactForm()
         let id = row._cell.row.data.id
         let region = row._cell.row.data.region
         this.regionName = region
-        console.log(this.angContactForm2)
         this.angContactForm2.get("id").setValue(id)
         this.angContactForm2.get("label").setValue(region)
-        $("#updateModal").modal('show')
+        $("#UM").modal('show')
       }
     ))
     this.tableData.setData(data)
@@ -75,13 +78,13 @@ export class RegionsadminComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ajoutRegion(){
     this.service.saveRegion(this.angContactForm.value).subscribe(res=>{
-      $("#ajoutModal").modal('hide')
+      $("#AM").modal('hide')
       location.reload()
     })
   }
   updateRegion(){
     this.service.updateRegion(this.angContactForm2.value).subscribe(res=>{
-      $("#updateModal").modal('hide')
+      $("#UM").modal('hide')
       location.reload()
     })
   }

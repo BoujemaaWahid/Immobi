@@ -41,6 +41,7 @@ export class AdminComponent implements OnInit {
   deconnect(){
     localStorage.removeItem("idUser")
     localStorage.removeItem("user_type")
+    localStorage.removeItem("authorize")
     this.route.navigate(['login'])
   }
 }

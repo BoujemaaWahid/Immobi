@@ -55,6 +55,7 @@ export class AdminlieuxComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   ngOnDestroy(): void {
     $("#lieux").removeClass("active")
+    $(".modal").remove()
   }
 
   ngOnInit(): void {
@@ -62,7 +63,7 @@ export class AdminlieuxComponent implements OnInit, OnDestroy, AfterViewInit {
     $("#lieux").addClass("active")
   }
   showFormulaire(){
-    $("#ajoutAdresse").modal('show')
+    $("#AAD").modal('show')
   }
   deleteItem(row){
 
@@ -107,7 +108,7 @@ export class AdminlieuxComponent implements OnInit, OnDestroy, AfterViewInit {
         this.angContactForm2.get("lng").setValue(r[0].lng)
         this.angContactForm2.get("ville").setValue(r[0].lieu.id)
         $("#villesUp").dropdown('set selected', r[0].lieu.id)
-        $("#updateAdresse").modal('show')
+        $("#UAD").modal('show')
       }
     ))
     this.tableData.setData(data)
@@ -164,7 +165,7 @@ export class AdminlieuxComponent implements OnInit, OnDestroy, AfterViewInit {
       lieu: {id:this.angContactForm2.get("ville").value}
     }
     this.service.updateAdresses(data).subscribe(res=>{
-      $("#updateAdresse").modal('hide')
+      $("#UAD").modal('hide')
       location.reload()
     })
   }

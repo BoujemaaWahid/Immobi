@@ -20,4 +20,5 @@ public class DemandeDto extends MessageDto implements Serializable {
 	private String telephone;
 	@JsonProperty("local")
 	private Local local;
+	
 }

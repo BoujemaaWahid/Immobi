@@ -41,10 +41,15 @@ public class AppSecurity extends WebSecurityConfigurerAdapter implements WebMvcC
 	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(
-				"/*/update","/*/delete", "/*/save",
-				"/*/*/update","/*/*/delete", "/*/*/save"
-				).hasRole("ADMIN");
+	//	http.authorizeRequests().antMatchers(
+		//		"/*/update","/*/delete", "/*/save",
+			//	"/*/*/update","/*/*/delete", "/*/*/save"
+				//).hasRole("ADMIN")
+		http.authorizeRequests().antMatchers("/message/*/save").hasAnyRole("PASSAGER", "MEMBER", "ADMIN")
+		.antMatchers(
+						"/*/update","/*/delete", "/*/save",
+					"/*/*/update","/*/*/delete", "/*/*/save"
+					).hasRole("ADMIN");
         http
         .authorizeRequests()
         .anyRequest().authenticated()

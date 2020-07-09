@@ -44,6 +44,7 @@ export class VillesadminComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   ngOnDestroy(): void {
     $("#villes").removeClass('active')
+    $(".modal").remove()
   }
 
   ngOnInit(): void {
@@ -71,7 +72,7 @@ export class VillesadminComponent implements OnInit, OnDestroy, AfterViewInit {
       'state':this.angContactForm.controls[e].errors}
   }
   showFormulaire(){
-    $("#ajoutModal").modal('show')
+    $("#ajoutModalVilles").modal('show')
   }
 
 
@@ -113,7 +114,7 @@ export class VillesadminComponent implements OnInit, OnDestroy, AfterViewInit {
         this.angContactForm2.get("postal").setValue(cell._cell.row.data.postale)
         this.angContactForm2.get("region").setValue(""+cell._cell.row.data.region_id)
         $("#region_field").dropdown('set selected', cell._cell.row.data.region_id)
-        $("#updateModal").modal('show')
+        $("#updateModalVilles").modal('show')
       }
     ))
     this.tableData.setData(data)
@@ -124,7 +125,7 @@ export class VillesadminComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log(this.angContactForm.value)
     this.service.saveLieux(this.angContactForm.value).subscribe(res=>{
       this.ajoutContactForm()
-      $("#ajoutModal").modal('hide')
+      $("#ajoutModalVilles").modal('hide')
       location.reload()
     })
   }
@@ -135,7 +136,7 @@ export class VillesadminComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.service.updateLieu(this.angContactForm2.value).subscribe(res=>{
       this.updateContactForm()
-      $("#updateModal").modal('hide')
+      $("#updateModalVilles").modal('hide')
       location.reload()
     })
   }

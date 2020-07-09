@@ -1,7 +1,7 @@
 <button style="border-radius:0px; width:100%" (click)="showFormulaire()" class="ui primary button">Ajouter</button>
 <div id="regions-table"></div>
 
-<div class="ui small modal" id="ajoutModal" style="height:auto;position:relative">
+<div class="ui small modal" id="AM" style="height:auto;position:relative">
     <div class="header">Ajouter une region</div>
     <div class="content">
         <form class="ui form" [formGroup]="angContactForm" novalidate >
@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<div class="ui small modal" id="updateModal" style="height:auto;position:relative">
+<div class="ui small modal" id="UM" style="height:auto;position:relative">
     <div class="header">Modification de la region {{regionName}}</div>
     <div class="content">
         <form class="ui form" [formGroup]="angContactForm2" novalidate >
