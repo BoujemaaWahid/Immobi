@@ -2,6 +2,7 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { slider } from '../route-animations';
+import { SocketmsgService } from './socketmsg.service';
 
 declare var $: any;
 declare var navBarHover: any;
@@ -13,6 +14,9 @@ declare var navBarActions: any;
   animations: []
 })
 export class AppComponent implements OnInit, AfterViewInit{
+  constructor(private ws: SocketmsgService){
+    
+  }
   ngAfterViewInit(): void {
 
   }
