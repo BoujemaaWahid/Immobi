@@ -24,27 +24,17 @@
     </a>
   </div>
     <div class="left menu" id="respmenu">
-      <a class="item">
+      <a class="item" (click)="messages()">
         <i class="envelope outline icon"></i>
           Messages
-          <div class="floating ui mini circular red label">22</div>
-        </a>
-        <a class="item">
-          <i class="info circle icon"></i>
-          Notifications
-          <div class="floating ui mini circular red label">22</div>
+          <div class="floating ui mini circular red label">{{countMessages}}</div>
         </a>
     </div>
     <div class="right menu" id="respmenu12">
-      <a class="item">
+      <a id="messagesicon" class="item" (click)="messages()">
       <i class="envelope outline icon"></i>
         Messages
-        <div class="floating ui mini circular red label">22</div>
-      </a>
-      <a class="item">
-        <i class="info circle icon"></i>
-        Notifications
-        <div class="floating ui mini circular red label">22</div>
+        <div class="floating ui mini circular red label">{{countMessages}}</div>
       </a>
       <a (click)="deconnect()" class="item" id="deconnect">
         <i class="sign out alternate icon"></i>
@@ -54,7 +44,7 @@
   </div>
 </div>
 <div class="ui left demo vertical inverted sidebar labeled icon menu">
-  <a class="active item dynitem">
+  <a class="active item dynitem" routerLink="/admin">
     Administrateur
   </a>
   

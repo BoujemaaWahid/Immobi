@@ -60,7 +60,6 @@ public class Local {
 
 
 	@OneToMany(mappedBy = "local")
-	@JsonIgnore
 	private List<Image> images;
 	
 	@OneToMany(mappedBy = "local")

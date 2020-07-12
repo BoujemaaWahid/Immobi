@@ -1,0 +1,44 @@
+body{
+    background: #7f7a7a12;
+}
+.card{
+    cursor: pointer;
+}
+@keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+	}
+
+	70% {
+		box-shadow: 0 0 0 10px rgba(114, 122, 230, 0);
+	}
+
+	100% {
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
+}
+.card:hover{
+    animation: pulse 2s infinite;
+}
+@keyframes new {
+	0% {
+		box-shadow: 0 0 0 0 #5cb85c;
+	}
+
+	70% {
+		box-shadow: 0 0 0 10px rgba(27, 156, 85, 0);
+	}
+
+	100% {
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
+}
+.card:hover{
+    animation: pulse 1.3s infinite;
+}
+.seen{
+    animation: new 2s infinite;
+}
+.reformat{
+    width: 30%;
+}

@@ -24,12 +24,18 @@ public class Message {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long id;
+	
 	@Column(name="email", nullable = false)
 	private String email;
+	
 	@Column(name="vue", nullable=false)
 	private boolean vue = false;
+	
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@Column(name = "message", nullable = false)
 	private String message;
+	
+	@Column(name = "responded")
+	private boolean responded = false;
 }

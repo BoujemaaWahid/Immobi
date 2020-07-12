@@ -24,7 +24,6 @@ export class RegionsadminComponent implements OnInit, OnDestroy, AfterViewInit {
       res.forEach(item=>{
         data.push({id: item.id, region: item.label})
       })
-      console.log(data)
       this.createTableData(data)
     })
   }

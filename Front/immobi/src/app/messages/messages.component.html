@@ -1,0 +1,76 @@
+<div class="ui inverted three item menu" style="border-radius: 0%;">
+    <div class="ui stackable grid centered relaxed">
+    <div class="eight wide column">
+    <a class="item" id="nouveaux" style="width: auto;"><i class="filter icon"></i><b>Nouveaux</b><div class="ui red tiny label circular">{{news}}</div></a>
+    </div>
+    <div class="eight wide column">
+    <a class="item" id="sreps" style="width: auto;"><i class="filter icon"></i><b>sans réponse</b><div class="ui red tiny label circular">{{nresp}}</div></a>
+      </div>
+  </div>
+  </div>
+<div class="ui stackable grid centered relaxed" style="margin-top:1%">
+  <div class="three wide column" *ngIf="messages.length == 0">
+    <h2 class="ui center aligned icon header">
+      <img class="ui image centered" style="width: 20%;margin-bottom: 0%;" src="assets/mail.png"><br>
+      Pas des messages pour l'instant
+    </h2>
+  </div>
+   <ng-container *ngFor="let item of messages; let i = index">
+       <div id="{{i}}"class="three wide column">
+        
+        <div class="ui card" [ngClass]="{seen: !item.vue}" (click)="reponse(i)">
+            <ng-container >
+            <div class="ui image" style="text-align: center;">
+              <img *ngIf="item['local'] != null" style="height:100px;" class="tiny image" src="{{item.local.images[0].base64}}">
+              <div class="ui image" style="width:100%; height:100px;" *ngIf="item['local'] == null">
+                <img class="ui image centered" style="width: 20%;margin-bottom: 0%;" src="assets/mail.png"><br>
+              <b style="max-width: 100%;display: block; overflow: hidden; white-space: nowrap;text-overflow: ellipsis;">{{item.email}}</b>
+              </div>
+            </div>
+          </ng-container>
+
+            <div class="content">
+              <a *ngIf="item['local'] != null" class="header">{{item.local.titre}}</a>
+              
+              <p style="max-width:100%;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.message}}</p>
+              
+                <div class="extra content">
+                    <label *ngIf="item['local'] != null" class="ui label basic round">{{item.email}}</label>
+                </div>
+            </div>
+          </div>   
+       </div>
+   </ng-container>
+</div>
+
+<div class="ui modal" style="width:auto;height:auto;position:relative">
+  <i class="close icon"></i>
+  <div class="header">
+    <div class="ui stackable grid relaxed two column">
+      <div class="column"><p>{{item.titre}}</p></div>
+      <div class="column">
+        <label style="float:right; margin-left: 1%;"class="ui label">{{item.email}}</label>
+        <label *ngIf="item.tel != null " style="float:right;"class="ui label">{{item.tel}}</label>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="ui stackable grid centered relaxed two column">
+      <div class="eight wide column" >
+        <div class="ui centered rounded image">
+          <img [ngClass]="{ui:true, image:true, reformat:(item.tel!=null)?false:true}" src="{{item.base64}}">
+        </div>
+      </div>
+      <div class="eight wide column">
+        <div class="description">
+          <p>{{item.message}}</p>  
+          </div>
+      </div>
+      </div>
+    </div>
+  <div class="actions">
+    <label class="ui label" style=" float:left;">Réponse</label>
+    <textarea [(ngModel)]="item.reponse" style="background:#44444414; border:none; border-radius: 2%; outline: none; width:100%;" rows="6"></textarea>
+    <button [disabled]="item.reponse == '' "class="ui button primary" style="width: 50%;" (click)="sendMessage()">répondez</button>
+  </div>
+</div>

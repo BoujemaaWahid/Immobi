@@ -26,7 +26,6 @@ public class Demande extends Message {
 	
 	@ManyToOne
 	@JoinColumn(name="local_id", nullable = false)
-	@JsonIgnore
 	private Local local;
 	
 }

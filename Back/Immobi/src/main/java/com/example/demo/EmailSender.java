@@ -3,6 +3,7 @@ package com.example.demo;
 import java.time.LocalDateTime;
 import java.util.Base64;
 
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,18 @@ public class EmailSender {
 	@Autowired
 	private ObjectMapper objectMapper;
 	
+	public void sendMessage(String to, String message) {
+        try {
+    		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+    		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
+			helper.setTo(to);
+	        helper.setSubject("À propos de votre message");
+	    	helper.setText(message, true);
+	        javaMailSender.send(mimeMessage);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+	}
 	public void sendConfirmation(String to) {
 		try {
 			MimeMessage mimeMessage = javaMailSender.createMimeMessage();

@@ -1,16 +1,7 @@
 package com.example.demo.controllers;
-
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
-
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -38,6 +29,7 @@ public class AuthController {
 	@Autowired
 	private InMemoryUserDetailsManager inMemoryUserDetailsManager;
 	
+	@SuppressWarnings("unused")
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	

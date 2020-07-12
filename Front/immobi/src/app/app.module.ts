@@ -22,6 +22,7 @@ import { VillesadminComponent } from './villesadmin/villesadmin.component';
 import { RegionsadminComponent } from './regionsadmin/regionsadmin.component';
 import { Guard, AdminGuard } from './Guards';
 import { DeacGuard } from './DeacGuard';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DeacGuard } from './DeacGuard';
     LocaladminComponent,
     AdminlieuxComponent,
     VillesadminComponent,
-    RegionsadminComponent
+    RegionsadminComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

@@ -88,6 +88,18 @@ export class DataService {
   saveImages(data): Observable<any>{
     return this.http.post("http://127.0.0.1:4300/local/images/saveAll", data, {headers:{'Content-Type':'application/json'}});
   }
+  getMessages(): Observable<any>{
+    return this.http.get("http://127.0.0.1:4300/message/mixAll");
+  }
+  getMessagesCount(): Observable<any>{
+    return this.http.get("http://127.0.0.1:4300/message/mixAllCount");
+  }
+  setSeen(data): Observable<any>{
+    return this.http.post("http://127.0.0.1:4300/message/setSeen", {}, {params:data});
+  }
+  sendMessage(data): Observable<any>{
+    return this.http.post("http://127.0.0.1:4300/message/sendMessage", {}, {params:data});
+  }
 
   updateLocal(data): Observable<any>{
     data['adresse'] = {id: data['adresse']}

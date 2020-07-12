@@ -13,6 +13,7 @@ import { VillesadminComponent } from './villesadmin/villesadmin.component';
 import { RegionsadminComponent } from './regionsadmin/regionsadmin.component';
 import { Guard, AdminGuard } from './Guards';
 import { DeacGuard } from './DeacGuard';
+import { MessagesComponent } from './messages/messages.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, canDeactivate: [DeacGuard], data: { animation: 'isHome'}},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'details', component: DetailsComponent, canDeactivate: [DeacGuard], data: {animation: 'isDetails'}},
   {path: 'validation', component: ConfirmationComponent, canActivate: [Guard]},
   {path: 'admin', component: AdminComponent, canActivate: [AdminGuard], children: [
+    {path: 'messages', component: MessagesComponent},
     {path: 'locales', component: LocaladminComponent},
     {path: 'adresses', component: AdminlieuxComponent},
     {path: 'villes', component: VillesadminComponent},

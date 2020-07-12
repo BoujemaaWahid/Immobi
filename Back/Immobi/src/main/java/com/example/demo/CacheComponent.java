@@ -9,10 +9,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.entitys.Demande;
-import com.example.demo.entitys.Local;
 import com.example.demo.entitys.TypeLocal;
-import com.example.demo.repositorys.DemandeRepository;
 import com.example.demo.repositorys.TypeRepository;
 import com.example.demo.services.DemandeService;
 
