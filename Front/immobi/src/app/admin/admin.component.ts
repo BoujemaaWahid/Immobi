@@ -27,6 +27,7 @@ export class AdminComponent implements OnInit {
     this.services.getMessagesCount().subscribe(res=>this.countMessages = res)
     this.sservice.streamData.subscribe(res=>{
       if( res == null )return;
+      
       $("#messagesicon").transition('jiggle')
       this.countMessages+=1
     })
@@ -37,6 +38,10 @@ export class AdminComponent implements OnInit {
     
     $("#baseMenu").css({display:'none'})
     this.locales()
+  }
+  send(){
+    alert()
+    this.sservice.send("hello 2")
   }
   toggleMenu(){
     $('.ui.labeled.icon.sidebar').sidebar('toggle')
