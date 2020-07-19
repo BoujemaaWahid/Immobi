@@ -20,11 +20,9 @@ export class DetailsComponent implements OnInit, AfterViewInit, Deactivator {
   item: any;
   constructor(private services: DataService, private dataShare: DataShare, private formBuilder: FormBuilder) {
     this.dataShare.currentMessage.subscribe(item => {
-
       if( item == null ) this.item = JSON.parse ( localStorage.getItem("details") )
       else {
         this.item = item
-        localStorage.setItem("details", JSON.stringify(item))
       }
     })
     this.markers = new Array<any>();
@@ -44,13 +42,10 @@ export class DetailsComponent implements OnInit, AfterViewInit, Deactivator {
       options: { animation: google.maps.Animation.BOUNCE },
     });
     var marker = new google.maps.Marker({
-      position: {
-        lat: 48.891250,
-        lng: 2.238387,
-      },
+      position: this.center,
       title: 'Hello World',
       icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|ddd'
-  });
+    });
     this.markers.push(marker);
   }
   async confirm(): Promise<boolean> {

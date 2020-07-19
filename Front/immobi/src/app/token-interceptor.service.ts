@@ -13,6 +13,10 @@ export class TokenInterceptorService implements HttpInterceptor{
   }
 
   intercept(req, next){
+    
+    if ( localStorage.getItem("authorize") == null )
+      localStorage.setItem("authorize", "immobi:0000")
+      
     let auth = localStorage.getItem("authorize").split(":")
     const signature = req.clone({
       setHeaders: {

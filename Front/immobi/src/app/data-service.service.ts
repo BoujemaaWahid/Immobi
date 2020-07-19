@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { data } from 'jquery';
 
 
 @Injectable({
@@ -70,11 +71,18 @@ export class DataService {
   supprimerRegion(data): Observable<any>{
     return this.http.delete("http://127.0.0.1:4300/lieux/region/delete", {params:{"id": data}, responseType:"text"});
   }
+  supprimerFav(data): Observable<any>{
+    return this.http.delete("http://127.0.0.1:4300/users/rmFav", {params:{"idu": data.idu, "idl":data.idl}});
+  }
+
   compteValidation(email): Observable<any>{
     return this.http.get("http://127.0.0.1:4300/auth/validation", {params:{"email": email}});
   }
   registerUser(user): Observable<any>{
     return this.http.post("http://127.0.0.1:4300/auth/register", user, {headers:{'Content-Type':'application/json'}});
+  }
+  mkFav(data): Observable<any>{
+    return this.http.post("http://127.0.0.1:4300/users/mkFav", {}, {params: {idu: data.idu, idl: data.idl}});
   }
   connectAccount(data): Observable<any>{
     return this.http.post("http://127.0.0.1:4300/auth/login", data, {headers:{'Content-Type':'application/json'}});
@@ -93,6 +101,9 @@ export class DataService {
   }
   getMessagesCount(): Observable<any>{
     return this.http.get("http://127.0.0.1:4300/message/mixAllCount");
+  }
+  getFavs(id): Observable<any>{
+    return this.http.get("http://127.0.0.1:4300/users/findId", {params:{id: id}});
   }
   setSeen(data): Observable<any>{
     return this.http.post("http://127.0.0.1:4300/message/setSeen", {}, {params:data});

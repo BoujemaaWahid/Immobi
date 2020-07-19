@@ -14,12 +14,14 @@ export class SocketmsgService {
   public responses: Observable<any>;
   public streamData: Subject<any>;
   public streamRead: Subject<any>;
+  public conSub: Subject<any>;
   public update: any;
   private l = []
   constructor() { 
     
     this.streamData = new BehaviorSubject(null)
     this.streamRead = new BehaviorSubject(null)
+    this.conSub = new BehaviorSubject(null)
     this.connect()
   
   }

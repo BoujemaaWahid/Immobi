@@ -1,7 +1,9 @@
 package com.example.demo.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
+import com.example.demo.entitys.Local;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -25,5 +27,7 @@ public class UserDto implements Serializable{
 	@JsonProperty("password")
 	private String password;
 	@JsonProperty("telephone")
-	private String telephone;	
+	private String telephone;
+	@JsonProperty("favoires")
+	private List<Local> favoires;
 }

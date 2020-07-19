@@ -1,13 +1,16 @@
 package com.example.demo.services;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List;import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.CacheComponent;
 import com.example.demo.dto.UserDto;
+import com.example.demo.entitys.Local;
 import com.example.demo.entitys.User;
 import com.example.demo.extradtos.LoginDto;
 import com.example.demo.repositorys.UserRepository;
@@ -19,6 +22,10 @@ public class UserService {
 	private UserRepository userRepository;
 	@Autowired
 	ModelMapper modelMapper;
+
+	@Autowired
+	private CacheComponent componentServ;
+	
 	
 	public boolean save(UserDto dto) {
 		try {
@@ -26,8 +33,44 @@ public class UserService {
 			modelMapper.map(dto, entity);
 			userRepository.save(entity);
 		}catch(Exception ex) { return false; }
+		componentServ.evictAllCaches();
 		return true;
 	}
+	public boolean saveFav(Long idu, Long idl) {
+		try {
+			Local l = new Local();
+			l.setId(idl);
+			User u = userRepository.findById(idu).get();
+			u.getFavoires().add(l);
+			userRepository.save(u);
+		}catch(Exception ex) {}
+		return false;
+	}
+	
+	public UserDto getFavs(Long idu) {
+		User u = userRepository.findById(idu).get();
+		u.setPassword(null);
+		u.setEmail(null);
+		u.setTelephone(null);
+		UserDto ud = new UserDto();
+		modelMapper.map(u, ud);
+		componentServ.evictAllCaches();
+		return ud;
+	}
+	public boolean removeFav(Long idu, Long idl) {
+		try {
+			Local l = new Local();
+			l.setId(idl);
+			User u = userRepository.findById(idu).get();
+			List<Local> nl = u.getFavoires().stream().filter(local-> local.getId() != idl).collect(Collectors.toList());
+			u.setFavoires(nl);
+			userRepository.save(u);
+			componentServ.evictAllCaches();
+			return true;
+		}catch(Exception ex) {}
+		return false;
+	}
+	
 	public boolean isThere(int type, String value) {
 		User user = null;
 		switch(type) {

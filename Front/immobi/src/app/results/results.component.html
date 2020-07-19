@@ -93,10 +93,9 @@
       </div>
     </div>
 
-      <div class="ui clearing divider"></div>
-      <div class="row justify-content-center">
+      <div style="display: none;" class="row justify-content-center">
 
-        <div class="col">
+        <div class="col" style="display: none;">
         <p style="float:left"><b>Je veux trouver mon bien immobilier à moin de </b></p>
         </div>
       </div>
@@ -105,7 +104,7 @@
           <div class="ui temp_filter floating labeled icon dropdown button basic">
             <i class="clock outline icon"></i>
 
-            <span class="text"><b>Temp</b></span>
+            <span class="text"><b></b></span>
               <div class="menu">
                 <div (click)="setTempTransport('10m', true)" class="item">10 min</div>
               </div>
@@ -494,14 +493,13 @@
       </div>
     </div>
 
-      <div class="ui clearing divider"></div>
       <div class="row justify-content-center">
 
-        <div class="col">
+        <div class="col" style="display: none;">
         <p style="float:left"><b>Je veux trouver mon bien immobilier à moin de </b></p>
         </div>
       </div>
-      <div class="row justify-content-center">
+      <div style="display: none;" class="row justify-content-center">
         <div  class="col-md-8">
           <div style="width:114%" class="ui temp_filter floating labeled icon dropdown button basic">
             <i class="clock outline icon"></i>
@@ -766,6 +764,7 @@
                 <p style="text-overflow: ellipsis ">
                 {{item.description}}
                 </p>
+                
               </div>
             </div>
             <div class="extra content">
@@ -788,8 +787,8 @@
 <!--1 c, 2 7, 3 5, -->
         <div class="{{grid_resp_class}}" *ngFor="let item of locales">
 
-          <div class="ui card" (click)="seeDetails(item.id)" style="height:1%">
-            <div style="height:10%;width:100%" class="image">
+          <div class="ui card" style="height:1%">
+            <div (click)="seeDetails(item.id)" style="height:10%;width:100%" class="image">
               <img style="height:200px;" src="{{item.images[0].base64}}" />
             </div>
             <div class="content">
@@ -805,8 +804,12 @@
                 <span class="description">Surface <b>{{item.surface}} m²</b></span>
               </div>
               <div class="description">
-                <p style="text-overflow: ellipsis ">
+                <p style="max-width:50%; text-overflow: ellipsis ">
                 {{item.description}}
+                </p>
+                <label *ngIf="item.garder" (click)="garderFavoir(item.id)" style="width: 100%; text-align: center" class="ui label">
+                  <i class="plus icon"></i>garder
+                </label>
               </div>
             </div>
             <div class="extra content">

@@ -58,7 +58,10 @@ public class Local {
 	@JsonIgnore
 	private List<TypeLocal> types;
 
-
+	@ManyToMany(mappedBy = "favoires")
+	@JsonIgnore
+	private List<User> favoires;
+	
 	@OneToMany(mappedBy = "local")
 	private List<Image> images;
 	

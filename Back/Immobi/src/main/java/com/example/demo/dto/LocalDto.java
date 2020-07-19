@@ -7,6 +7,7 @@ import java.util.List;
 import com.example.demo.entitys.Adresse;
 import com.example.demo.entitys.Image;
 import com.example.demo.entitys.TypeLocal;
+import com.example.demo.entitys.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -48,5 +49,7 @@ public class LocalDto implements Serializable{
 	private String date_publication;
 	@JsonProperty("disponible")
 	private boolean disponible;
+	@JsonProperty("favoires")
+	private List<User> favoires;
 	
 }

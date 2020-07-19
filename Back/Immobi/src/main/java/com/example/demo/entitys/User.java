@@ -1,10 +1,15 @@
 package com.example.demo.entitys;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -34,5 +39,12 @@ public class User {
 	private String password;
 	
 	@Column(name = "telephone", nullable = false, unique = true)
-	private String telephone;	
+	private String telephone;
+	
+	@ManyToMany
+	@JoinTable(
+	  name = "favoires",
+	  joinColumns = @JoinColumn(name = "user_id"), 
+	  inverseJoinColumns = @JoinColumn(name = "local_id"))
+	private List<Local> favoires;
 }

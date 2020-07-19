@@ -7,6 +7,7 @@ declare var $: any;
 declare var pulseAnimation: any;
 declare var navBarActions: any;
 import * as bcrypt from 'bcryptjs';
+import { SocketmsgService } from '../socketmsg.service';
 declare var Swal: any;
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ declare var Swal: any;
 export class LoginComponent implements OnInit, OnDestroy {
   angContactForm: FormGroup;
   session = true;
-  constructor(private data: DataService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private sub: SocketmsgService, private data: DataService, private router: Router, private formBuilder: FormBuilder) {
     if( localStorage.getItem("idUser") != null ){
       if( localStorage.getItem("user_type") == "1")
       this.router.navigate(['/admin'])
@@ -69,15 +70,20 @@ export class LoginComponent implements OnInit, OnDestroy {
             else { localStorage.setItem("keep_session", "false") }
             if( res['fact_3'] ){
               localStorage.setItem("user_type", "1")
-              localStorage.setItem("authorize", "admin:0000"/*+this.angContactForm.get("pwd").value*/)
+              localStorage.setItem("authorize", "admin:0000")
               this.router.navigate(['/admin'])
             }
-            else localStorage.setItem("authorize", "member:member")
-              //TO ACCOUNT
+            else {
+              localStorage.setItem("authorize", "member:member")
+              localStorage.setItem("user_type", "2")
+              this.sub.conSub.next({auth:true, id: res['fact_1'], type: "2"})
+              this.router.navigate([''])
+            }
           }
         })
       }
     }, error=>{
+      console.log(error)
       Swal.fire(
         'Internet',
         'Vous pouvez pas accéder à votre compte pour le moment',
