@@ -807,7 +807,7 @@
                 <p style="max-width:50%; text-overflow: ellipsis ">
                 {{item.description}}
                 </p>
-                <label *ngIf="item.garder" (click)="garderFavoir(item.id)" style="width: 100%; text-align: center" class="ui label">
+                <label *ngIf="item.garder && idUser == '2'" (click)="garderFavoir(item.id)" style="width: 100%; text-align: center" class="ui label">
                   <i class="plus icon"></i>garder
                 </label>
               </div>

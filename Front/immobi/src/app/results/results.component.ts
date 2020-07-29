@@ -21,7 +21,7 @@ export class ResultsComponent implements OnInit, AfterViewInit, OnDestroy {
   locales = []
   grid_resp_class = ""
   gardeItems = false
-
+  idUser = localStorage.getItem("idUser")
   constructor(private conSub: SocketmsgService, private dataService: DataService,private dataShare: DataShare, private formBuilder: FormBuilder, private router: Router ) {
     this.filter = new Filters()
 
